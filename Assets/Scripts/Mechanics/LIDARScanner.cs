@@ -55,6 +55,7 @@ public class LIDARScanner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set line renderer values
         laserLineRenderer = GetComponent<LineRenderer>();
         Vector3[] initLaserPositions = new Vector3[2] { Vector3.zero, Vector3.zero };
         laserLineRenderer.SetPositions(initLaserPositions);
@@ -63,12 +64,14 @@ public class LIDARScanner : MonoBehaviour
         laserLineRenderer.startColor = Color.red;
         laserLineRenderer.endColor = Color.red;
 
+        // Pause the particle effect
         normalPS.Pause();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug
         Debug.Log(normalPS.isPaused);
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -76,6 +79,7 @@ public class LIDARScanner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
             normalPS.Stop();
 
+        // Charge scanner
         if (startRecharge)
         {
             if (m_CurrentScanCharge >= m_FullScanCharge)
@@ -87,6 +91,7 @@ public class LIDARScanner : MonoBehaviour
             m_CurrentScanCharge += Time.deltaTime;
         }
 
+        // Get player input
         GetInput();
     }
 
@@ -141,9 +146,12 @@ public class LIDARScanner : MonoBehaviour
     {
         for (int i = 0; i < laserCount; i++)
         {
-            // Get random points inside of a circle
-            float x = Random.Range(-circleRadius, circleRadius) * Mathf.Cos(Random.Range(0, 2 * Mathf.PI));
-            float y = Random.Range(-circleRadius, circleRadius) * Mathf.Sin(Random.Range(0, 2 * Mathf.PI));
+            // Get a random point inside a circle
+            float a = Random.Range(0,2 * Mathf.PI);
+            float r = Random.Range(0, circleRadius);
+
+            float x = Mathf.Sqrt(r * circleRadius) * Mathf.Cos(a);
+            float y = Mathf.Sqrt(r * circleRadius) * Mathf.Sin(a);
 
             // Add them to the ray direction
             //Vector3 direction = playerCameraTransform.transform.forward + new Vector3(x, y, 0); // this needs to change
