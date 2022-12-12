@@ -202,6 +202,7 @@ public class LIDARScanner : MonoBehaviour
                 {
                     positionsList.Add(rayHit.point);
                     particleAmount++;
+                    SetRandomColour();
                     laserLineRenderer.SetPosition(0, muzzlePoint.position);
                     laserLineRenderer.SetPosition(1, rayHit.point);
                 }

@@ -6,6 +6,8 @@ public class RadarPusle : MonoBehaviour
 {
     [SerializeField] private Transform radarPingPrefab;
 
+    [SerializeField] private Transform radarPingsContainer;
+
     [SerializeField] private Transform pulseSpriteTransform;
     [SerializeField] private float range;
     [SerializeField] private float rangeMax;
@@ -51,10 +53,10 @@ public class RadarPusle : MonoBehaviour
                     if (rayHit.collider.CompareTag("Artefact"))
                     {
                         Vector3 newPingPosition = rayHit.collider.transform.position + new Vector3(0, 5, 0);
-                        Transform radarPingTransform = Instantiate(radarPingPrefab, newPingPosition, Quaternion.Euler(90,0,0));
+                        Transform radarPingTransform = Instantiate(radarPingPrefab, newPingPosition, Quaternion.Euler(90,0,0), radarPingsContainer);
                         RadarPing radarPing = radarPingTransform.GetComponent<RadarPing>();
 
-                        radarPing.SetDisappearTimer(rangeMax / rangeSpeed);
+                        radarPing.SetDisappearTimer(rangeMax / fadeRange);
                     }
                 }
             }
