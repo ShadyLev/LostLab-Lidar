@@ -21,7 +21,7 @@ public class LIDARScanner : MonoBehaviour
     private VisualEffect currentVFX;
     private Texture2D texture;
     private Color[] positions;
-    private int particleAmount;
+    [SerializeField]private int particleAmount;
     private bool createNewVFX = false;
 
     [SerializeField] VisualEffect vfxPrefab;
