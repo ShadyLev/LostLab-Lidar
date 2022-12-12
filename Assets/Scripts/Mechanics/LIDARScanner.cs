@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 /// <summary>
 /// LIDAR scanner script. 
@@ -11,6 +12,22 @@ public class LIDARScanner : MonoBehaviour
     [Header("Particle Systems")]
     public ParticleSystem normalPS;
     public ParticleSystem enemyPS;
+
+    private const string TEXTURE_NAME = "PositionsTexture";
+    private const string RESOLUTION_PARAMETER_NAME = "Resolution";
+
+    private List<Vector3> positionsList = new List<Vector3>();
+    private List<VisualEffect> vfxList = new List<VisualEffect>();
+    private VisualEffect currentVFX;
+    private Texture2D texture;
+    private Color[] positions;
+    private int particleAmount;
+    private bool createNewVFX = false;
+
+    [SerializeField] VisualEffect vfxPrefab;
+    [SerializeField] GameObject vfxContainer;
+
+    private int resolution = 100;
 
     [Header("Colour")]
     [Tooltip("Gradient of the colour based on distance from player.")]
@@ -66,6 +83,11 @@ public class LIDARScanner : MonoBehaviour
 
         // Pause the particle effect
         normalPS.Pause();
+
+        createNewVFX = true;
+
+        CreateVFX();
+        ApplyPositions();
     }
 
     // Update is called once per frame
@@ -159,6 +181,7 @@ public class LIDARScanner : MonoBehaviour
 
             if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range)) //whatIsEnemy
             {
+                /*
                 Quaternion tmp = Quaternion.LookRotation(rayHit.normal);
                 float dist = Vector3.Distance(playerCameraTransform.position, rayHit.point);
 
@@ -174,8 +197,23 @@ public class LIDARScanner : MonoBehaviour
                 SetRandomColour();
                 laserLineRenderer.SetPosition(0, muzzlePoint.position);
                 laserLineRenderer.SetPosition(1, rayHit.point);
+                */
+                if(positionsList.Count < resolution * resolution)
+                {
+                    positionsList.Add(rayHit.point);
+                    particleAmount++;
+                    laserLineRenderer.SetPosition(0, muzzlePoint.position);
+                    laserLineRenderer.SetPosition(1, rayHit.point);
+                }
+                else
+                {
+                    createNewVFX = true;
+                    CreateVFX();
+                    break;
+                }
             }
         }
+        ApplyPositions();
     }
 
     /// <summary>
@@ -249,6 +287,56 @@ public class LIDARScanner : MonoBehaviour
         emitParams.startColor = gradient.Evaluate(distance / farThreshhold);
 
         ps.Emit(emitParams, 1);
+    }
+
+    void CreateVFX()
+    {
+        if (!createNewVFX)
+            return;
+
+        vfxList.Add(currentVFX);
+
+        currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
+        currentVFX.SetUInt(RESOLUTION_PARAMETER_NAME, (uint)resolution); // Assign the resolution
+
+        texture = new Texture2D(resolution, resolution, TextureFormat.RGBAFloat, false);
+        positions = new Color[resolution * resolution];
+
+        positionsList.Clear();
+        particleAmount = 0;
+
+        createNewVFX = false;
+    }
+
+    void ApplyPositions()
+    {
+        Vector3[] pos = positionsList.ToArray();
+
+        Vector3 vfxPos = currentVFX.transform.position;
+
+        Vector3 transformPos = transform.position;
+
+        int loopLength = texture.width * texture.height;
+        int posListLength = pos.Length;
+
+        for(int i = 0; i < loopLength; i++)
+        {
+            Color data;
+            if(i < posListLength - 1)
+            {
+                data = new Color(pos[i].x - vfxPos.x, pos[i].y - vfxPos.y, pos[i].z - vfxPos.z, 1);
+            }
+            else
+            {
+                data = new Color(0,0,0,0);
+            }
+            positions[i] = data;
+        }
+        texture.SetPixels(positions);
+        texture.Apply();
+
+        currentVFX.SetTexture(TEXTURE_NAME, texture);
+        currentVFX.Reinit();
     }
 
     /// <summary>
