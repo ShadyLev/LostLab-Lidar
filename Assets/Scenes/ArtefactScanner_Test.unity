@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -488,23 +488,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 389765764, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 600005995, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.665
-      objectReference: {fileID: 0}
-    - target: {fileID: 600005995, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.821
-      objectReference: {fileID: 0}
-    - target: {fileID: 545236460787075495, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: fadeRange
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder

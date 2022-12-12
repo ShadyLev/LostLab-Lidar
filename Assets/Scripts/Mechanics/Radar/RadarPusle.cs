@@ -55,7 +55,6 @@ public class RadarPusle : MonoBehaviour
                         RadarPing radarPing = radarPingTransform.GetComponent<RadarPing>();
 
                         radarPing.SetDisappearTimer(rangeMax / rangeSpeed);
-                        Debug.Log("Spawned at " + rayHit.point);
                     }
                 }
             }
