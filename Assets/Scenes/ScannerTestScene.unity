@@ -404,12 +404,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 298770717}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &298770719 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2314088643963443059, guid: 63235757b3e0d844fae18000ebf92f94,
-    type: 3}
-  m_PrefabInstance: {fileID: 298770717}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &359249476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,12 +2020,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1434919932}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &1434919934 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2314088643963443059, guid: 7765e6094d87bca44b318563499d09ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 1434919932}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1499235643
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,9 +2053,9 @@ MonoBehaviour:
   cam: {fileID: 1328673050}
   target: {fileID: 7805791633215677239}
   maxZoom: 300
-  minZoom: 50
-  deltaZoom: 25
-  currentZoom: 75
+  minZoom: 10
+  deltaZoom: 10
+  currentZoom: 25
 --- !u!4 &1499235645
 Transform:
   m_ObjectHideFlags: 0
@@ -3075,30 +3063,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 482095077, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
-      propertyPath: probeLayerMask.m_Bits
-      value: 119
-      objectReference: {fileID: 0}
-    - target: {fileID: 3421491714989040948, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f5c9fad49bfae7340ba7f1efb1cc2d8a, type: 2}
-    - target: {fileID: 7355418393466306539, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7d8506c9cbf885841815abbf2c716fc2, type: 2}
-    - target: {fileID: 7805791632567062083, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791632567062085, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 311
-      objectReference: {fileID: 0}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder
@@ -3159,22 +3123,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: enemyPS
-      value: 
-      objectReference: {fileID: 298770719}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: normalPS
-      value: 
-      objectReference: {fileID: 1434919934}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: vfxPrefab
-      value: 
-      objectReference: {fileID: 6993159134884572614, guid: 3be86a6d50ac9b9499c6aba6849eeb58,
-        type: 3}
     - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer

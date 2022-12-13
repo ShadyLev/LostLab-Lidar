@@ -982,7 +982,7 @@ GameObject:
   - component: {fileID: 3547276218579019980}
   - component: {fileID: 8974074064220018464}
   - component: {fileID: 8295284087933928394}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpWall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1273,7 +1273,7 @@ GameObject:
   - component: {fileID: 1483816176529259707}
   - component: {fileID: 6901514262620237417}
   - component: {fileID: 6624085766474719690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1467,7 +1467,7 @@ GameObject:
   - component: {fileID: 2214616564775833580}
   - component: {fileID: 5272245322515048874}
   - component: {fileID: 3491233243844027502}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1564,7 @@ GameObject:
   - component: {fileID: 25464664978886286}
   - component: {fileID: 2520675107288425801}
   - component: {fileID: 9200557821430104978}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1661,7 +1661,7 @@ GameObject:
   - component: {fileID: 7255778557054216532}
   - component: {fileID: 1609010957744766914}
   - component: {fileID: 1832962212998213979}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1758,7 @@ GameObject:
   - component: {fileID: 4987553379110175816}
   - component: {fileID: 4987553379110175823}
   - component: {fileID: 4987553379110175822}
-  m_Layer: 13
+  m_Layer: 7
   m_Name: UpDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1839,7 +1839,7 @@ BoxCollider:
   m_GameObject: {fileID: 4987553379110175820}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 4987553379411260560}
   - component: {fileID: 4987553379411260567}
   - component: {fileID: 4987553379411260566}
-  m_Layer: 13
+  m_Layer: 7
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1991,7 +1991,7 @@ BoxCollider:
   m_GameObject: {fileID: 4987553379411260564}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2007,7 +2007,7 @@ GameObject:
   - component: {fileID: 4987553379506935491}
   - component: {fileID: 4987553379506935490}
   - component: {fileID: 4987553379506935489}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2104,7 +2104,7 @@ GameObject:
   - component: {fileID: 4987553379710879503}
   - component: {fileID: 4987553379710879502}
   - component: {fileID: 4987553379710879501}
-  m_Layer: 13
+  m_Layer: 7
   m_Name: DownDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2189,7 +2189,7 @@ BoxCollider:
   m_GameObject: {fileID: 4987553379710879491}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2205,7 +2205,7 @@ GameObject:
   - component: {fileID: 4987553380107475814}
   - component: {fileID: 4987553380107475813}
   - component: {fileID: 4987553380107475812}
-  m_Layer: 13
+  m_Layer: 7
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2286,7 +2286,7 @@ BoxCollider:
   m_GameObject: {fileID: 4987553380107475610}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2341,7 +2341,7 @@ GameObject:
   - component: {fileID: 4987553380445911574}
   - component: {fileID: 4987553380445911573}
   - component: {fileID: 4987553380445911572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DownWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2471,7 +2471,7 @@ GameObject:
   - component: {fileID: 4987553380928655380}
   - component: {fileID: 4987553380928655371}
   - component: {fileID: 4987553380928655370}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 4987553380970118412}
   - component: {fileID: 4987553380970118403}
   - component: {fileID: 4987553380970118402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2712,16 +2712,6 @@ MonoBehaviour:
   - {fileID: 4987553379411260564}
   - {fileID: 4987553380107475610}
   roomDifficulty: 0
-  enemiesInRoom:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  playerObject: {fileID: 0}
-  roomClearedPillar: {fileID: 0}
-  roomCleared: 0
 --- !u!65 &188134453574931627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2747,7 +2737,7 @@ GameObject:
   - component: {fileID: 4987553381140780683}
   - component: {fileID: 4987553381140780682}
   - component: {fileID: 4987553381140780681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3135,7 +3125,7 @@ GameObject:
   - component: {fileID: 7035765178971041640}
   - component: {fileID: 7665381868924603197}
   - component: {fileID: 2694399088874773657}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3232,7 +3222,7 @@ GameObject:
   - component: {fileID: 3592934212689809620}
   - component: {fileID: 295112332922119167}
   - component: {fileID: 4104403690890730835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UpWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3329,7 +3319,7 @@ GameObject:
   - component: {fileID: 2936487661966673820}
   - component: {fileID: 8638524160778096552}
   - component: {fileID: 4168747443126601398}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3426,7 +3416,7 @@ GameObject:
   - component: {fileID: 5449256327962184536}
   - component: {fileID: 7278562584543075888}
   - component: {fileID: 6459454496142946628}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,24 +22,6 @@ public class RoomBehaviour : MonoBehaviour
     // 2 - Hard
     // 3 - Boss
 
-    public List<GameObject> enemiesInRoom = new List<GameObject>();
-
-    public GameObject playerObject;
-
-    public GameObject roomClearedPillar;
-
-    public bool roomCleared = false;
-
-    public void Update()
-    {
-        if(enemiesInRoom.Count == 0 && !roomCleared)
-        {
-            //Debug.LogWarning("ROOM CLEARED");
-            roomClearedPillar.SetActive(true); // Activate pillar
-            roomCleared = true;
-        }
-    }
-
     /// <summary>
     /// Updates the room door status
     /// </summary>

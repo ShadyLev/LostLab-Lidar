@@ -3262,7 +3262,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 311
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3358,7 +3358,7 @@ MonoBehaviour:
   invertFaceCulling: 0
   probeLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   hasPersistentHistory: 0
   allowDeepLearningSuperSampling: 1
   deepLearningSuperSamplingUseCustomQualitySettings: 0
@@ -4047,6 +4047,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 83.636
       objectReference: {fileID: 0}
+    - target: {fileID: 2462273206797365431, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f5c9fad49bfae7340ba7f1efb1cc2d8a, type: 2}
     - target: {fileID: 4057219029478110060, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: m_Enabled
