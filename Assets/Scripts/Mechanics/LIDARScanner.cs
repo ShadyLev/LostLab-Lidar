@@ -12,9 +12,10 @@ public class LIDARScanner : MonoBehaviour
     [Header("Particle Systems")]
     private const string TEXTURE_NAME = "PositionsTexture"; // Reference to VFX Graph variable
     private const string RESOLUTION_PARAMETER_NAME = "Resolution"; // Reference to VFX Graph variable
+    private const string VECTOR3_NAME = "PlayerPos"; // Reference to VFX Graph variable
 
     private List<Vector3> positionsList = new List<Vector3>(); // List holding all positions of hit points 
-    private List<VisualEffect> vfxList = new List<VisualEffect>(); // List of VFX Graphs
+    public List<VisualEffect> vfxList = new List<VisualEffect>(); // List of VFX Graphs
     private VisualEffect currentVFX; // Current used VFX Graph
     private Texture2D texture; // Texture holding DATA info
     private Color[] positions; // Positions encoded in a Color array
@@ -102,6 +103,8 @@ public class LIDARScanner : MonoBehaviour
 
         // Get player input
         GetInput();
+
+        UpdatePlayerPosVFXGraph();
     }
 
     /// <summary>
@@ -273,10 +276,11 @@ public class LIDARScanner : MonoBehaviour
         if (!createNewVFX)
             return;
 
-        vfxList.Add(currentVFX); // Add old prefab to the list
-
         currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
+
         currentVFX.SetUInt(RESOLUTION_PARAMETER_NAME, (uint)resolution); // Assign the resolution
+
+        vfxList.Add(currentVFX); // Add old prefab to the list
 
         texture = new Texture2D(resolution, resolution, TextureFormat.RGBAFloat, false); // Create new texture2D
         positions = new Color[resolution * resolution]; // Create a new array of colours that will hold position Data 
@@ -325,6 +329,14 @@ public class LIDARScanner : MonoBehaviour
 
         currentVFX.SetTexture(TEXTURE_NAME, texture); // Set texture in VFX Graph
         currentVFX.Reinit(); // Re initialize to display points.
+    }
+
+    void UpdatePlayerPosVFXGraph()
+    {
+        foreach(VisualEffect vs in vfxList)
+        {
+            vs.SetVector3(VECTOR3_NAME, transform.position);
+        }
     }
 
     /// <summary>
