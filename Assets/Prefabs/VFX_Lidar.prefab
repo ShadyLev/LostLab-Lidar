@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6261263473876220211}
   - component: {fileID: 6993159134884572614}
   - component: {fileID: 8776476057132645586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFX_Lidar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

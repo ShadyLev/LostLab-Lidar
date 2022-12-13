@@ -10,24 +10,21 @@ using UnityEngine.VFX;
 public class LIDARScanner : MonoBehaviour
 {
     [Header("Particle Systems")]
-    public ParticleSystem normalPS;
-    public ParticleSystem enemyPS;
+    private const string TEXTURE_NAME = "PositionsTexture"; // Reference to VFX Graph variable
+    private const string RESOLUTION_PARAMETER_NAME = "Resolution"; // Reference to VFX Graph variable
 
-    private const string TEXTURE_NAME = "PositionsTexture";
-    private const string RESOLUTION_PARAMETER_NAME = "Resolution";
+    private List<Vector3> positionsList = new List<Vector3>(); // List holding all positions of hit points 
+    private List<VisualEffect> vfxList = new List<VisualEffect>(); // List of VFX Graphs
+    private VisualEffect currentVFX; // Current used VFX Graph
+    private Texture2D texture; // Texture holding DATA info
+    private Color[] positions; // Positions encoded in a Color array
+    [SerializeField]private int particleAmount; // Current amount of particles
+    private bool createNewVFX = false; // Create new vfx bool
 
-    private List<Vector3> positionsList = new List<Vector3>();
-    private List<VisualEffect> vfxList = new List<VisualEffect>();
-    private VisualEffect currentVFX;
-    private Texture2D texture;
-    private Color[] positions;
-    [SerializeField]private int particleAmount;
-    private bool createNewVFX = false;
+    [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
+    [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
 
-    [SerializeField] VisualEffect vfxPrefab;
-    [SerializeField] GameObject vfxContainer;
-
-    private int resolution = 100;
+    private int resolution = 100; // Resolution of the texture2d holding data points
 
     [Header("Colour")]
     [Tooltip("Gradient of the colour based on distance from player.")]
@@ -58,6 +55,7 @@ public class LIDARScanner : MonoBehaviour
     private float minValue = 0.01f; // Minimum radius of the scan area
     private float maxValue = 1f; // Maxiumum radius of the scan area
     private float scrollValue = 0.005f; // How much the radius changes when scrolling
+    private int laserScanScreenOffset = 50; // How much the radius changes when scrolling
 
     RaycastHit rayHit; // Reference to the raycast hit
 
@@ -81,9 +79,6 @@ public class LIDARScanner : MonoBehaviour
         laserLineRenderer.startColor = Color.red;
         laserLineRenderer.endColor = Color.red;
 
-        // Pause the particle effect
-        normalPS.Pause();
-
         createNewVFX = true;
 
         CreateVFX();
@@ -93,14 +88,6 @@ public class LIDARScanner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug
-        Debug.Log(normalPS.isPaused);
-
-        if (Input.GetKeyDown(KeyCode.P))
-            normalPS.Pause();
-        if (Input.GetKeyDown(KeyCode.O))
-            normalPS.Stop();
-
         // Charge scanner
         if (startRecharge)
         {
@@ -182,21 +169,7 @@ public class LIDARScanner : MonoBehaviour
             if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range)) //whatIsEnemy
             {
                 /*
-                Quaternion tmp = Quaternion.LookRotation(rayHit.normal);
-                float dist = Vector3.Distance(playerCameraTransform.position, rayHit.point);
-
                 if (rayHit.collider.CompareTag("Enemy"))
-                {
-                    DoEmit(enemyPS, rayHit.point, -tmp.eulerAngles, dist, true);
-                }
-                else
-                {
-                    DoEmit(normalPS, rayHit.point, -tmp.eulerAngles, dist, false);
-                }
-
-                SetRandomColour();
-                laserLineRenderer.SetPosition(0, muzzlePoint.position);
-                laserLineRenderer.SetPosition(1, rayHit.point);
                 */
                 if(positionsList.Count < resolution * resolution)
                 {
@@ -231,9 +204,9 @@ public class LIDARScanner : MonoBehaviour
         Vector3 direction = playerCamera.transform.forward;
         Ray ray;
 
-        for(int y = 0; y < Screen.height; y += 10)
+        for(int y = 0 + laserScanScreenOffset; y < Screen.height - laserScanScreenOffset; y += 10)
         {
-            for (int x = 0; x < Screen.width; x += 10)
+            for (int x = 0 + laserScanScreenOffset; x < Screen.width - laserScanScreenOffset; x += 10)
             {
                 ray = playerCamera.ScreenPointToRay(new Vector3(x, Screen.height - y, 0));
 
@@ -241,22 +214,22 @@ public class LIDARScanner : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    Quaternion tmp = Quaternion.LookRotation(hit.normal);
-                    float dist = Vector3.Distance(playerCameraTransform.position, hit.point);
-
-                    if (hit.collider.CompareTag("Enemy"))
+                    if (positionsList.Count < resolution * resolution)
                     {
-                        DoEmit(enemyPS, hit.point, -tmp.eulerAngles, dist, true);
+                        positionsList.Add(hit.point);
+                        particleAmount++;
+                        SetRandomColour();
+                        laserLineRenderer.SetPosition(0, muzzlePoint.position);
+                        laserLineRenderer.SetPosition(1, hit.point);
                     }
                     else
                     {
-                        DoEmit(normalPS, hit.point, -tmp.eulerAngles, dist, false);
+                        createNewVFX = true;
+                        CreateVFX();
+                        break;
                     }
-
-                    SetRandomColour();
-                    laserLineRenderer.SetPosition(0, muzzlePoint.position);
-                    laserLineRenderer.SetPosition(1, hit.point);
                 }
+                ApplyPositions();
             }
             yield return new WaitForSeconds(0.05f);
         }
@@ -290,54 +263,68 @@ public class LIDARScanner : MonoBehaviour
         ps.Emit(emitParams, 1);
     }
 
+    /// <summary>
+    /// This function creates a new VFX Graph prefab.
+    /// It creates a new prefab then sets the uINt resolution in VFX Graph object.
+    /// Creates a texture2d with the same resolution and a new positions array made out of color.
+    /// </summary>
     void CreateVFX()
     {
         if (!createNewVFX)
             return;
 
-        vfxList.Add(currentVFX);
+        vfxList.Add(currentVFX); // Add old prefab to the list
 
         currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
         currentVFX.SetUInt(RESOLUTION_PARAMETER_NAME, (uint)resolution); // Assign the resolution
 
-        texture = new Texture2D(resolution, resolution, TextureFormat.RGBAFloat, false);
-        positions = new Color[resolution * resolution];
+        texture = new Texture2D(resolution, resolution, TextureFormat.RGBAFloat, false); // Create new texture2D
+        positions = new Color[resolution * resolution]; // Create a new array of colours that will hold position Data 
 
-        positionsList.Clear();
-        particleAmount = 0;
+        positionsList.Clear(); // Clear list of old positions.
+        particleAmount = 0; // Reset particle amount
 
         createNewVFX = false;
     }
 
+    /// <summary>
+    /// This function applies position of particles.
+    /// It takes a list of points and encodes them as Colors on a texture2D.
+    /// </summary>
     void ApplyPositions()
     {
-        Vector3[] pos = positionsList.ToArray();
+        Vector3[] pos = positionsList.ToArray(); // Take avalible point positions and transform to array.
 
-        Vector3 vfxPos = currentVFX.transform.position;
+        Vector3 vfxPos = currentVFX.transform.position; // POsition of our currently used VFX Graph object
 
         Vector3 transformPos = transform.position;
 
-        int loopLength = texture.width * texture.height;
-        int posListLength = pos.Length;
+        int loopLength = texture.width * texture.height; // Loop through entire texture pixel by pixel.
+        int posListLength = pos.Length; // Length of positions array.
 
+        //Loop through texture
         for(int i = 0; i < loopLength; i++)
         {
             Color data;
-            if(i < posListLength - 1)
+            if(i < posListLength - 1) // If we can encode data
             {
+                // Assign a pixel color with RGB values representing coordinates. 
+                // Subtract position of VFX Graph to ensure the right position in world.
                 data = new Color(pos[i].x - vfxPos.x, pos[i].y - vfxPos.y, pos[i].z - vfxPos.z, 1);
             }
             else
             {
+                // If not data is avalible to encode create an invisible point to not make GPU angy.
                 data = new Color(0,0,0,0);
             }
-            positions[i] = data;
+            positions[i] = data; // Save the encoded color.
         }
-        texture.SetPixels(positions);
-        texture.Apply();
 
-        currentVFX.SetTexture(TEXTURE_NAME, texture);
-        currentVFX.Reinit();
+        texture.SetPixels(positions); // Set pixels to texture
+        texture.Apply(); // Apply
+
+        currentVFX.SetTexture(TEXTURE_NAME, texture); // Set texture in VFX Graph
+        currentVFX.Reinit(); // Re initialize to display points.
     }
 
     /// <summary>

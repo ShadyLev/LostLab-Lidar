@@ -57,6 +57,7 @@ public class RadarPusle : MonoBehaviour
                         RadarPing radarPing = radarPingTransform.GetComponent<RadarPing>();
 
                         radarPing.SetDisappearTimer(rangeMax / fadeRange);
+                        radarPing.SetColour(Color.green);
                     }
                 }
             }
