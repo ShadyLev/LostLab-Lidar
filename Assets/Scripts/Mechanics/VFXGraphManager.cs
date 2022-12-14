@@ -8,11 +8,11 @@ public class VFXGraphManager : MonoBehaviour
     [Header("Particle Systems")]
     private const string TEXTURE_NAME = "PositionsTexture"; // Reference to VFX Graph variable
     private const string RESOLUTION_PARAMETER_NAME = "Resolution"; // Reference to VFX Graph variable
-    private const string VECTOR3_NAME = "PlayerPos"; // Reference to VFX Graph variable
+    private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
 
     private List<Vector3> positionsList = new List<Vector3>(); // List holding all positions of hit points 
     public List<VisualEffect> vfxList = new List<VisualEffect>(); // List of VFX Graphs
-    private VisualEffect currentVFX; // Current used VFX Graph
+    [SerializeField] private VisualEffect currentVFX; // Current used VFX Graph
     private Texture2D texture; // Texture holding DATA info
     private Color[] positions; // Positions encoded in a Color array
     [SerializeField] private int particleAmount; // Current amount of particles
@@ -22,6 +22,8 @@ public class VFXGraphManager : MonoBehaviour
     [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
 
     private int resolution = 100; // Resolution of the texture2d holding data points
+
+    [SerializeField] private Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -120,7 +122,7 @@ public class VFXGraphManager : MonoBehaviour
     {
         foreach (VisualEffect vs in vfxList)
         {
-            vs.SetVector3(VECTOR3_NAME, transform.position);
+            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position - vs.transform.position);
         }
     }
 }

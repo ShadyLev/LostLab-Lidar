@@ -809,6 +809,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359249476}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &364832411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7805791633372197179, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7805791633215677238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &417460644
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,6 +3689,11 @@ PrefabInstance:
       propertyPath: vfxContainer
       value: 
       objectReference: {fileID: 961926448}
+    - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 364832411}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder
