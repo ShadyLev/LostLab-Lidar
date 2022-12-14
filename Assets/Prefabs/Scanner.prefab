@@ -124,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6990689276125353343}
   - component: {fileID: 6990689276125353337}
+  - component: {fileID: 7601699528810113120}
   - component: {fileID: 4057219029478110060}
   - component: {fileID: 6990689276125353342}
   m_Layer: 0
@@ -163,11 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b236e18d28dfcc442a4e275adcd7da32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalPS: {fileID: 0}
-  enemyPS: {fileID: 0}
-  particleAmount: 0
-  vfxPrefab: {fileID: 0}
-  vfxContainer: {fileID: 0}
+  vfxManager: {fileID: 7601699528810113120}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0.03518948, b: 0, a: 1}
@@ -208,6 +205,23 @@ MonoBehaviour:
   m_CurrentScanCharge: 0
   laserWidth: 0.01
   canScan: 1
+--- !u!114 &7601699528810113120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990689276125353340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75c42d2b974aed4b9e65e6272a6061e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxList: []
+  particleAmount: 0
+  vfxPrefab: {fileID: 6993159134884572614, guid: 3be86a6d50ac9b9499c6aba6849eeb58,
+    type: 3}
+  vfxContainer: {fileID: 0}
 --- !u!114 &4057219029478110060
 MonoBehaviour:
   m_ObjectHideFlags: 0
