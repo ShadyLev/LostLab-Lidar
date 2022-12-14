@@ -125,4 +125,22 @@ public class VFXGraphManager : MonoBehaviour
             vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position - vs.transform.position);
         }
     }
+
+    public void DestroyOneFromVFXList(VisualEffect vs)
+    {
+        vfxList.Remove(vs);
+        CreateVFX();
+        ApplyPositions();
+    }
+    public void DestroyVFXList()
+    {
+        List<VisualEffect> tmpVs = vfxList;
+        foreach(VisualEffect vs in tmpVs)
+        {
+            Destroy(vs.gameObject);
+        }
+        vfxList.Clear();
+        CreateVFX();
+        ApplyPositions();
+    }
 }

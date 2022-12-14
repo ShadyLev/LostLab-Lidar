@@ -53,6 +53,31 @@ public class LIDARScanner : MonoBehaviour
     private bool isScanning = false;
     public bool canScan = true;
 
+    [SerializeField] private GameObject rayPrefab;
+    [SerializeField] private Transform rayContainer;
+    [SerializeField] private int numOfRays;
+    [SerializeField] private float verticalScanAngle;
+    [SerializeField] private float horizontalScanAngle;
+    [SerializeField] private float scanRate;
+
+    private GameObject[] rays;
+    [SerializeField] private float scanAngle;
+
+    [SerializeField] private bool scanning;
+
+    public bool Scanning
+    {
+        get => scanning;
+        set
+        {
+            if (scanAngle < verticalScanAngle)
+                return;
+
+            scanning = value;
+            scanAngle = scanning ? -verticalScanAngle : verticalScanAngle;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,11 +89,15 @@ public class LIDARScanner : MonoBehaviour
         laserLineRenderer.endWidth = laserWidth;
         laserLineRenderer.startColor = Color.red;
         laserLineRenderer.endColor = Color.red;
+
+        InitializeRays(rayPrefab);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Scan(Time.deltaTime);
+
         // Charge scanner
         if (startRecharge)
         {
@@ -123,8 +152,16 @@ public class LIDARScanner : MonoBehaviour
         //If player holds space perform a scan
         if (Input.GetKey(KeyCode.Mouse1) && canScan) // Check if not shooting
         {
-            laserLineRenderer.enabled = true; // Enable line renderer
-            StartCoroutine(LaserScan()); //LaserScan(800, 800);
+            //laserLineRenderer.enabled = true; // Enable line renderer
+            //StartCoroutine(LaserScan()); //LaserScan(800, 800);
+            scanning = true;
+        }
+        //If player holds space perform a scan
+        if (Input.GetKeyUp(KeyCode.Mouse1)) // Check if not shooting
+        {
+            //laserLineRenderer.enabled = true; // Enable line renderer
+            //StartCoroutine(LaserScan()); //LaserScan(800, 800);
+            scanning = false;
         }
     }
 
@@ -214,6 +251,64 @@ public class LIDARScanner : MonoBehaviour
         isScanning = false; // No longer scanning
         startRecharge = true; // Start rechargin
         StopCoroutine(LaserScan());
+    }
+
+    public void Scan(float deltaTime)
+    {
+        if (!scanning)
+            return;
+
+        if ((scanRate * deltaTime) + scanAngle >= verticalScanAngle)
+        {
+            scanAngle = -scanAngle;
+            scanning = false;
+        }
+
+        scanAngle += scanRate * deltaTime;
+        NewScan();
+        Debug.Log("scanning");
+    }
+
+    public void InitializeRays(GameObject rayPrefab)
+    {
+        rays = new GameObject[numOfRays];
+        scanAngle = verticalScanAngle;
+
+        for (int i = 0; i < numOfRays; i++)
+        {
+            rays[i] = GameObject.Instantiate(rayPrefab, rayContainer);
+        }
+
+        Scanning = false;
+    }
+
+    void NewScan()
+    {
+        RaycastHit hit = new RaycastHit();
+        for (int i = 0; i < numOfRays; i++)
+        {
+            if (AdjustRayFromRaycast(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
+            {
+                vfxManager.AddPositions(hit.point);
+                vfxManager.ApplyPositions();
+                Debug.Log("hit");
+            }
+        }
+    }
+
+    private bool AdjustRayFromRaycast(Transform ray, float horizontalAngle, float verticalAngle, float horizontalRadians, ref RaycastHit hit)
+    {
+        bool successfulHit;
+
+        // Orient the ray
+        ray.localEulerAngles = new Vector3(verticalAngle, Mathf.Cos(horizontalRadians) * horizontalAngle, 0);
+
+        int layerId = 7;
+        int layerMask = 1 << layerId;
+
+        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f);
+
+        return successfulHit;
     }
 
 
