@@ -43,24 +43,25 @@ public class RadarPusle : MonoBehaviour
 
         pulseSpriteTransform.localScale = new Vector3(range, range);
 
-        RaycastHit[] hitsArray = Physics.SphereCastAll(transform.position, range / 2f, transform.forward, artefactLayerMask);
-        foreach (RaycastHit rayHit in hitsArray) {
-            if (rayHit.collider != null)
+        //RaycastHit[] hitsArray = Physics.SphereCastAll(transform.position, range / 2f, transform.forward, artefactLayerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range / 2f, artefactLayerMask);
+        foreach (Collider col in hitColliders)
+        {
+            if (col == null)
+                return;
+
+            if (!alreadyPingedColliders.Contains(col))
             {
-                if (!alreadyPingedColliders.Contains(rayHit.collider))
+                alreadyPingedColliders.Add(col);
+
+                if (col.gameObject.CompareTag("Artefact"))
                 {
-                    alreadyPingedColliders.Add(rayHit.collider);
+                    Vector3 newPingPosition = col.transform.position + new Vector3(0, 5, 0);
+                    Transform radarPingTransform = Instantiate(radarPingPrefab, newPingPosition, Quaternion.Euler(90, 0, 0), radarPingsContainer);
+                    RadarPing radarPing = radarPingTransform.GetComponent<RadarPing>();
 
-                    //Debug.Log("Hit object " + rayHit.collider.name);
-                    if (rayHit.collider.CompareTag("Artefact"))
-                    {
-                        Vector3 newPingPosition = rayHit.collider.transform.position + new Vector3(0, 5, 0);
-                        Transform radarPingTransform = Instantiate(radarPingPrefab, newPingPosition, Quaternion.Euler(90,0,0), radarPingsContainer);
-                        RadarPing radarPing = radarPingTransform.GetComponent<RadarPing>();
-
-                        radarPing.SetDisappearTimer(rangeMax / fadeRange);
-                        radarPing.SetColour(Color.green);
-                    }
+                    radarPing.SetDisappearTimer(rangeMax / fadeRange);
+                    radarPing.SetColour(Color.green);
                 }
             }
         }

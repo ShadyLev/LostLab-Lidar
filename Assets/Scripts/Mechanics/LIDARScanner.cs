@@ -149,6 +149,10 @@ public class LIDARScanner : MonoBehaviour
             //laserLineRenderer.enabled = true; // Enable line renderer
             //StartCoroutine(LaserScan()); //LaserScan(800, 800);
             scanning = true;
+
+            isScanning = true; // We are scanning rn
+            canScan = false; // Disable ability to scan again
+            m_CurrentScanCharge = 0; // Set the charge time to 0
         }
     }
 
@@ -250,6 +254,9 @@ public class LIDARScanner : MonoBehaviour
         {
             scanAngle = -verticalScanAngle;
             scanning = false;
+
+            isScanning = false; // No longer scanning
+            startRecharge = true; // Start rechargin
         }
         
 
