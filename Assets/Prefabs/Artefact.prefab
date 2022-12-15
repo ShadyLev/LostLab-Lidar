@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6552909664087275932}
   - component: {fileID: 6552909664087275933}
   - component: {fileID: 6552909664087275934}
+  - component: {fileID: 2909090887104784942}
   m_Layer: 0
   m_Name: Artefact
   m_TagString: Artefact
@@ -92,8 +93,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6552909664087275935}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2909090887104784942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552909664087275935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33b078719603c34287f24f7ddfb3691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 0}
+  manager: {fileID: 0}
+  radius: 0

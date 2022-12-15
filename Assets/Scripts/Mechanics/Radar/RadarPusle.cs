@@ -8,6 +8,8 @@ public class RadarPusle : MonoBehaviour
 
     [SerializeField] private Transform radarPingsContainer;
 
+    [SerializeField] private LayerMask artefactLayerMask;
+
     [SerializeField] private Transform pulseSpriteTransform;
     [SerializeField] private float range;
     [SerializeField] private float rangeMax;
@@ -41,7 +43,7 @@ public class RadarPusle : MonoBehaviour
 
         pulseSpriteTransform.localScale = new Vector3(range, range);
 
-        RaycastHit[] hitsArray = Physics.SphereCastAll(transform.position, range / 2f, transform.forward);
+        RaycastHit[] hitsArray = Physics.SphereCastAll(transform.position, range / 2f, transform.forward, artefactLayerMask);
         foreach (RaycastHit rayHit in hitsArray) {
             if (rayHit.collider != null)
             {
