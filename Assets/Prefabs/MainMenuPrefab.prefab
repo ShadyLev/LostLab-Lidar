@@ -10743,8 +10743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeSFX: 1
   volumeMusic: 0.01
-  buttonHover: {fileID: 8300000, guid: beca2ad8f07bf6c4fa2b676bf423fc3c, type: 3}
-  buttonClick: {fileID: 8300000, guid: 9d574ee7a5b547742a1b8d65c55ce37a, type: 3}
+  buttonHover: {fileID: 8300000, guid: cc3239e9abe3b5647816bf4714cf1ecc, type: 3}
+  buttonClick: {fileID: 8300000, guid: 07ee87feca245324bae645a9570ce547, type: 3}
 --- !u!82 &6738858215619796004
 AudioSource:
   m_ObjectHideFlags: 0
