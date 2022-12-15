@@ -3939,7 +3939,7 @@ PrefabInstance:
     - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: horizontalScanAngle
-      value: 180
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}

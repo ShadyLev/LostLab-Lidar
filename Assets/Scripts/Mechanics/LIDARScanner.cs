@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,19 +65,7 @@ public class LIDARScanner : MonoBehaviour
     [SerializeField] private float scanAngle;
 
     [SerializeField] private bool scanning;
-
-    public bool Scanning
-    {
-        get => scanning;
-        set
-        {
-            if (scanAngle < verticalScanAngle)
-                return;
-
-            scanning = value;
-            scanAngle = scanning ? -verticalScanAngle : verticalScanAngle;
-        }
-    }
+    
 
     // Start is called before the first frame update
     void Start()
@@ -90,7 +79,7 @@ public class LIDARScanner : MonoBehaviour
         laserLineRenderer.startColor = Color.red;
         laserLineRenderer.endColor = Color.red;
 
-        InitializeRays(rayPrefab);
+        CreateRayObjects(rayPrefab);
     }
 
     // Update is called once per frame
@@ -112,6 +101,11 @@ public class LIDARScanner : MonoBehaviour
 
         // Get player input
         GetInput();
+    }
+
+    private void FixedUpdate()
+    {
+        //Scan(Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -156,13 +150,6 @@ public class LIDARScanner : MonoBehaviour
             //StartCoroutine(LaserScan()); //LaserScan(800, 800);
             scanning = true;
         }
-        //If player holds space perform a scan
-        if (Input.GetKeyUp(KeyCode.Mouse1)) // Check if not shooting
-        {
-            //laserLineRenderer.enabled = true; // Enable line renderer
-            //StartCoroutine(LaserScan()); //LaserScan(800, 800);
-            scanning = false;
-        }
     }
 
     /// <summary>
@@ -174,8 +161,8 @@ public class LIDARScanner : MonoBehaviour
         for (int i = 0; i < laserCount; i++)
         {
             // Get a random point inside a circle
-            float a = Random.Range(0,2 * Mathf.PI);
-            float r = Random.Range(0, circleRadius);
+            float a = UnityEngine.Random.Range(0,2 * Mathf.PI);
+            float r = UnityEngine.Random.Range(0, circleRadius);
 
             float x = Mathf.Sqrt(r * circleRadius) * Mathf.Cos(a);
             float y = Mathf.Sqrt(r * circleRadius) * Mathf.Sin(a);
@@ -257,19 +244,21 @@ public class LIDARScanner : MonoBehaviour
     {
         if (!scanning)
             return;
-
+        
+        
         if ((scanRate * deltaTime) + scanAngle >= verticalScanAngle)
         {
-            scanAngle = -scanAngle;
+            scanAngle = -verticalScanAngle;
             scanning = false;
         }
+        
 
         scanAngle += scanRate * deltaTime;
         NewScan();
         Debug.Log("scanning");
     }
 
-    public void InitializeRays(GameObject rayPrefab)
+    public void CreateRayObjects(GameObject rayPrefab)
     {
         rays = new GameObject[numOfRays];
         scanAngle = verticalScanAngle;
@@ -278,8 +267,6 @@ public class LIDARScanner : MonoBehaviour
         {
             rays[i] = GameObject.Instantiate(rayPrefab, rayContainer);
         }
-
-        Scanning = false;
     }
 
     void NewScan()
@@ -287,13 +274,15 @@ public class LIDARScanner : MonoBehaviour
         RaycastHit hit = new RaycastHit();
         for (int i = 0; i < numOfRays; i++)
         {
-            if (AdjustRayFromRaycast(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
+            if (AdjustRayFromRaycast(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * UnityEngine.Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
             {
-                vfxManager.AddPositions(hit.point);
-                vfxManager.ApplyPositions();
-                Debug.Log("hit");
+                if(vfxManager.CheckIfCanAddData())
+                    vfxManager.AddPositions(hit.point);
+                else
+                    vfxManager.CreateVFX();
             }
         }
+        vfxManager.ApplyPositions();
     }
 
     private bool AdjustRayFromRaycast(Transform ray, float horizontalAngle, float verticalAngle, float horizontalRadians, ref RaycastHit hit)
@@ -306,7 +295,7 @@ public class LIDARScanner : MonoBehaviour
         int layerId = 7;
         int layerMask = 1 << layerId;
 
-        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f);
+        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f, layerMask);
 
         return successfulHit;
     }
@@ -317,7 +306,7 @@ public class LIDARScanner : MonoBehaviour
     /// </summary>
     void SetRandomColour()
     {
-        float rnd = Random.Range(0, 3);
+        float rnd = UnityEngine.Random.Range(0, 3);
 
         Color tmpCol = Color.red;
 
