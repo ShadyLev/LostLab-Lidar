@@ -2,11 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField] GameObject loadingScreen;
+    [SerializeField] GameObject menuScreen;
     [SerializeField] Slider slider;
+    [SerializeField] TextMeshProUGUI progressText;
 
     public void LoadLevel(int sceneIndex)
     {
@@ -17,6 +20,7 @@ public class LevelLoader : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+        menuScreen.SetActive(false);
         loadingScreen.SetActive(true);
 
         while (!operation.isDone)
@@ -24,6 +28,7 @@ public class LevelLoader : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / .9f);
 
             slider.value = progress;
+            progressText.SetText(progress * 100f + "%");
 
             yield return null;
         }
