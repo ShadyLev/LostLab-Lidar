@@ -94,6 +94,7 @@ public class LIDARScanner : MonoBehaviour
         // Charge scanner
         if (startRecharge)
         {
+            laserLineRenderer.enabled = false; // Enable line renderer
             Debug.Log("Recharge");
             if (m_CurrentScanCharge >= m_FullScanCharge)
             {
@@ -146,7 +147,7 @@ public class LIDARScanner : MonoBehaviour
         //If player holds space perform a scan
         if (Input.GetKey(KeyCode.Mouse1) && canScan) // Check if not shooting
         {
-            //laserLineRenderer.enabled = true; // Enable line renderer
+            laserLineRenderer.enabled = true; // Enable line renderer
             scanning = true;
 
             isScanning = true; // We are scanning rn
@@ -239,6 +240,10 @@ public class LIDARScanner : MonoBehaviour
                     vfxManager.AddPositions(hit.point);
                 else
                     vfxManager.CreateVFX();
+
+                SetRandomColour();
+                laserLineRenderer.SetPosition(0, muzzlePoint.position);
+                laserLineRenderer.SetPosition(1, hit.point);
             }
         }
         vfxManager.ApplyPositions();
