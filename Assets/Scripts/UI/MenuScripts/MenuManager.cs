@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject menuCanvas;
     public GameObject settingsCanvas;
+    public GameObject introCanvas;
     public string mainLevelName;
     public Color normalTextColor;
     public Color hoverTextColor;
@@ -36,6 +37,12 @@ public class MenuManager : MonoBehaviour
     public void StartSinglePlayerGame()
     {
         SceneManager.LoadScene(mainLevelName);
+    }
+
+    public void StartIntro()
+    {
+        menuCanvas.SetActive(false);
+        introCanvas.SetActive(true);
     }
 
     public void QuitGame()
