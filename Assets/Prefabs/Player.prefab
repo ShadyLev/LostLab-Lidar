@@ -3521,7 +3521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpSpeed: 8
+  jumpSpeed: 6
   gravity: 20
   isMoving: 0
 --- !u!143 &7805791633320145063
@@ -3646,7 +3646,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7805791633372197178}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 59c0e31cd0516a445b86dff64f764c07, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -4149,7 +4149,12 @@ PrefabInstance:
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: laserWidth
-      value: 0.005
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: mask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}

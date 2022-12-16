@@ -95,7 +95,7 @@ public class LIDARScanner : MonoBehaviour
         if (startRecharge)
         {
             laserLineRenderer.enabled = false; // Enable line renderer
-            Debug.Log("Recharge");
+
             if (m_CurrentScanCharge >= m_FullScanCharge)
             {
                 startRecharge = false;
@@ -164,18 +164,11 @@ public class LIDARScanner : MonoBehaviour
     {
         for (int i = 0; i < laserCount; i++)
         {
-            // Get a random point inside a circle
-            float a = UnityEngine.Random.Range(0,2 * Mathf.PI);
-            float r = UnityEngine.Random.Range(0, circleRadius);
+            Vector2 randomPointInCircle = GetRandomPointInsideCircle(circleRadius);
 
-            float x = Mathf.Sqrt(r * circleRadius) * Mathf.Cos(a);
-            float y = Mathf.Sqrt(r * circleRadius) * Mathf.Sin(a);
+            Vector3 direction = playerCameraTransform.forward + (playerCameraTransform.right * randomPointInCircle.x) + (playerCameraTransform.up * randomPointInCircle.y);
 
-            // Add them to the ray direction
-            //Vector3 direction = playerCameraTransform.transform.forward + new Vector3(x, y, 0); // this needs to change
-            Vector3 direction = playerCameraTransform.forward + (playerCameraTransform.right * x) + (playerCameraTransform.up * y);
-
-            if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range)) //whatIsEnemy
+            if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range, mask)) //whatIsEnemy
             {
                 /*
                 if (rayHit.collider.CompareTag("Enemy"))
@@ -195,6 +188,18 @@ public class LIDARScanner : MonoBehaviour
             }
         }
         vfxManager.ApplyPositions();
+    }
+
+    Vector2 GetRandomPointInsideCircle(float circleRadius)
+    {
+        // Get a random point inside a circle
+        float a = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+        float r = UnityEngine.Random.Range(0, circleRadius);
+
+        float x = Mathf.Sqrt(r * circleRadius) * Mathf.Cos(a);
+        float y = Mathf.Sqrt(r * circleRadius) * Mathf.Sin(a);
+
+        return new Vector2(x, y);
     }
 
     public void Scan(float deltaTime)
@@ -255,9 +260,6 @@ public class LIDARScanner : MonoBehaviour
 
         // Orient the ray
         ray.localEulerAngles = new Vector3(verticalAngle, Mathf.Cos(horizontalRadians) * horizontalAngle, 0);
-
-        int layerId = 7;
-        int layerMask = 1 << layerId;
 
         successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f, mask);
 
