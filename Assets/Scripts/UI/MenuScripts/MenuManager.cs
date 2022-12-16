@@ -44,6 +44,12 @@ public class MenuManager : MonoBehaviour
         menuCanvas.SetActive(false);
         introCanvas.SetActive(true);
     }
+    
+    public void BackFromIntro()
+    {
+        introCanvas.SetActive(false);
+        menuCanvas.SetActive(true);
+    }
 
     public void QuitGame()
     {

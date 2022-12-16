@@ -36,4 +36,16 @@ public class IntroSequence : MonoBehaviour
 
         slides[counter].SetActive(true);
     }
+
+    private void OnDisable()
+    {
+        foreach (GameObject slide in slides)
+        {
+            slide.SetActive(false);
+        }
+
+        slides[0].SetActive(true);
+
+        counter = 0;
+    }
 }
