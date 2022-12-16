@@ -65,7 +65,8 @@ public class LIDARScanner : MonoBehaviour
     [SerializeField] private float scanAngle;
 
     [SerializeField] private bool scanning;
-    
+
+    public LayerMask mask;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +81,9 @@ public class LIDARScanner : MonoBehaviour
         laserLineRenderer.endColor = Color.red;
 
         CreateRayObjects(rayPrefab);
+
+        m_CurrentScanCharge = m_FullScanCharge;
+        scanAngle = -verticalScanAngle;
     }
 
     // Update is called once per frame
@@ -90,6 +94,7 @@ public class LIDARScanner : MonoBehaviour
         // Charge scanner
         if (startRecharge)
         {
+            Debug.Log("Recharge");
             if (m_CurrentScanCharge >= m_FullScanCharge)
             {
                 startRecharge = false;
@@ -101,11 +106,6 @@ public class LIDARScanner : MonoBehaviour
 
         // Get player input
         GetInput();
-    }
-
-    private void FixedUpdate()
-    {
-        //Scan(Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -147,7 +147,6 @@ public class LIDARScanner : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1) && canScan) // Check if not shooting
         {
             //laserLineRenderer.enabled = true; // Enable line renderer
-            //StartCoroutine(LaserScan()); //LaserScan(800, 800);
             scanning = true;
 
             isScanning = true; // We are scanning rn
@@ -197,53 +196,6 @@ public class LIDARScanner : MonoBehaviour
         vfxManager.ApplyPositions();
     }
 
-    /// <summary>
-    /// Shoots rays in a shape of a rectangle one by one with a small delay between each ray.
-    /// </summary>
-    /// <param name="width">Width of the rectangle</param>
-    /// <param name="height">Height of the rectangle</param>
-    IEnumerator LaserScan()
-    {
-        isScanning = true; // We are scanning rn
-        canScan = false; // Disable ability to scan again
-        m_CurrentScanCharge = 0; // Set the charge time to 0
-
-        Vector3 direction = playerCamera.transform.forward;
-        Ray ray;
-
-        for(int y = 0 + laserScanScreenOffset; y < Screen.height - laserScanScreenOffset; y += 10)
-        {
-            for (int x = 0 + laserScanScreenOffset; x < Screen.width - laserScanScreenOffset; x += 10)
-            {
-                ray = playerCamera.ScreenPointToRay(new Vector3(x, Screen.height - y, 0));
-
-                Physics.Raycast(ray, out RaycastHit hit);
-
-                if (hit.collider != null)
-                {
-                    if (vfxManager.CheckIfCanAddData())
-                    {
-                        vfxManager.AddPositions(hit.point);
-                        SetRandomColour();
-                        laserLineRenderer.SetPosition(0, muzzlePoint.position);
-                        laserLineRenderer.SetPosition(1, hit.point);
-                    }
-                    else
-                    {
-                        vfxManager.CreateVFX();
-                        break;
-                    }
-                }
-                vfxManager.ApplyPositions();
-            }
-            yield return new WaitForSeconds(0.05f);
-        }
-        laserLineRenderer.enabled = false; // Disable line renderer
-        isScanning = false; // No longer scanning
-        startRecharge = true; // Start rechargin
-        StopCoroutine(LaserScan());
-    }
-
     public void Scan(float deltaTime)
     {
         if (!scanning)
@@ -256,13 +208,13 @@ public class LIDARScanner : MonoBehaviour
             scanning = false;
 
             isScanning = false; // No longer scanning
-            startRecharge = true; // Start rechargin
+            startRecharge = true; // Start recharging
         }
         
 
         scanAngle += scanRate * deltaTime;
+
         NewScan();
-        Debug.Log("scanning");
     }
 
     public void CreateRayObjects(GameObject rayPrefab)
@@ -302,7 +254,7 @@ public class LIDARScanner : MonoBehaviour
         int layerId = 7;
         int layerMask = 1 << layerId;
 
-        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f, layerMask);
+        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f, mask);
 
         return successfulHit;
     }
