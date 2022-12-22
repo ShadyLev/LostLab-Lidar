@@ -40,12 +40,20 @@ public class VFXGraphManager : MonoBehaviour
         UpdatePlayerPosVFXGraph();
     }
 
+    /// <summary>
+    /// Adds position to the positions list.
+    /// </summary>
+    /// <param name="position">Position</param>
     public void AddPositions(Vector3 position)
     {
         positionsList.Add(position);
         particleAmount++;
     }
 
+    /// <summary>
+    /// Checks if there is space on the positions list to add data too.
+    /// </summary>
+    /// <returns>True if there is space; False if there is no space</returns>
     public bool CheckIfCanAddData()
     {
         if (positionsList.Count < resolution * resolution)
@@ -118,6 +126,10 @@ public class VFXGraphManager : MonoBehaviour
         currentVFX.Reinit(); // Re initialize to display points.
     }
 
+
+    /// <summary>
+    /// Updates the player position in every VFX graph.
+    /// </summary>
     void UpdatePlayerPosVFXGraph()
     {
         foreach (VisualEffect vs in vfxList)
@@ -126,12 +138,20 @@ public class VFXGraphManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys a specific VFX Graph object from the list of VFX Graphs.
+    /// </summary>
+    /// <param name="vs">Visual Effect to destroy</param>
     public void DestroyOneFromVFXList(VisualEffect vs)
     {
         vfxList.Remove(vs);
         CreateVFX();
         ApplyPositions();
     }
+
+    /// <summary>
+    /// Destroys all VFX Objects from the list and clears the list.
+    /// </summary>
     public void DestroyVFXList()
     {
         List<VisualEffect> tmpVs = vfxList;
