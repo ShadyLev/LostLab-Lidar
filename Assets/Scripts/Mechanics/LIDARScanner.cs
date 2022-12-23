@@ -170,24 +170,22 @@ public class LIDARScanner : MonoBehaviour
 
             if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range, mask)) //whatIsEnemy
             {
-                /*
                 if (rayHit.collider.CompareTag("Enemy"))
-                */
-                if(vfxManager.CheckIfCanAddData())
                 {
-                    vfxManager.AddPositions(rayHit.point);
-                    SetRandomColour();
-                    laserLineRenderer.SetPosition(0, muzzlePoint.position);
-                    laserLineRenderer.SetPosition(1, rayHit.point);
+                    vfxManager.AddDataToBuffer(rayHit.point, new Vector4(0, 0, 1, 1));
                 }
                 else
                 {
-                    vfxManager.CreateVFX();
-                    break;
+                    vfxManager.AddDataToBuffer(rayHit.point, new Vector4(1, 0, 0, 1));
                 }
+                
+                SetRandomColour();
+                laserLineRenderer.SetPosition(0, muzzlePoint.position);
+                laserLineRenderer.SetPosition(1, rayHit.point);
             }
         }
-        vfxManager.ApplyPositions();
+        vfxManager.SetCustomBufferData();
+        //vfxManager.ApplyPositions();
     }
 
     Vector2 GetRandomPointInsideCircle(float circleRadius)
@@ -241,17 +239,17 @@ public class LIDARScanner : MonoBehaviour
         {
             if (AdjustRayFromRaycast(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * UnityEngine.Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
             {
-                if(vfxManager.CheckIfCanAddData())
-                    vfxManager.AddPositions(hit.point);
-                else
-                    vfxManager.CreateVFX();
+                //if(vfxManager.CheckIfCanAddData())
+                //    vfxManager.AddPositions(hit.point);
+                //else
+                //    vfxManager.CreateVFX();
 
                 SetRandomColour();
                 laserLineRenderer.SetPosition(0, muzzlePoint.position);
                 laserLineRenderer.SetPosition(1, hit.point);
             }
         }
-        vfxManager.ApplyPositions();
+        //vfxManager.ApplyPositions();
     }
 
     private bool AdjustRayFromRaycast(Transform ray, float horizontalAngle, float verticalAngle, float horizontalRadians, ref RaycastHit hit)
