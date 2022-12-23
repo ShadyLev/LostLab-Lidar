@@ -13,15 +13,8 @@ public class LIDARScanner : MonoBehaviour
     [Header("Particle Systems")]
     [SerializeField] VFXGraphManager vfxManager;
 
-    [Header("Colour")]
-    [Tooltip("Gradient of the colour based on distance from player.")]
-    public Gradient gradient;
-
-    [Tooltip("Distance at which the dot is far from player.")]
-    public float farThreshhold;
-
-    [Tooltip("Colour of the dot when hit enemy.")]
-    public Color enemyHitColour;
+    [Header("Point Types")]
+    [SerializeField] PointType[] pointTypes;
 
     [Header("Transforms")]
     [Tooltip("Muzzle point of the scanner. From here the line renderer will start.")]
@@ -170,14 +163,7 @@ public class LIDARScanner : MonoBehaviour
 
             if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range, mask)) //whatIsEnemy
             {
-                if (rayHit.collider.CompareTag("Enemy"))
-                {
-                    vfxManager.AddDataToBuffer(rayHit.point, new Vector4(0, 0, 1, 1));
-                }
-                else
-                {
-                    vfxManager.AddDataToBuffer(rayHit.point, new Vector4(1, 0, 0, 1));
-                }
+                CheckHitObjectFromRaycast(rayHit);
                 
                 SetRandomColour();
                 laserLineRenderer.SetPosition(0, muzzlePoint.position);
@@ -186,6 +172,19 @@ public class LIDARScanner : MonoBehaviour
         }
         vfxManager.SetCustomBufferData();
         //vfxManager.ApplyPositions();
+    }
+
+    void CheckHitObjectFromRaycast(RaycastHit hit)
+    {
+        foreach(PointType type in pointTypes)
+        {
+            if (hit.collider.CompareTag(type.TagName))
+            {
+                Vector4 pointColor = new Vector4(type.Color.r, type.Color.g, type.Color.b, type.Color.a);
+
+                vfxManager.AddDataToBuffer(hit.point, pointColor, type.Lifetime);
+            }
+        }
     }
 
     Vector2 GetRandomPointInsideCircle(float circleRadius)

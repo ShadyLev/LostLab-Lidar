@@ -81,7 +81,7 @@ public class VFXGraphManager : MonoBehaviour
         }
     }
 
-    public void AddDataToBuffer(Vector3 position, Vector4 color)
+    public void AddDataToBuffer(Vector3 position, Vector4 color, float lifetime)
     {
         CheckIfBufferFull();
 
@@ -89,6 +89,7 @@ public class VFXGraphManager : MonoBehaviour
 
         newData.position = position;
         newData.color = color;
+        newData.lifetime = lifetime;
 
         m_CustomVFXData.Add(newData);
         particleAmount++;
