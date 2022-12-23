@@ -13,7 +13,7 @@ public class LIDARScanner : MonoBehaviour
     [Header("Particle Systems")]
     [SerializeField] VFXGraphManager vfxManager;
 
-    [Header("Point Types")]
+    [NonReorderable]
     [SerializeField] PointType[] pointTypes;
 
     [Header("Transforms")]
@@ -163,7 +163,7 @@ public class LIDARScanner : MonoBehaviour
 
             if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range, mask)) //whatIsEnemy
             {
-                CheckHitObjectFromRaycast(rayHit);
+                CheckHitColliderOnPointType(rayHit);
                 
                 SetRandomColour();
                 laserLineRenderer.SetPosition(0, muzzlePoint.position);
@@ -171,10 +171,9 @@ public class LIDARScanner : MonoBehaviour
             }
         }
         vfxManager.SetCustomBufferData();
-        //vfxManager.ApplyPositions();
     }
 
-    void CheckHitObjectFromRaycast(RaycastHit hit)
+    void CheckHitColliderOnPointType(RaycastHit hit)
     {
         foreach(PointType type in pointTypes)
         {
@@ -238,17 +237,14 @@ public class LIDARScanner : MonoBehaviour
         {
             if (AdjustRayFromRaycast(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * UnityEngine.Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
             {
-                //if(vfxManager.CheckIfCanAddData())
-                //    vfxManager.AddPositions(hit.point);
-                //else
-                //    vfxManager.CreateVFX();
+                CheckHitColliderOnPointType(hit);
 
                 SetRandomColour();
                 laserLineRenderer.SetPosition(0, muzzlePoint.position);
                 laserLineRenderer.SetPosition(1, hit.point);
             }
         }
-        //vfxManager.ApplyPositions();
+        vfxManager.SetCustomBufferData();
     }
 
     private bool AdjustRayFromRaycast(Transform ray, float horizontalAngle, float verticalAngle, float horizontalRadians, ref RaycastHit hit)
