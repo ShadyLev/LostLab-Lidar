@@ -35,7 +35,6 @@ public class LIDARScanner : MonoBehaviour
     private float minValue = 0.01f; // Minimum radius of the scan area
     private float maxValue = 1f; // Maxiumum radius of the scan area
     private float scrollValue = 0.005f; // How much the radius changes when scrolling
-    private int laserScanScreenOffset = 50; // How much the radius changes when scrolling
 
     RaycastHit rayHit; // Reference to the raycast hit
 
@@ -157,35 +156,51 @@ public class LIDARScanner : MonoBehaviour
     {
         for (int i = 0; i < laserCount; i++)
         {
+            // Get a random point inside a circle
             Vector2 randomPointInCircle = GetRandomPointInsideCircle(circleRadius);
 
+            // Calculate raycast direction
             Vector3 direction = playerCameraTransform.forward + (playerCameraTransform.right * randomPointInCircle.x) + (playerCameraTransform.up * randomPointInCircle.y);
 
-            if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range, mask)) //whatIsEnemy
+            if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, range, mask))
             {
+                // Apply positions
                 CheckHitColliderOnPointType(rayHit);
                 
-                SetRandomColour();
-                laserLineRenderer.SetPosition(0, muzzlePoint.position);
-                laserLineRenderer.SetPosition(1, rayHit.point);
+                /// Set line renderer variables
+                SetRandomColour(); // Random colour
+                laserLineRenderer.SetPosition(0, muzzlePoint.position); // Start point
+                laserLineRenderer.SetPosition(1, rayHit.point); // End point
             }
         }
         vfxManager.SetCustomBufferData();
     }
 
+    /// <summary>
+    /// Checks if RaycastHit hit a object with a particular tag and assigns buffer data based on the tag.
+    /// </summary>
+    /// <param name="hit">RaycastHit variable</param>
     void CheckHitColliderOnPointType(RaycastHit hit)
     {
+        // Go through each added point type.
         foreach(PointType type in pointTypes)
         {
-            if (hit.collider.CompareTag(type.TagName))
+            if (hit.collider.CompareTag(type.TagName)) // Compare tag
             {
+                // Change Color type to Vector4 (Graphics Buffer does not support Color data type)
                 Vector4 pointColor = new Vector4(type.Color.r, type.Color.g, type.Color.b, type.Color.a);
 
+                // Add data to buffer
                 vfxManager.AddDataToBuffer(hit.point, pointColor, type.Lifetime);
             }
         }
     }
 
+    /// <summary>
+    /// Calculates a random point inside a circle.
+    /// </summary>
+    /// <param name="circleRadius">Radius of the circle</param>
+    /// <returns>Vector2 coordinates of a point inside a circle.</returns>
     Vector2 GetRandomPointInsideCircle(float circleRadius)
     {
         // Get a random point inside a circle
@@ -198,28 +213,11 @@ public class LIDARScanner : MonoBehaviour
         return new Vector2(x, y);
     }
 
-    public void Scan(float deltaTime)
-    {
-        if (!scanning)
-            return;
-        
-        
-        if ((scanRate * deltaTime) + scanAngle >= verticalScanAngle)
-        {
-            scanAngle = -verticalScanAngle;
-            scanning = false;
-
-            isScanning = false; // No longer scanning
-            startRecharge = true; // Start recharging
-        }
-        
-
-        scanAngle += scanRate * deltaTime;
-
-        NewScan();
-    }
-
-    public void CreateRayObjects(GameObject rayPrefab)
+    /// <summary>
+    /// Creates gameobjects to shoot rays from.
+    /// </summary>
+    /// <param name="rayPrefab">Prefab of the gameobject.</param>
+    private void CreateRayObjects(GameObject rayPrefab)
     {
         rays = new GameObject[numOfRays];
         scanAngle = verticalScanAngle;
@@ -230,12 +228,42 @@ public class LIDARScanner : MonoBehaviour
         }
     }
 
-    void NewScan()
+    /// <summary>
+    /// Calculates scan angle based on deltatime and calls Scan function.
+    /// </summary>
+    /// <param name="deltaTime"></param>
+    private void Scan(float deltaTime)
+    {
+        // If not scanning return
+        if (!scanning)
+            return;
+
+        // If scan angle is above max limit stop scanning
+        if ((scanRate * deltaTime) + scanAngle >= verticalScanAngle)
+        {
+            scanAngle = -verticalScanAngle; // Reset scan angle
+            scanning = false;
+
+            isScanning = false; // No longer scanning
+            startRecharge = true; // Start recharging
+        }
+        
+        // Increase scan angle
+        scanAngle += scanRate * deltaTime;
+
+        // Shoot rays
+        ShootRays();
+    }
+
+    /// <summary>
+    /// Shoots rays in rows and sets hit points to graphics buffer.
+    /// </summary>
+    private void ShootRays()
     {
         RaycastHit hit = new RaycastHit();
         for (int i = 0; i < numOfRays; i++)
         {
-            if (AdjustRayFromRaycast(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * UnityEngine.Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
+            if (RotateRayObjectsToAngle(rays[i].transform, horizontalScanAngle, scanAngle, Mathf.PI * UnityEngine.Random.Range(i / (float)numOfRays, i + 1 / (float)numOfRays), ref hit))
             {
                 CheckHitColliderOnPointType(hit);
 
@@ -247,15 +275,26 @@ public class LIDARScanner : MonoBehaviour
         vfxManager.SetCustomBufferData();
     }
 
-    private bool AdjustRayFromRaycast(Transform ray, float horizontalAngle, float verticalAngle, float horizontalRadians, ref RaycastHit hit)
+    /// <summary>
+    /// Calculates the angle of the ray object and shoots a ray forward.
+    /// </summary>
+    /// <param name="ray">Transform of an object to shoot the ray from</param>
+    /// <param name="horizontalAngle">Max Horizontal Angle to shoot ray at.</param>
+    /// <param name="verticalAngle">Max Vertical Angle to shoot ray at.</param>
+    /// <param name="horizontalRadians">Radian angle between each ray.</param>
+    /// <param name="hit">Raycast hit reference.</param>
+    /// <returns>True or false based on if raycast hit an object.</returns>
+    private bool RotateRayObjectsToAngle(Transform ray, float horizontalAngle, float verticalAngle, float horizontalRadians, ref RaycastHit hit)
     {
         bool successfulHit;
 
-        // Orient the ray
+        // Rotate the ray to target
         ray.localEulerAngles = new Vector3(verticalAngle, Mathf.Cos(horizontalRadians) * horizontalAngle, 0);
 
+        // Shoot raycast in direction
         successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f, mask);
 
+        // Return bool #
         return successfulHit;
     }
 
@@ -267,14 +306,23 @@ public class LIDARScanner : MonoBehaviour
     {
         float rnd = UnityEngine.Random.Range(0, 3);
 
-        Color tmpCol = Color.red;
+        Color tmpCol;
 
-        if (rnd == 0)
-            tmpCol = Color.red;
-        else if (rnd == 1)
-            tmpCol = Color.blue;
-        else if (rnd == 2)
-            tmpCol = Color.green;
+        switch (rnd)
+        {
+            default:
+                tmpCol = Color.yellow;
+                break;
+            case 0:
+                tmpCol = Color.red;
+                break;
+            case 1:
+                tmpCol = Color.blue;
+                break;
+            case 2:
+                tmpCol = Color.green;
+                break;
+        }
 
         laserLineRenderer.startColor = tmpCol;
         laserLineRenderer.endColor = tmpCol;

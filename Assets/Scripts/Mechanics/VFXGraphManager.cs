@@ -11,25 +11,26 @@ public class VFXGraphManager : MonoBehaviour
     #region Variables
 
     [Header("Particle Systems")]
-    private const string RESOLUTION_PARAMETER_NAME = "Resolution"; // Reference to VFX Graph variable
+    private const string MAX_PARTICLE_COUNT_PARAMETER_NAME = "MaxParticleCount"; // Reference to VFX Graph variable
     private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
+
+    [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
+    [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
 
     [SerializeField] List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
     [SerializeField] private VisualEffect m_currentVFX; // Current used VFX Graph
     [SerializeField] private int m_particleAmount; // Current amount of particles
 
-    [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
-    [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
-
-    private int resolution = 16384; // Resolution of the texture2d holding data points
+    private int maxParticleCount = 16000; // Particle count
 
     [SerializeField] private Transform playerTransform;
 
     /// VFX GRAPH BUFFER VARIABLES
 
-    private GraphicsBuffer gfxBuffer;
-    private int m_BufferPropertyID = Shader.PropertyToID("CustomBuffer");
+    private GraphicsBuffer gfxBuffer; // Graphics Buffer
+    private int m_BufferPropertyID = Shader.PropertyToID("CustomBuffer"); // VFX Graph Buffer ID
 
+    // Custom Buffer Data
     [VFXType(VFXTypeAttribute.Usage.GraphicsBuffer)]
     struct CustomVFXData
     {
@@ -38,6 +39,7 @@ public class VFXGraphManager : MonoBehaviour
         public float lifetime;
     }
 
+    // List of custom Data points
     private List<CustomVFXData> m_CustomVFXData = new List<CustomVFXData>();
 
     #endregion
@@ -45,10 +47,9 @@ public class VFXGraphManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Reallocate(resolution);
+        Reallocate(maxParticleCount);
 
         CreateVFX();
-        //ApplyPositions();
     }
 
     // Update is called once per frame
@@ -66,6 +67,7 @@ public class VFXGraphManager : MonoBehaviour
     public void DestroyOneFromVFXList(VisualEffect vs)
     {
         m_vfxList.Remove(vs);
+
         CreateVFX();
     }
 
@@ -75,11 +77,14 @@ public class VFXGraphManager : MonoBehaviour
     public void DestroyVFXList()
     {
         List<VisualEffect> tmpVs = m_vfxList;
+
         foreach (VisualEffect vs in tmpVs)
         {
             Destroy(vs.gameObject);
         }
+
         m_vfxList.Clear();
+
         CreateVFX();
     }
 
@@ -124,6 +129,10 @@ public class VFXGraphManager : MonoBehaviour
 
     #region PRIVATE METHODS
 
+    /// <summary>
+    /// Creates a new graphics buffer of size.
+    /// </summary>
+    /// <param name="newSize">Graphics buffer count.</param>
     void Reallocate(int newSize)
     {
         if (gfxBuffer != null)
@@ -142,12 +151,12 @@ public class VFXGraphManager : MonoBehaviour
         // Reallocate more data if needed
         if (m_CustomVFXData.Count > gfxBuffer.count)
         {
-            int newCount = gfxBuffer.count;
-            while (newCount < m_CustomVFXData.Count)
-                newCount *= 2;
+            //int newCount = gfxBuffer.count;
+            //while (newCount < m_CustomVFXData.Count)
+            //    newCount *= 2;
 
             m_CustomVFXData.Clear();
-            //Reallocate(resolution);
+            Reallocate(maxParticleCount);
             CreateVFX();
         }
     }
@@ -161,7 +170,7 @@ public class VFXGraphManager : MonoBehaviour
     {
         m_currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
 
-        m_currentVFX.SetUInt(RESOLUTION_PARAMETER_NAME, (uint)resolution); // Assign the resolution
+        m_currentVFX.SetUInt(MAX_PARTICLE_COUNT_PARAMETER_NAME, (uint)maxParticleCount); // Assign the resolution
 
         m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer);
 

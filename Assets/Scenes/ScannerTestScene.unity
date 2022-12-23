@@ -3597,11 +3597,6 @@ PrefabInstance:
       propertyPath: vfxContainer
       value: 
       objectReference: {fileID: 961926448}
-    - target: {fileID: 7805791632567062085, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 311
-      objectReference: {fileID: 0}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder
@@ -3661,96 +3656,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].TagName
-      value: Environment
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].Color.r
-      value: 0.07539296
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].TagName
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[2].Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[2].Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[2].Color.r
-      value: 0.07539296
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[2].TagName
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].Lifetime
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].Lifetime
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[2].Lifetime
-      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
