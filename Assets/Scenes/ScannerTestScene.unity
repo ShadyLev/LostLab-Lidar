@@ -3651,6 +3651,11 @@ PrefabInstance:
       propertyPath: pointTypes.Array.data[1].Size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: pointTypes.Array.data[0].Lifetime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
 --- !u!4 &7805791633215677239 stripped

@@ -26,12 +26,14 @@ public class LIDARScanner : MonoBehaviour
 
     [Header("LIDAR values")]
     [Tooltip("Radius of the scan area.")]
-    public float circleRadius;
-    [Tooltip("Scanner range")]
-    public float range;
-    public float m_FullScanCharge;
-    public float m_CurrentScanCharge;
-    private bool startRecharge;
+    [SerializeField] private float circleRadius;
+    [Tooltip("Scanner range.")]
+    [SerializeField] private float range;
+    [Tooltip("How long the big scan will recharge.")]
+    [SerializeField] public float m_FullScanCharge;
+
+    public float m_CurrentScanCharge; // current scan charge value
+    private bool startRecharge; // Start recharge bool
     private float minValue = 0.01f; // Minimum radius of the scan area
     private float maxValue = 1f; // Maxiumum radius of the scan area
     private float scrollValue = 0.005f; // How much the radius changes when scrolling

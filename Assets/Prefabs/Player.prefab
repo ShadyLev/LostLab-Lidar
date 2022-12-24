@@ -4257,6 +4257,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
+      propertyPath: pointTypes.Array.data[0].Size
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[1].Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
       propertyPath: pointTypes.Array.data[0].Color.a
       value: 1
       objectReference: {fileID: 0}
@@ -4298,7 +4308,7 @@ PrefabInstance:
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: pointTypes.Array.data[0].Lifetime
-      value: 1000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
@@ -4380,6 +4390,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 7805791633372197179}
+    - target: {fileID: 7601699528810113120, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: particle_Texture
+      value: 
+      objectReference: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e, type: 3}
 --- !u!4 &7805791633489632550 stripped
