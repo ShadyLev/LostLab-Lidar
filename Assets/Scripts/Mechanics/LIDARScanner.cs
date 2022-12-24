@@ -191,7 +191,7 @@ public class LIDARScanner : MonoBehaviour
                 Vector4 pointColor = new Vector4(type.Color.r, type.Color.g, type.Color.b, type.Color.a);
 
                 // Add data to buffer
-                vfxManager.AddDataToBuffer(hit.point, pointColor, type.Lifetime);
+                vfxManager.AddDataToBuffer(hit.point, pointColor, type.Lifetime, type.Size);
             }
         }
     }

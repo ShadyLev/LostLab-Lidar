@@ -37,6 +37,7 @@ public class VFXGraphManager : MonoBehaviour
         public Vector3 position;
         public Vector4 color;
         public float lifetime;
+        public float size;
     }
 
     // List of custom Data points
@@ -95,7 +96,7 @@ public class VFXGraphManager : MonoBehaviour
     /// <param name="position">Position of the particle</param>
     /// <param name="color">Color of the particle.</param>
     /// <param name="lifetime">Lifetime of the particle.</param>
-    public void AddDataToBuffer(Vector3 position, Vector4 color, float lifetime)
+    public void AddDataToBuffer(Vector3 position, Vector4 color, float lifetime, float size)
     {
         // Check if there is space to add new data to buffer.
         CheckIfBufferFull(); 
@@ -107,6 +108,7 @@ public class VFXGraphManager : MonoBehaviour
         newData.position = position;
         newData.color = color;
         newData.lifetime = lifetime;
+        newData.size = size;
 
         // Add to list
         m_CustomVFXData.Add(newData);
