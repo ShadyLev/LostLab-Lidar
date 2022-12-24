@@ -85,6 +85,7 @@ public class VFXGraphManager : MonoBehaviour
 
         m_vfxList.Clear();
 
+        Reallocate(maxParticleCount);
         CreateVFX();
     }
 
