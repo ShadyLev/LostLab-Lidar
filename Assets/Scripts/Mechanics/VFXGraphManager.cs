@@ -13,13 +13,15 @@ public class VFXGraphManager : MonoBehaviour
     [Header("Particle Systems")]
     private const string MAX_PARTICLE_COUNT_PARAMETER_NAME = "MaxParticleCount"; // Reference to VFX Graph variable
     private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
+    private const string PARTICLE_TEXTURE_NAME = "ParticleTexture"; // Reference to VFX Graph variable
 
     [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
     [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
+    [SerializeField] Texture2D particle_Texture;
 
-    [SerializeField] List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
-    [SerializeField] private VisualEffect m_currentVFX; // Current used VFX Graph
-    [SerializeField] private int m_particleAmount; // Current amount of particles
+    private List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
+    private VisualEffect m_currentVFX; // Current used VFX Graph
+    private int m_particleAmount; // Current amount of particles
 
     private int maxParticleCount = 16000; // Particle count
 
@@ -174,6 +176,8 @@ public class VFXGraphManager : MonoBehaviour
         m_currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
 
         m_currentVFX.SetUInt(MAX_PARTICLE_COUNT_PARAMETER_NAME, (uint)maxParticleCount); // Assign the resolution
+
+        m_currentVFX.SetTexture(PARTICLE_TEXTURE_NAME, particle_Texture);
 
         m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer);
 
