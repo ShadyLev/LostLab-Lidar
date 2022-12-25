@@ -13,7 +13,7 @@ public class PointType
     public Color Color;
 
     [Tooltip("Lifetime of the particle.")]
-    public float Lifetime;
+    public bool useDefaultGradient;
 
     [Tooltip("Size of the particle.")]
     public float Size;

@@ -192,8 +192,11 @@ public class LIDARScanner : MonoBehaviour
                 // Change Color type to Vector4 (Graphics Buffer does not support Color data type)
                 Vector4 pointColor = new Vector4(type.Color.r, type.Color.g, type.Color.b, type.Color.a);
 
+                // Convert bool into int (Graphics Buffer does not support Bool data type)
+                int isGrad = type.useDefaultGradient ? 1 : 0;
+
                 // Add data to buffer
-                vfxManager.AddDataToBuffer(hit.point, pointColor, type.Lifetime, type.Size);
+                vfxManager.AddDataToBuffer(hit.point, pointColor, isGrad, type.Size);
             }
         }
     }

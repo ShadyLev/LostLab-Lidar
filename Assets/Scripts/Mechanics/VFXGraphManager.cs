@@ -14,10 +14,14 @@ public class VFXGraphManager : MonoBehaviour
     private const string MAX_PARTICLE_COUNT_PARAMETER_NAME = "MaxParticleCount"; // Reference to VFX Graph variable
     private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
     private const string PARTICLE_TEXTURE_NAME = "ParticleTexture"; // Reference to VFX Graph variable
+    private const string GRADIENT_NAME = "DefaultGradient"; // Reference to VFX Graph variable
+    private const string MAX_DISTANCE_COLOR_NAME = "MaxDistanceColor"; // Reference to VFX Graph variable
 
     [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
     [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
     [SerializeField] Texture2D particle_Texture;
+    [SerializeField] Gradient defaultParticleGradient;
+    [SerializeField] float gradientMaxDistance;
 
     private List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
     private VisualEffect m_currentVFX; // Current used VFX Graph
@@ -38,7 +42,7 @@ public class VFXGraphManager : MonoBehaviour
     {
         public Vector3 position;
         public Vector4 color;
-        public float lifetime;
+        public int useDefaultGradient;
         public float size;
     }
 
@@ -98,7 +102,7 @@ public class VFXGraphManager : MonoBehaviour
     /// <param name="position">Position of the particle</param>
     /// <param name="color">Color of the particle.</param>
     /// <param name="lifetime">Lifetime of the particle.</param>
-    public void AddDataToBuffer(Vector3 position, Vector4 color, float lifetime, float size)
+    public void AddDataToBuffer(Vector3 position, Vector4 color, int useDefaultGradient, float size)
     {
         // Check if there is space to add new data to buffer.
         CheckIfBufferFull(); 
@@ -109,7 +113,7 @@ public class VFXGraphManager : MonoBehaviour
         // Apply data
         newData.position = position;
         newData.color = color;
-        newData.lifetime = lifetime;
+        newData.useDefaultGradient = useDefaultGradient;
         newData.size = size;
 
         // Add to list
@@ -177,6 +181,10 @@ public class VFXGraphManager : MonoBehaviour
         m_currentVFX.SetTexture(PARTICLE_TEXTURE_NAME, particle_Texture); // Assign particle texture
 
         m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer); // Set graphics buffer
+
+        //m_currentVFX.SetGradient(GRADIENT_NAME, defaultParticleGradient); // Set default gradient
+
+        //m_currentVFX.SetFloat(MAX_DISTANCE_COLOR_NAME, gradientMaxDistance);
 
         m_vfxList.Add(m_currentVFX); // Add old prefab to the list
 

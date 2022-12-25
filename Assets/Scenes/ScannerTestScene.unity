@@ -3578,9 +3578,19 @@ PrefabInstance:
       objectReference: {fileID: 961926448}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
-      propertyPath: particle_Texture
-      value: 
-      objectReference: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+      propertyPath: defaultParticleGradient.atime3
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: defaultParticleGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: defaultParticleGradient.key3.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder
@@ -3643,17 +3653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
-      propertyPath: pointTypes.Array.data[0].Size
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[1].Size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[0].Lifetime
+      propertyPath: pointTypes.Array.data[0].useDefaultGradient
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
