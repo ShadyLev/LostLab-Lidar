@@ -2,36 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using System.Runtime.InteropServices;
+using Unity.Mathematics;
+using System;
 
 public class VFXGraphManager : MonoBehaviour
 {
-    [Header("Particle Systems")]
-    private const string TEXTURE_NAME = "PositionsTexture"; // Reference to VFX Graph variable
-    private const string RESOLUTION_PARAMETER_NAME = "Resolution"; // Reference to VFX Graph variable
-    private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
+    #region Variables
 
-    private List<Vector3> positionsList = new List<Vector3>(); // List holding all positions of hit points 
-    public List<VisualEffect> vfxList = new List<VisualEffect>(); // List of VFX Graphs
-    [SerializeField] private VisualEffect currentVFX; // Current used VFX Graph
-    private Texture2D texture; // Texture holding DATA info
-    private Color[] positions; // Positions encoded in a Color array
-    [SerializeField] private int particleAmount; // Current amount of particles
-    private bool createNewVFX = false; // Create new vfx bool
+    [Header("Particle Systems")]
+    private const string MAX_PARTICLE_COUNT_PARAMETER_NAME = "MaxParticleCount"; // Reference to VFX Graph variable
+    private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
+    private const string PARTICLE_TEXTURE_NAME = "ParticleTexture"; // Reference to VFX Graph variable
+    private const string GRADIENT_NAME = "DefaultGradient"; // Reference to VFX Graph variable
+    private const string MAX_DISTANCE_COLOR_NAME = "MaxDistanceColor"; // Reference to VFX Graph variable
 
     [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
     [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
+    [SerializeField] Texture2D particle_Texture;
+    [SerializeField] Gradient defaultParticleGradient;
+    [SerializeField] float gradientMaxDistance;
 
-    private int resolution = 100; // Resolution of the texture2d holding data points
+    private List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
+    private VisualEffect m_currentVFX; // Current used VFX Graph
+    private int m_currentVFXParticleAmount; // Current amount of particles
+    private int m_fullParticleCount;
+
+    private int maxParticleCount = 10000; // Particle count
 
     [SerializeField] private Transform playerTransform;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        createNewVFX = true;
+    /// VFX GRAPH BUFFER VARIABLES
 
+    private GraphicsBuffer gfxBuffer; // Graphics Buffer
+
+    private int m_BufferPropertyID = Shader.PropertyToID("CustomBuffer"); // VFX Graph Buffer ID
+
+    // Custom Buffer Data
+    [VFXType(VFXTypeAttribute.Usage.GraphicsBuffer)]
+    struct CustomVFXData
+    {
+        public Vector3 position;
+        public Vector4 color;
+        public int useDefaultGradient;
+        public float size;
+    }
+
+    // List of custom Data points
+    private List<CustomVFXData> m_CustomVFXData = new List<CustomVFXData>();
+
+    #endregion
+
+    // Start is called before the first frame update
+    void Awake()
+    {
         CreateVFX();
-        ApplyPositions();
     }
 
     // Update is called once per frame
@@ -40,30 +65,109 @@ public class VFXGraphManager : MonoBehaviour
         UpdatePlayerPosVFXGraph();
     }
 
+    #region PUBLIC METHODS
+
     /// <summary>
-    /// Adds position to the positions list.
+    /// Destroys all VFX Objects from the list and clears the list.
     /// </summary>
-    /// <param name="position">Position</param>
-    public void AddPositions(Vector3 position)
+    public void DestroyVFXList()
     {
-        positionsList.Add(position);
-        particleAmount++;
+        List<VisualEffect> tmpVs = m_vfxList;
+
+        foreach (VisualEffect vs in tmpVs)
+        {
+            Destroy(vs.gameObject);
+        }
+
+        m_vfxList.Clear();
+
+        Release();
+
+        CreateVFX();
     }
 
     /// <summary>
-    /// Checks if there is space on the positions list to add data too.
+    /// Adds particle data to the list of CustomVFXData.
     /// </summary>
-    /// <returns>True if there is space; False if there is no space</returns>
-    public bool CheckIfCanAddData()
+    /// <param name="position">Position of the particle</param>
+    /// <param name="color">Color of the particle.</param>
+    /// <param name="lifetime">Lifetime of the particle.</param>
+    public void AddDataToBuffer(Vector3 position, Vector4 color, int useDefaultGradient, float size)
     {
-        if (positionsList.Count < resolution * resolution)
+        // Check if there is space to add new data to buffer.
+        if (CheckIfBufferFull())
+            return;
+
+        // Create new CustomVFX Data
+        CustomVFXData newData = new CustomVFXData();
+
+        // Apply data
+        newData.position = position;
+        newData.color = color;
+        newData.useDefaultGradient = useDefaultGradient;
+        newData.size = size;
+
+        // Add to list
+        m_CustomVFXData.Add(newData);
+
+        // Increase particle amount
+        m_currentVFXParticleAmount++;
+    }
+
+
+    /// <summary>
+    /// Sets custom buffer data to the Graphics Buffer and Re Initilizes current VFX Graph
+    /// </summary>
+    public void SetCustomBufferData()
+    {
+        gfxBuffer.SetData(m_CustomVFXData);
+
+        m_currentVFX.Reinit();
+        //m_currentVFX.Play();
+    }
+
+    /// <summary>
+    /// Gives current particle count.
+    /// </summary>
+    /// <returns>Int of particles.</returns>
+    public int GetCurrentParticleCount()
+    {
+        return m_currentVFXParticleAmount + m_fullParticleCount;
+    }
+
+    #endregion
+
+    #region PRIVATE METHODS
+
+    /// <summary>
+    /// Creates a new graphics buffer of size.
+    /// </summary>
+    /// <param name="newSize">Graphics buffer count.</param>
+    void CreateNewBuffer(int newSize)
+    {
+        if (gfxBuffer != null)
+            gfxBuffer.Release();
+
+        gfxBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, newSize, Marshal.SizeOf(typeof(CustomVFXData)));
+        gfxBuffer.SetData(new CustomVFXData[newSize]);
+    }
+
+    /// <summary>
+    /// Checks if Graphics Buffer is full.
+    /// If so -> create new VFX Graph object and clear buffer data.
+    /// </summary>
+    bool CheckIfBufferFull()
+    {
+        if (m_CustomVFXData.Count + 1 > gfxBuffer.count)
         {
+            CreateVFX();
             return true;
         }
         else
         {
             return false;
         }
+        
     }
 
     /// <summary>
@@ -71,96 +175,61 @@ public class VFXGraphManager : MonoBehaviour
     /// It creates a new prefab then sets the uINt resolution in VFX Graph object.
     /// Creates a texture2d with the same resolution and a new positions array made out of color.
     /// </summary>
-    public void CreateVFX()
+    private void CreateVFX()
     {
-        currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
+        CreateNewBuffer(maxParticleCount); // Create new Graphics buffer
 
-        currentVFX.SetUInt(RESOLUTION_PARAMETER_NAME, (uint)resolution); // Assign the resolution
+        m_CustomVFXData.Clear(); // Clear buffer data
 
-        vfxList.Add(currentVFX); // Add old prefab to the list
+        m_currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
 
-        texture = new Texture2D(resolution, resolution, TextureFormat.RGBAFloat, false); // Create new texture2D
-        positions = new Color[resolution * resolution]; // Create a new array of colours that will hold position Data 
+        m_currentVFX.SetUInt(MAX_PARTICLE_COUNT_PARAMETER_NAME, (uint)maxParticleCount); // Assign the resolution
 
-        positionsList.Clear(); // Clear list of old positions.
-        particleAmount = 0; // Reset particle amount
+        m_currentVFX.SetTexture(PARTICLE_TEXTURE_NAME, particle_Texture); // Assign particle texture
+
+        m_currentVFX.SetGradient(GRADIENT_NAME, defaultParticleGradient); // Set default gradient
+
+        m_currentVFX.SetFloat(MAX_DISTANCE_COLOR_NAME, gradientMaxDistance); // Set max distance colour var
+
+        m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer); // Set graphics buffer
+
+        m_vfxList.Add(m_currentVFX); // Add old prefab to the list
+
+        m_fullParticleCount += m_currentVFXParticleAmount;
+
+        m_currentVFXParticleAmount = 0; // Reset particle amount
     }
-
-    /// <summary>
-    /// This function applies position of particles.
-    /// It takes a list of points and encodes them as Colors on a texture2D.
-    /// </summary>
-    public void ApplyPositions()
-    {
-        Vector3[] pos = positionsList.ToArray(); // Take avalible point positions and transform to array.
-
-        Vector3 vfxPos = currentVFX.transform.position; // POsition of our currently used VFX Graph object
-
-        Vector3 transformPos = transform.position;
-
-        int loopLength = texture.width * texture.height; // Loop through entire texture pixel by pixel.
-        int posListLength = pos.Length; // Length of positions array.
-
-        //Loop through texture
-        for (int i = 0; i < loopLength; i++)
-        {
-            Color data;
-            if (i < posListLength - 1) // If we can encode data
-            {
-                // Assign a pixel color with RGB values representing coordinates. 
-                // Subtract position of VFX Graph to ensure the right position in world.
-                data = new Color(pos[i].x - vfxPos.x, pos[i].y - vfxPos.y, pos[i].z - vfxPos.z, 1);
-            }
-            else
-            {
-                // If not data is avalible to encode create an invisible point to not make GPU angy.
-                data = new Color(0, 0, 0, 0);
-            }
-            positions[i] = data; // Save the encoded color.
-        }
-
-        texture.SetPixels(positions); // Set pixels to texture
-        texture.Apply(); // Apply
-
-        currentVFX.SetTexture(TEXTURE_NAME, texture); // Set texture in VFX Graph
-        currentVFX.Reinit(); // Re initialize to display points.
-    }
-
 
     /// <summary>
     /// Updates the player position in every VFX graph.
     /// </summary>
-    void UpdatePlayerPosVFXGraph()
+    private void UpdatePlayerPosVFXGraph()
     {
-        foreach (VisualEffect vs in vfxList)
+        foreach (VisualEffect vs in m_vfxList)
         {
-            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position - vs.transform.position);
+            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position);
         }
     }
 
-    /// <summary>
-    /// Destroys a specific VFX Graph object from the list of VFX Graphs.
-    /// </summary>
-    /// <param name="vs">Visual Effect to destroy</param>
-    public void DestroyOneFromVFXList(VisualEffect vs)
+    #endregion
+
+    #region Dispose
+    public void OnDisable()
     {
-        vfxList.Remove(vs);
-        CreateVFX();
-        ApplyPositions();
+        Release();
     }
 
-    /// <summary>
-    /// Destroys all VFX Objects from the list and clears the list.
-    /// </summary>
-    public void DestroyVFXList()
+    public void OnDestroy()
     {
-        List<VisualEffect> tmpVs = vfxList;
-        foreach(VisualEffect vs in tmpVs)
-        {
-            Destroy(vs.gameObject);
-        }
-        vfxList.Clear();
-        CreateVFX();
-        ApplyPositions();
+        Release();
     }
+
+    void Release()
+    {
+        if(gfxBuffer!= null)
+            gfxBuffer.Release();
+
+        gfxBuffer = null;
+    }
+    #endregion
 }

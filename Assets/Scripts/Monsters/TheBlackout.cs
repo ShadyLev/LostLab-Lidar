@@ -40,7 +40,7 @@ public class TheBlackout : MonoBehaviour
         {
             if(Vector3.Distance(vfx.transform.position, playerObject.transform.position) <= radius)
             {
-                manager.DestroyOneFromVFXList(vfx.GetComponent<VisualEffect>());
+                //manager.DestroyOneFromVFXList(vfx.GetComponent<VisualEffect>());
                 Destroy(vfx.gameObject);
             }
         }

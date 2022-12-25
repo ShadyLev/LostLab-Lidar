@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.21924, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4107623}
   m_Layer: 7
   m_Name: Plane (16)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 43248845}
   m_Layer: 7
   m_Name: Plane (19)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 166025824}
   m_Layer: 7
   m_Name: Plane (23)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -418,27 +418,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166025822}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &216097258 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6552909664087275935, guid: 66d199cf36686e44d94aedb75d4e1f1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 357964756}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &216097259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216097258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33b078719603c34287f24f7ddfb3691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
-  manager: {fileID: 0}
-  radius: 50000
 --- !u!1 &269115515
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +432,7 @@ GameObject:
   - component: {fileID: 269115517}
   m_Layer: 7
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,7 +529,7 @@ GameObject:
   - component: {fileID: 274127163}
   m_Layer: 7
   m_Name: Plane (21)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,7 +627,7 @@ GameObject:
   - component: {fileID: 279828892}
   m_Layer: 7
   m_Name: Plane (2)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -835,7 +814,7 @@ GameObject:
   - component: {fileID: 359249478}
   m_Layer: 7
   m_Name: Plane (8)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -933,7 +912,7 @@ GameObject:
   - component: {fileID: 417460646}
   m_Layer: 7
   m_Name: Plane (5)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1031,7 +1010,7 @@ GameObject:
   - component: {fileID: 436935736}
   m_Layer: 7
   m_Name: Plane (17)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1129,7 +1108,7 @@ GameObject:
   - component: {fileID: 521307404}
   m_Layer: 7
   m_Name: Plane (3)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1275,7 +1254,7 @@ GameObject:
   - component: {fileID: 562521361}
   m_Layer: 7
   m_Name: Plane (20)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1590,7 +1569,7 @@ GameObject:
   - component: {fileID: 891032154}
   m_Layer: 7
   m_Name: Plane (6)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1719,7 +1698,7 @@ GameObject:
   - component: {fileID: 980652415}
   m_Layer: 7
   m_Name: Plane (14)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1817,7 +1796,7 @@ GameObject:
   - component: {fileID: 1018336650}
   m_Layer: 7
   m_Name: Plane (18)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1915,7 +1894,7 @@ GameObject:
   - component: {fileID: 1034327699}
   m_Layer: 7
   m_Name: Plane (11)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2013,7 +1992,7 @@ GameObject:
   - component: {fileID: 1082468080}
   m_Layer: 7
   m_Name: Plane (13)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2111,7 +2090,7 @@ GameObject:
   - component: {fileID: 1144318332}
   m_Layer: 7
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2209,7 +2188,7 @@ GameObject:
   - component: {fileID: 1150782238}
   m_Layer: 7
   m_Name: Plane (7)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2341,7 +2320,7 @@ GameObject:
   - component: {fileID: 1301364496}
   m_Layer: 7
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2444,7 +2423,7 @@ GameObject:
   - component: {fileID: 1500889920}
   m_Layer: 7
   m_Name: Plane (9)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2542,7 +2521,7 @@ GameObject:
   - component: {fileID: 1518319028}
   m_Layer: 7
   m_Name: Plane (1)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2640,7 +2619,7 @@ GameObject:
   - component: {fileID: 1520675824}
   m_Layer: 7
   m_Name: Plane (4)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2942,7 +2921,7 @@ GameObject:
   - component: {fileID: 1792169440}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3039,7 +3018,7 @@ GameObject:
   - component: {fileID: 1842614576}
   m_Layer: 7
   m_Name: Plane (12)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3137,7 +3116,7 @@ GameObject:
   - component: {fileID: 1877583921}
   m_Layer: 7
   m_Name: Plane (10)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3235,7 +3214,7 @@ GameObject:
   - component: {fileID: 1927522163}
   m_Layer: 7
   m_Name: Plane (15)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3333,7 +3312,7 @@ GameObject:
   - component: {fileID: 2028523241}
   m_Layer: 7
   m_Name: Plane (22)
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3592,11 +3571,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165218059, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer
       value: 
       objectReference: {fileID: 961926448}
+    - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: particle_Texture
+      value: 
+      objectReference: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder
@@ -3657,6 +3645,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: pointTypes.Array.data[0].Color.g
+      value: 0.4392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: pointTypes.Array.data[0].Color.r
+      value: 0.79607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: pointTypes.Array.data[0].useDefaultGradient
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
 --- !u!4 &7805791633215677239 stripped
@@ -3665,3 +3668,132 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7805791633215677238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7805791633215677240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7805791634151883007, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7805791633215677238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7805791633215677241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805791633215677240}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3399916d18f994a969531bb6c2719f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scannerScript: {fileID: 7805791633215677243}
+  normalScanClip: {fileID: 8300000, guid: 175840a345d63ca4fb751b2dd7be913a, type: 3}
+  bigScanClip: {fileID: 8300000, guid: 559aa5b7b353f1f4cabe6ff212a20ff7, type: 3}
+--- !u!82 &7805791633215677242
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805791633215677240}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7805791633215677243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7805791633215677238}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805791633215677240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b236e18d28dfcc442a4e275adcd7da32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
