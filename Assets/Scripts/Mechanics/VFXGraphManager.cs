@@ -51,8 +51,6 @@ public class VFXGraphManager : MonoBehaviour
     // List of custom Data points
     private List<CustomVFXData> m_CustomVFXData = new List<CustomVFXData>();
 
-    private List<List<CustomVFXData>> dataList = new List<List<CustomVFXData>>();
-
     #endregion
 
     // Start is called before the first frame update
@@ -180,8 +178,6 @@ public class VFXGraphManager : MonoBehaviour
     private void CreateVFX()
     {
         CreateNewBuffer(maxParticleCount); // Create new Graphics buffer
-
-        dataList.Add(m_CustomVFXData);
 
         m_CustomVFXData.Clear(); // Clear buffer data
 
