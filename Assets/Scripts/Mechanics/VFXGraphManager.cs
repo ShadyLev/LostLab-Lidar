@@ -25,15 +25,17 @@ public class VFXGraphManager : MonoBehaviour
 
     private List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
     private VisualEffect m_currentVFX; // Current used VFX Graph
-    [SerializeField] private int m_particleAmount; // Current amount of particles
+    private int m_currentVFXParticleAmount; // Current amount of particles
+    private int m_fullParticleCount;
 
-    private int maxParticleCount = 16000; // Particle count
+    private int maxParticleCount = 10000; // Particle count
 
     [SerializeField] private Transform playerTransform;
 
     /// VFX GRAPH BUFFER VARIABLES
 
     private GraphicsBuffer gfxBuffer; // Graphics Buffer
+    private List<GraphicsBuffer> gfxBufferList = new List<GraphicsBuffer>(); // Graphics Buffer
     private int m_BufferPropertyID = Shader.PropertyToID("CustomBuffer"); // VFX Graph Buffer ID
 
     // Custom Buffer Data
@@ -54,8 +56,6 @@ public class VFXGraphManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Reallocate(maxParticleCount);
-
         CreateVFX();
     }
 
@@ -92,7 +92,6 @@ public class VFXGraphManager : MonoBehaviour
 
         m_vfxList.Clear();
 
-        Reallocate(maxParticleCount);
         CreateVFX();
     }
 
@@ -120,7 +119,7 @@ public class VFXGraphManager : MonoBehaviour
         m_CustomVFXData.Add(newData);
 
         // Increase particle amount
-        m_particleAmount++;
+        m_currentVFXParticleAmount++;
     }
 
 
@@ -135,6 +134,15 @@ public class VFXGraphManager : MonoBehaviour
         //m_currentVFX.Play();
     }
 
+    /// <summary>
+    /// Gives current particle count.
+    /// </summary>
+    /// <returns>Int of particles.</returns>
+    public int GetCurrentParticleCount()
+    {
+        return m_currentVFXParticleAmount + m_fullParticleCount;
+    }
+
     #endregion
 
     #region PRIVATE METHODS
@@ -143,11 +151,9 @@ public class VFXGraphManager : MonoBehaviour
     /// Creates a new graphics buffer of size.
     /// </summary>
     /// <param name="newSize">Graphics buffer count.</param>
-    void Reallocate(int newSize)
+    void CreateNewBuffer(int newSize)
     {
-        if (gfxBuffer != null)
-            gfxBuffer.Release();
-
+        gfxBufferList.Add(gfxBuffer);
         gfxBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, newSize, Marshal.SizeOf(typeof(CustomVFXData)));
         gfxBuffer.SetData(new CustomVFXData[newSize]);
     }
@@ -158,11 +164,9 @@ public class VFXGraphManager : MonoBehaviour
     /// </summary>
     void CheckIfBufferFull()
     {
-        // Reallocate more data if needed
         if (m_CustomVFXData.Count > gfxBuffer.count)
         {
             m_CustomVFXData.Clear();
-            Reallocate(maxParticleCount);
             CreateVFX();
         }
     }
@@ -174,6 +178,8 @@ public class VFXGraphManager : MonoBehaviour
     /// </summary>
     private void CreateVFX()
     {
+        CreateNewBuffer(maxParticleCount); // Create new Graphics buffer
+
         m_currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
 
         m_currentVFX.SetUInt(MAX_PARTICLE_COUNT_PARAMETER_NAME, (uint)maxParticleCount); // Assign the resolution
@@ -188,7 +194,9 @@ public class VFXGraphManager : MonoBehaviour
 
         m_vfxList.Add(m_currentVFX); // Add old prefab to the list
 
-        m_particleAmount = 0; // Reset particle amount
+        m_fullParticleCount += m_currentVFXParticleAmount;
+
+        m_currentVFXParticleAmount = 0; // Reset particle amount
 
         m_CustomVFXData.Clear(); // Clear buffer data
     }
