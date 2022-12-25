@@ -154,6 +154,7 @@ public class VFXGraphManager : MonoBehaviour
     void CreateNewBuffer(int newSize)
     {
         gfxBufferList.Add(gfxBuffer);
+
         gfxBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, newSize, Marshal.SizeOf(typeof(CustomVFXData)));
         gfxBuffer.SetData(new CustomVFXData[newSize]);
     }
@@ -227,10 +228,12 @@ public class VFXGraphManager : MonoBehaviour
 
     void Release()
     {
-        if (gfxBuffer != null)
+        foreach(GraphicsBuffer gfxb in gfxBufferList)
         {
-            gfxBuffer.Release();
-            gfxBuffer = null;
+            if (gfxb != null)
+            {
+                gfxb.Release();
+            }
         }
     }
     #endregion
