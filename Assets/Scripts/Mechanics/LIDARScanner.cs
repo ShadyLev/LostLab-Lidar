@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
+public enum ScanType
+{
+    Normal,
+    Big
+}
+
 /// <summary>
 /// LIDAR scanner script. 
 /// </summary>
@@ -58,7 +64,8 @@ public class LIDARScanner : MonoBehaviour
     private GameObject[] rays;
     [SerializeField] private float scanAngle;
 
-    [SerializeField] private bool scanning;
+    [SerializeField] private bool m_bBigCcanning;
+    [SerializeField] private bool m_bNormalScanning;
 
     public LayerMask mask;
 
@@ -103,6 +110,23 @@ public class LIDARScanner : MonoBehaviour
         GetInput();
     }
 
+    public bool GetBoolScanValues(ScanType type)
+    {
+        bool scanBool = false;
+
+        switch (type)
+        {
+            case ScanType.Normal:
+                scanBool = m_bNormalScanning;
+                break;
+            case ScanType.Big:
+                scanBool = m_bBigCcanning;
+                break;
+        }
+
+        return scanBool;
+    }
+
     /// <summary>
     /// Gets the player inputs
     /// </summary>
@@ -124,7 +148,7 @@ public class LIDARScanner : MonoBehaviour
                 circleRadius -= scrollValue;
         }
 
-        if (isScanning)
+        if (m_bBigCcanning)
             return;
 
         // If player holds M1 shoot laser
@@ -142,9 +166,8 @@ public class LIDARScanner : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1) && canScan) // Check if not shooting
         {
             laserLineRenderer.enabled = true; // Enable line renderer
-            scanning = true;
+            m_bBigCcanning = true;
 
-            isScanning = true; // We are scanning rn
             canScan = false; // Disable ability to scan again
             m_CurrentScanCharge = 0; // Set the charge time to 0
         }
@@ -156,6 +179,8 @@ public class LIDARScanner : MonoBehaviour
     /// </summary>
     void ShootLaser(int laserCount)
     {
+        m_bNormalScanning = true;
+
         for (int i = 0; i < laserCount; i++)
         {
             // Get a random point inside a circle
@@ -176,6 +201,7 @@ public class LIDARScanner : MonoBehaviour
             }
         }
         vfxManager.SetCustomBufferData();
+        m_bNormalScanning = false;
     }
 
     /// <summary>
@@ -240,16 +266,15 @@ public class LIDARScanner : MonoBehaviour
     private void Scan(float deltaTime)
     {
         // If not scanning return
-        if (!scanning)
+        if (!m_bBigCcanning)
             return;
 
         // If scan angle is above max limit stop scanning
         if ((scanRate * deltaTime) + scanAngle >= verticalScanAngle)
         {
             scanAngle = -verticalScanAngle; // Reset scan angle
-            scanning = false;
+            m_bBigCcanning = false;
 
-            isScanning = false; // No longer scanning
             startRecharge = true; // Start recharging
         }
         

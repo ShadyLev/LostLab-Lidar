@@ -51,6 +51,8 @@ public class VFXGraphManager : MonoBehaviour
     // List of custom Data points
     private List<CustomVFXData> m_CustomVFXData = new List<CustomVFXData>();
 
+    private List<List<CustomVFXData>> dataList = new List<List<CustomVFXData>>();
+
     #endregion
 
     // Start is called before the first frame update
@@ -160,10 +162,6 @@ public class VFXGraphManager : MonoBehaviour
     {
         if (m_CustomVFXData.Count + 1 > gfxBuffer.count)
         {
-
-            if (gfxBuffer != null)
-                gfxBuffer.Release();
-
             CreateVFX();
             return true;
         }
@@ -181,10 +179,11 @@ public class VFXGraphManager : MonoBehaviour
     /// </summary>
     private void CreateVFX()
     {
+        CreateNewBuffer(maxParticleCount); // Create new Graphics buffer
+
+        dataList.Add(m_CustomVFXData);
 
         m_CustomVFXData.Clear(); // Clear buffer data
-
-        CreateNewBuffer(maxParticleCount); // Create new Graphics buffer
 
         m_currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
 
