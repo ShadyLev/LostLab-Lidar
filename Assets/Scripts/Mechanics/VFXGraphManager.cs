@@ -207,7 +207,7 @@ public class VFXGraphManager : MonoBehaviour
     {
         foreach (VisualEffect vs in m_vfxList)
         {
-            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position);
+            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position - vs.transform.position);
         }
     }
 
