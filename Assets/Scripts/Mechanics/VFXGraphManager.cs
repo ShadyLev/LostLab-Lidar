@@ -35,7 +35,7 @@ public class VFXGraphManager : MonoBehaviour
     /// VFX GRAPH BUFFER VARIABLES
 
     private GraphicsBuffer gfxBuffer; // Graphics Buffer
-    private List<GraphicsBuffer> gfxBufferList = new List<GraphicsBuffer>(); // Graphics Buffer
+
     private int m_BufferPropertyID = Shader.PropertyToID("CustomBuffer"); // VFX Graph Buffer ID
 
     // Custom Buffer Data
@@ -68,17 +68,6 @@ public class VFXGraphManager : MonoBehaviour
     #region PUBLIC METHODS
 
     /// <summary>
-    /// Destroys a specific VFX Graph object from the list of VFX Graphs.
-    /// </summary>
-    /// <param name="vs">Visual Effect to destroy</param>
-    public void DestroyOneFromVFXList(VisualEffect vs)
-    {
-        m_vfxList.Remove(vs);
-
-        CreateVFX();
-    }
-
-    /// <summary>
     /// Destroys all VFX Objects from the list and clears the list.
     /// </summary>
     public void DestroyVFXList()
@@ -92,6 +81,8 @@ public class VFXGraphManager : MonoBehaviour
 
         m_vfxList.Clear();
 
+        Release();
+
         CreateVFX();
     }
 
@@ -104,7 +95,8 @@ public class VFXGraphManager : MonoBehaviour
     public void AddDataToBuffer(Vector3 position, Vector4 color, int useDefaultGradient, float size)
     {
         // Check if there is space to add new data to buffer.
-        CheckIfBufferFull(); 
+        if (CheckIfBufferFull())
+            return;
 
         // Create new CustomVFX Data
         CustomVFXData newData = new CustomVFXData();
@@ -153,7 +145,8 @@ public class VFXGraphManager : MonoBehaviour
     /// <param name="newSize">Graphics buffer count.</param>
     void CreateNewBuffer(int newSize)
     {
-        gfxBufferList.Add(gfxBuffer);
+        if (gfxBuffer != null)
+            gfxBuffer.Release();
 
         gfxBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, newSize, Marshal.SizeOf(typeof(CustomVFXData)));
         gfxBuffer.SetData(new CustomVFXData[newSize]);
@@ -163,13 +156,22 @@ public class VFXGraphManager : MonoBehaviour
     /// Checks if Graphics Buffer is full.
     /// If so -> create new VFX Graph object and clear buffer data.
     /// </summary>
-    void CheckIfBufferFull()
+    bool CheckIfBufferFull()
     {
-        if (m_CustomVFXData.Count > gfxBuffer.count)
+        if (m_CustomVFXData.Count + 1 > gfxBuffer.count)
         {
-            m_CustomVFXData.Clear();
+
+            if (gfxBuffer != null)
+                gfxBuffer.Release();
+
             CreateVFX();
+            return true;
         }
+        else
+        {
+            return false;
+        }
+        
     }
 
     /// <summary>
@@ -179,6 +181,9 @@ public class VFXGraphManager : MonoBehaviour
     /// </summary>
     private void CreateVFX()
     {
+
+        m_CustomVFXData.Clear(); // Clear buffer data
+
         CreateNewBuffer(maxParticleCount); // Create new Graphics buffer
 
         m_currentVFX = Instantiate(vfxPrefab, transform.position, Quaternion.identity, vfxContainer.transform); // Create new vfx
@@ -187,19 +192,17 @@ public class VFXGraphManager : MonoBehaviour
 
         m_currentVFX.SetTexture(PARTICLE_TEXTURE_NAME, particle_Texture); // Assign particle texture
 
-        m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer); // Set graphics buffer
-
         m_currentVFX.SetGradient(GRADIENT_NAME, defaultParticleGradient); // Set default gradient
 
-        m_currentVFX.SetFloat(MAX_DISTANCE_COLOR_NAME, gradientMaxDistance);
+        m_currentVFX.SetFloat(MAX_DISTANCE_COLOR_NAME, gradientMaxDistance); // Set max distance colour var
+
+        m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer); // Set graphics buffer
 
         m_vfxList.Add(m_currentVFX); // Add old prefab to the list
 
         m_fullParticleCount += m_currentVFXParticleAmount;
 
         m_currentVFXParticleAmount = 0; // Reset particle amount
-
-        m_CustomVFXData.Clear(); // Clear buffer data
     }
 
     /// <summary>
@@ -209,7 +212,7 @@ public class VFXGraphManager : MonoBehaviour
     {
         foreach (VisualEffect vs in m_vfxList)
         {
-            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position - vs.transform.position);
+            vs.SetVector3(VECTOR3_PLAYER_NAME, playerTransform.position);
         }
     }
 
@@ -228,13 +231,10 @@ public class VFXGraphManager : MonoBehaviour
 
     void Release()
     {
-        foreach(GraphicsBuffer gfxb in gfxBufferList)
-        {
-            if (gfxb != null)
-            {
-                gfxb.Release();
-            }
-        }
+        if(gfxBuffer!= null)
+            gfxBuffer.Release();
+
+        gfxBuffer = null;
     }
     #endregion
 }
