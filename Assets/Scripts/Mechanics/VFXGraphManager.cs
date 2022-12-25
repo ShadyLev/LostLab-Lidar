@@ -182,9 +182,9 @@ public class VFXGraphManager : MonoBehaviour
 
         m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer); // Set graphics buffer
 
-        //m_currentVFX.SetGradient(GRADIENT_NAME, defaultParticleGradient); // Set default gradient
+        m_currentVFX.SetGradient(GRADIENT_NAME, defaultParticleGradient); // Set default gradient
 
-        //m_currentVFX.SetFloat(MAX_DISTANCE_COLOR_NAME, gradientMaxDistance);
+        m_currentVFX.SetFloat(MAX_DISTANCE_COLOR_NAME, gradientMaxDistance);
 
         m_vfxList.Add(m_currentVFX); // Add old prefab to the list
 
