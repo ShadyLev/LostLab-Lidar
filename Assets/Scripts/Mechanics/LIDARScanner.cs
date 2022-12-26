@@ -138,7 +138,9 @@ public class LIDARScanner : MonoBehaviour
         SetLineRendererData();
 
         // Apply gradient and max distance to vfx graph manager
-        vfxManager.SetDefaultGradientData(defaultParticleGradient, gradientMaxDistance);
+        //vfxManager.SetDefaultGradientData(defaultParticleGradient, gradientMaxDistance);
+        vfxManager.DefaultParticleGradient = defaultParticleGradient;
+        vfxManager.GradientMaxDistance = gradientMaxDistance;
 
         // Instantiate ray objects for big scan reference 
         CreateRayObjects();

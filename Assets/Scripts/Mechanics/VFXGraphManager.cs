@@ -29,7 +29,17 @@ public class VFXGraphManager : MonoBehaviour
 
     //---Hidden Variables----
     private Gradient defaultParticleGradient; // Gradient to use for particles
+    public Gradient DefaultParticleGradient
+    {
+        get { return this.defaultParticleGradient; }
+        set { this.defaultParticleGradient = value; }
+    }
     private float gradientMaxDistance; // Max distance for particle gradient
+    public float GradientMaxDistance
+    {
+        get { return this.gradientMaxDistance; }
+        set { this.gradientMaxDistance = value; }
+    }
 
     private List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
     private VisualEffect m_currentVFX; // Current used VFX Graph
