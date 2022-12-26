@@ -4463,7 +4463,7 @@ PrefabInstance:
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: pointTypes.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
@@ -4483,6 +4483,11 @@ PrefabInstance:
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: pointTypes.Array.data[2].Size
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[3].Size
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
@@ -4609,6 +4614,26 @@ PrefabInstance:
         type: 3}
       propertyPath: pointTypes.Array.data[2].TagName
       value: Artefact
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[3].Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[3].Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[3].Color.r
+      value: 0.88328743
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[3].TagName
+      value: Ladder
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
