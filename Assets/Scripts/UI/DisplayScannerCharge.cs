@@ -20,13 +20,13 @@ public class DisplayScannerCharge : MonoBehaviour
     void Start()
     {
         maxChargeTime = scannerScript.m_FullScanCharge;
-        currentChargeTime = scannerScript.m_CurrentScanCharge;
+        currentChargeTime = scannerScript.GetCurrentScanCharge();
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentChargeTime = scannerScript.m_CurrentScanCharge;
+        currentChargeTime = scannerScript.GetCurrentScanCharge();
 
         lerpSpeed = 3f * Time.deltaTime;
 

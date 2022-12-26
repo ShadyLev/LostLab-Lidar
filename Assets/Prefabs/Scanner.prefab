@@ -165,46 +165,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfxManager: {fileID: 7601699528810113120}
-  gradient:
+  defaultParticleGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0.03518948, b: 0, a: 1}
-    key1: {r: 0, g: 1, b: 0.075618744, a: 1}
-    key2: {r: 0, g: 0.087194204, b: 1, a: 1}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 32768
-    ctime2: 65535
+    ctime1: 65535
+    ctime2: 0
     ctime3: 0
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 32768
-    atime2: 65535
+    atime1: 65535
+    atime2: 0
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 3
-  farThreshhold: 25
-  enemyHitColour: {r: 1, g: 0, b: 0, a: 1}
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  gradientMaxDistance: 0
+  pointTypes: []
   muzzlePoint: {fileID: 6990689275446479013}
   playerCameraTransform: {fileID: 0}
-  playerCamera: {fileID: 0}
-  circleRadius: 0.2
-  range: 100
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_normalScanKey: 0
+  m_bigScanKey: 0
+  m_scrollValue: 0.005
+  m_minCircleRadius: 0.01
+  m_maxCircleRadius: 1
+  m_range: 1000
+  rayContainer: {fileID: 0}
+  numOfRays: 0
+  verticalScanAngle: 0
+  horizontalScanAngle: 0
+  scanRate: 0
   m_FullScanCharge: 5
-  m_CurrentScanCharge: 0
   laserWidth: 0.01
-  canScan: 1
+  m_CurrentScanCharge: 0
+  m_isBigScanning: 0
+  m_isNormalScanning: 0
 --- !u!114 &7601699528810113120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,11 +229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75c42d2b974aed4b9e65e6272a6061e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxList: []
-  particleAmount: 0
   vfxPrefab: {fileID: 6993159134884572614, guid: 3be86a6d50ac9b9499c6aba6849eeb58,
     type: 3}
   vfxContainer: {fileID: 0}
+  particle_Texture: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!114 &4057219029478110060
 MonoBehaviour:
   m_ObjectHideFlags: 0

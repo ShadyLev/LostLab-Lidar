@@ -11,31 +11,34 @@ public class VFXGraphManager : MonoBehaviour
     #region Variables
 
     [Header("Particle Systems")]
+    [Tooltip("Player object transform to track for accurate gradient color data.")]
+    [SerializeField] private Transform playerTransform;
+    [Tooltip("Prefab with a single instance of the VFX Graph component.")]
+    [SerializeField] VisualEffect vfxPrefab;
+    [Tooltip("Parent object for VFX Graph systems.")]
+    [SerializeField] GameObject vfxContainer;
+    [Tooltip("Particle texture to use.")]
+    [SerializeField] Texture2D particleTexture;
+
+    //----VFX GRAPH VARIABLE REFERENCES----
     private const string MAX_PARTICLE_COUNT_PARAMETER_NAME = "MaxParticleCount"; // Reference to VFX Graph variable
     private const string VECTOR3_PLAYER_NAME = "PlayerPos"; // Reference to VFX Graph variable
     private const string PARTICLE_TEXTURE_NAME = "ParticleTexture"; // Reference to VFX Graph variable
     private const string GRADIENT_NAME = "DefaultGradient"; // Reference to VFX Graph variable
     private const string MAX_DISTANCE_COLOR_NAME = "MaxDistanceColor"; // Reference to VFX Graph variable
 
-    [SerializeField] VisualEffect vfxPrefab; // VFX Graph prefab
-    [SerializeField] GameObject vfxContainer; // Gameobject holding all VFX Graph prefabs in scene
-    [SerializeField] Texture2D particle_Texture;
-    [SerializeField] Gradient defaultParticleGradient;
-    [SerializeField] float gradientMaxDistance;
+    //---Hidden Variables----
+    private Gradient defaultParticleGradient; // Gradient to use for particles
+    private float gradientMaxDistance; // Max distance for particle gradient
 
     private List<VisualEffect> m_vfxList = new List<VisualEffect>(); // List of VFX Graphs
     private VisualEffect m_currentVFX; // Current used VFX Graph
-    private int m_currentVFXParticleAmount; // Current amount of particles
-    private int m_fullParticleCount;
 
-    private int maxParticleCount = 10000; // Particle count
-
-    [SerializeField] private Transform playerTransform;
+    private int m_VFXParticleAmount; // Current amount of particles
+    private int maxParticleCount = 10000; // Particle count per system
 
     /// VFX GRAPH BUFFER VARIABLES
-
     private GraphicsBuffer gfxBuffer; // Graphics Buffer
-
     private int m_BufferPropertyID = Shader.PropertyToID("CustomBuffer"); // VFX Graph Buffer ID
 
     // Custom Buffer Data
@@ -53,8 +56,10 @@ public class VFXGraphManager : MonoBehaviour
 
     #endregion
 
+    #region Awake, Start & Update
+
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         CreateVFX();
     }
@@ -64,6 +69,8 @@ public class VFXGraphManager : MonoBehaviour
     {
         UpdatePlayerPosVFXGraph();
     }
+
+    #endregion
 
     #region PUBLIC METHODS
 
@@ -111,7 +118,7 @@ public class VFXGraphManager : MonoBehaviour
         m_CustomVFXData.Add(newData);
 
         // Increase particle amount
-        m_currentVFXParticleAmount++;
+        m_VFXParticleAmount++;
     }
 
 
@@ -123,7 +130,6 @@ public class VFXGraphManager : MonoBehaviour
         gfxBuffer.SetData(m_CustomVFXData);
 
         m_currentVFX.Reinit();
-        //m_currentVFX.Play();
     }
 
     /// <summary>
@@ -132,7 +138,18 @@ public class VFXGraphManager : MonoBehaviour
     /// <returns>Int of particles.</returns>
     public int GetCurrentParticleCount()
     {
-        return m_currentVFXParticleAmount + m_fullParticleCount;
+        return m_VFXParticleAmount;
+    }
+
+    /// <summary>
+    /// Sets the default particle gradoent to use.
+    /// </summary>
+    /// <param name="gradient">Default particle gradient.</param>
+    /// <param name="maxDistance">Max gradient distance.</param>
+    public void SetDefaultGradientData(Gradient gradient, float maxDistance)
+    {
+        defaultParticleGradient = gradient;
+        gradientMaxDistance = maxDistance;
     }
 
     #endregion
@@ -167,7 +184,6 @@ public class VFXGraphManager : MonoBehaviour
         {
             return false;
         }
-        
     }
 
     /// <summary>
@@ -185,7 +201,7 @@ public class VFXGraphManager : MonoBehaviour
 
         m_currentVFX.SetUInt(MAX_PARTICLE_COUNT_PARAMETER_NAME, (uint)maxParticleCount); // Assign the resolution
 
-        m_currentVFX.SetTexture(PARTICLE_TEXTURE_NAME, particle_Texture); // Assign particle texture
+        m_currentVFX.SetTexture(PARTICLE_TEXTURE_NAME, particleTexture); // Assign particle texture
 
         m_currentVFX.SetGradient(GRADIENT_NAME, defaultParticleGradient); // Set default gradient
 
@@ -194,10 +210,6 @@ public class VFXGraphManager : MonoBehaviour
         m_currentVFX.SetGraphicsBuffer(m_BufferPropertyID, gfxBuffer); // Set graphics buffer
 
         m_vfxList.Add(m_currentVFX); // Add old prefab to the list
-
-        m_fullParticleCount += m_currentVFXParticleAmount;
-
-        m_currentVFXParticleAmount = 0; // Reset particle amount
     }
 
     /// <summary>
