@@ -119,8 +119,8 @@ public class LIDARScanner : MonoBehaviour
     private float m_CurrentScanCharge; // current scan charge value
 
     // Is player scanning variables
-    private bool m_isBigScanning;
-    private bool m_isNormalScanning;
+    private bool m_isBigScanning = false;
+    private bool m_isNormalScanning = false;
 
     #endregion
 
@@ -132,7 +132,6 @@ public class LIDARScanner : MonoBehaviour
         // Set initial variable values
         m_circleRadius = m_defaultCircleRadius; // Starting circle radius = default circle radius
         m_CurrentScanCharge = m_FullScanCharge; // Current scan charge = full scan charge
-        scanAngle = -m_verticalScanAngle; // Current scan angle = -vertical scan angle
 
         // Set the line renderer data
         SetLineRendererData();
@@ -338,7 +337,7 @@ public class LIDARScanner : MonoBehaviour
     {
         GameObject tmp = new GameObject("RayTransformRef");
         rays = new GameObject[m_numberOfBigScanRays];
-        scanAngle = m_verticalScanAngle;
+        scanAngle = -m_verticalScanAngle;
 
         for (int i = 0; i < m_numberOfBigScanRays; i++)
         {
