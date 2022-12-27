@@ -14,7 +14,13 @@ public class ArtefactManager : MonoBehaviour
     public int CurrentArtefactAmount
     {
         get { return m_currentArtefactAmount; }
-        set { m_currentArtefactAmount = value; }
+        set 
+        {
+            if (value > m_maxArtefactAmount)
+                value = m_maxArtefactAmount;
+
+            m_currentArtefactAmount = value; 
+        }
     }
 
     [SerializeField] bool m_hasAllArtefacts = false; // Bool that shows if player has collected all artefacts in scene.

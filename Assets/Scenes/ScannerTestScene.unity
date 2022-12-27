@@ -919,6 +919,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1000013105924406, guid: 6a7274aefcc6cef4fbbfba924cc7f657,
         type: 3}
+    - target: {fileID: 6250169126302230943, guid: 66d199cf36686e44d94aedb75d4e1f1a,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6552909664087275931, guid: 66d199cf36686e44d94aedb75d4e1f1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -6944,6 +6949,11 @@ PrefabInstance:
       propertyPath: vfxContainer
       value: 
       objectReference: {fileID: 961926448}
+    - target: {fileID: 7805791633215677242, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7805791633320145062, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: m_RootOrder
