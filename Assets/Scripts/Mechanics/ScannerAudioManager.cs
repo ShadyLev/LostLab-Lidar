@@ -11,7 +11,7 @@ public class ScannerAudioManager : MonoBehaviour
     [SerializeField] AudioClip normalScanClip;
     [SerializeField] AudioClip bigScanClip;
 
-    bool isPlaying;
+    public bool isPlaying;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,6 @@ public class ScannerAudioManager : MonoBehaviour
         if (!scannerScript.GetBoolScanValues(ScanType.Normal))
         {
             isPlaying = false;
-            Debug.Log("Not");
             audioSource.Stop();
         }
 
@@ -37,7 +36,8 @@ public class ScannerAudioManager : MonoBehaviour
 
         if (scannerScript.GetBoolScanValues(ScanType.Normal))
         {
-            PlayNormalScanAudio();
+            if (!audioSource.isPlaying)
+                PlayNormalScanAudio();
         }
 
         if (scannerScript.GetBoolScanValues(ScanType.Big))

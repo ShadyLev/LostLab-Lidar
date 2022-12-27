@@ -234,9 +234,13 @@ public class LIDARScanner : MonoBehaviour
             return;
 
         // Check if normal key is pressed and perform scan
-        if (Input.GetKey(m_normalScanKey))
+        if (Input.GetKeyDown(m_normalScanKey))
         {
             m_isNormalScanning = true; // Set scanning to true
+        }
+            // Check if normal key is pressed and perform scan
+        if (Input.GetKey(m_normalScanKey))
+        {
             laserLineRenderer.enabled = true; // Enable line renderer
             ShootLaser(m_numberOfNormalScanRays); // Shoot laser
         }
