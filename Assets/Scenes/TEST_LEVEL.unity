@@ -48382,10 +48382,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1165218059, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.00012207031
-      objectReference: {fileID: 0}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer

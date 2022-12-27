@@ -11,19 +11,32 @@ public class ScannerAudioManager : MonoBehaviour
     [SerializeField] AudioClip normalScanClip;
     [SerializeField] AudioClip bigScanClip;
 
+    bool isPlaying;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!scannerScript.GetBoolScanValues(ScanType.Big))
+            isPlaying = false;
+
+        if (!scannerScript.GetBoolScanValues(ScanType.Normal))
+        {
+            isPlaying = false;
+            Debug.Log("Not");
+            audioSource.Stop();
+        }
+
+        if (isPlaying)
+            return;
+
         if (scannerScript.GetBoolScanValues(ScanType.Normal))
         {
-            Debug.Log(scannerScript.GetBoolScanValues(ScanType.Normal));
             PlayNormalScanAudio();
         }
 
@@ -36,6 +49,7 @@ public class ScannerAudioManager : MonoBehaviour
 
     void PlayNormalScanAudio()
     {
+        isPlaying = true;
         audioSource.loop = true;
 
         audioSource.clip = normalScanClip;
@@ -46,6 +60,7 @@ public class ScannerAudioManager : MonoBehaviour
 
     void PlayBigScanAudio()
     {
+        isPlaying = true;
         audioSource.PlayOneShot(bigScanClip, AudioManager.Instance.volumeSFX);
     }
 }
