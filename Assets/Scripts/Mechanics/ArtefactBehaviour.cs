@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArtefactBehaviour : MonoBehaviour
@@ -11,6 +9,7 @@ public class ArtefactBehaviour : MonoBehaviour
     TheBlackout blackout; // Reference to the blackout script
     MeshFilter meshFilter; // Ref to own mesh filter
     MeshCollider meshCol; // Ref to own mesh collider
+    ArtefactManager artefactManager; // Ref to artefact manager
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +18,7 @@ public class ArtefactBehaviour : MonoBehaviour
         blackout = GetComponent<TheBlackout>();
         meshFilter = GetComponent<MeshFilter>();
         meshCol = GetComponent<MeshCollider>();
+        artefactManager = GameObject.FindGameObjectWithTag("Player").GetComponent<ArtefactManager>();
 
         // Set mesh filter and collider to artefactModel prefab
         Mesh tmpMesh = artefactModel.GetComponent<MeshFilter>().sharedMesh;
@@ -32,6 +32,7 @@ public class ArtefactBehaviour : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             blackout.FullBlackout();
+            artefactManager.CurrentArtefactAmount++;
         }
     }
 }
