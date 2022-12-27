@@ -42,7 +42,6 @@ public class ScannerAudioManager : MonoBehaviour
 
         if (scannerScript.GetBoolScanValues(ScanType.Big))
         {
-            Debug.Log(scannerScript.GetBoolScanValues(ScanType.Big));
             PlayBigScanAudio();
         }
     }
