@@ -16,21 +16,7 @@ public class TheBlackout : MonoBehaviour
         manager = playerObject.GetComponentInChildren<VFXGraphManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            FullBlackout();
-        }
-    }
-
-    void BlackoutInArea(float radius)
+    public void BlackoutInArea(float radius)
     {
         int layerId = 8;
         int layerMask = 1 << layerId;
@@ -46,7 +32,7 @@ public class TheBlackout : MonoBehaviour
         }
     }
 
-    void FullBlackout()
+    public void FullBlackout()
     {
         manager.DestroyVFXList();
     }
