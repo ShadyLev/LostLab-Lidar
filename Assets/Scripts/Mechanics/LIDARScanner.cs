@@ -164,9 +164,6 @@ public class LIDARScanner : MonoBehaviour
 
             m_CurrentScanCharge += Time.deltaTime;
         }
-
-        // Get player input
-        GetInput();
     }
 
     #endregion
@@ -211,7 +208,7 @@ public class LIDARScanner : MonoBehaviour
     /// <summary>
     /// Gets the player inputs
     /// </summary>
-    private void GetInput()
+    public void GetInput()
     {
         // Adjust the radius of the scanner
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward

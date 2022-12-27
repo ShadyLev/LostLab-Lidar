@@ -5,8 +5,9 @@ using UnityEngine;
 public class TogglePauseMenu : MonoBehaviour
 {
     public KeyCode pauseKey = KeyCode.Escape;
-    private bool isOpened = false;
+    [SerializeField] private bool isOpened = false;
     [SerializeField] GameObject pauseMenuCanvas;
+    [SerializeField] PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +30,17 @@ public class TogglePauseMenu : MonoBehaviour
         //Debug.Log(PlayerStatus.usingUI);
         pauseMenuCanvas.SetActive(isOpened);
         Time.timeScale = isOpened ? 0 : 1;
+
+        playerInput.enabled = !isOpened;
+
+        if (isOpened)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }else if (!isOpened)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }
