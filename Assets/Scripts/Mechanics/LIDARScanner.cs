@@ -120,7 +120,7 @@ public class LIDARScanner : MonoBehaviour
 
     // Is player scanning variables
     private bool m_isBigScanning = false;
-    private bool m_isNormalScanning = false;
+    public bool m_isNormalScanning = false;
 
     #endregion
 
