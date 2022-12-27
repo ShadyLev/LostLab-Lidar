@@ -1604,6 +1604,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521307402}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!20 &543892440 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7805791632567062085, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7805791633215677238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &553896548
 GameObject:
   m_ObjectHideFlags: 1
@@ -6940,10 +6946,73 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165218058, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1277798439, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
       propertyPath: artefactParentHolder
       value: 
       objectReference: {fileID: 2019988960}
+    - target: {fileID: 2063838590, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 512616695752075724, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1122195061013889273, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760240876742408947, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 249.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944076772791602975, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536815711089214156, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638590425187596264, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778560937094857876, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976993795686668843, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280671728289426498, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 249.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313147325102191566, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6707766041339054079, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer
@@ -7013,6 +7082,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791633542225987, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791633728545334, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 543892440}
+    - target: {fileID: 7805791633728545334, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791633728545334, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791633728545334, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791633728545737, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791633728545739, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}

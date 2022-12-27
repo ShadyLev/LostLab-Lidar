@@ -210,7 +210,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7805791633320145062}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!20 &389765767
 Camera:
@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 1165218062}
   - component: {fileID: 1165218063}
   - component: {fileID: 1165218060}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Particle Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1361,7 +1361,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 415.7256, y: 24.6161}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1165218062
@@ -1683,7 +1683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1351609550
 Transform:
   m_ObjectHideFlags: 0
@@ -1823,7 +1823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592595428}
   m_LocalRotation: {x: -0, y: -0.051972423, z: -0, w: 0.9986485}
-  m_LocalPosition: {x: 0.6615, y: -0.078100026, z: 0.0298}
+  m_LocalPosition: {x: 0.6615, y: -0.078100026, z: -0.14620003}
   m_LocalScale: {x: 1.7953, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2248,7 +2248,7 @@ GameObject:
   - component: {fileID: 2063838591}
   - component: {fileID: 2063838593}
   - component: {fileID: 2063838592}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ArtefactCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2566,7 +2566,7 @@ GameObject:
   - component: {fileID: 387459644725354181}
   - component: {fileID: 1595764708907606605}
   - component: {fileID: 5379743518195162844}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2820,7 +2820,7 @@ GameObject:
   - component: {fileID: 2454001953379984548}
   - component: {fileID: 5542920822759068146}
   - component: {fileID: 3646508378150040575}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2896,7 +2896,7 @@ GameObject:
   - component: {fileID: 1155178274065556448}
   - component: {fileID: 7382796009468534332}
   - component: {fileID: 718048871640057177}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3063,7 +3063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760240876742408947}
   - component: {fileID: 5335999773413999658}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ScanTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3118,7 +3118,7 @@ GameObject:
   - component: {fileID: 1180223529764679806}
   - component: {fileID: 6008249695910147120}
   - component: {fileID: 8763352250779471036}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3387,7 +3387,7 @@ GameObject:
   - component: {fileID: 3270206930809406364}
   - component: {fileID: 5773848715049801252}
   - component: {fileID: 1360972414792720976}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BarFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3461,7 +3461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5280671728289426498}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ArtefactCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3500,7 +3500,7 @@ GameObject:
   - component: {fileID: 8154387858961344677}
   - component: {fileID: 7460662043512930725}
   - component: {fileID: 899249803062850756}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3703,7 +3703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7208515533636714867}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3895,7 +3895,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4107,8 +4107,8 @@ Transform:
   m_Children:
   - {fileID: 7805791633372197179}
   - {fileID: 7805791632567062082}
-  - {fileID: 7805791633728545736}
   - {fileID: 389765764}
+  - {fileID: 7805791633728545736}
   - {fileID: 545236460787075494}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4273,7 +4273,7 @@ GameObject:
   - component: {fileID: 7805791633542225999}
   - component: {fileID: 7805791633542225998}
   - component: {fileID: 7805791633542225985}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4297,7 +4297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 35.6329, y: 24.6161}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7805791633542225999
@@ -4367,7 +4367,7 @@ GameObject:
   - component: {fileID: 7805791633728545736}
   - component: {fileID: 7805791633728545334}
   - component: {fileID: 7805791633728545737}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4391,7 +4391,7 @@ RectTransform:
   - {fileID: 1165218059}
   - {fileID: 5280671728289426498}
   m_Father: {fileID: 7805791633320145062}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4407,10 +4407,10 @@ Canvas:
   m_GameObject: {fileID: 7805791633728545739}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 7805791632567062085}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -5134,7 +5134,7 @@ PrefabInstance:
     - target: {fileID: 6990689276125353343, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.176
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353343, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
@@ -5459,7 +5459,7 @@ PrefabInstance:
     - target: {fileID: 2298809152906327516, guid: 26826aa72014e34459e1014f63b5005e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6658
+      value: 0.48979995
       objectReference: {fileID: 0}
     - target: {fileID: 2298809152906327516, guid: 26826aa72014e34459e1014f63b5005e,
         type: 3}

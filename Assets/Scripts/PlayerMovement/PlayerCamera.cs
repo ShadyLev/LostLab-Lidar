@@ -24,7 +24,7 @@ public class PlayerCamera : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         // Get the mouse inputs
         float mouseX = Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime;
