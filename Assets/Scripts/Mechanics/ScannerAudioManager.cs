@@ -5,61 +5,65 @@ using UnityEngine;
 public class ScannerAudioManager : MonoBehaviour
 {
     [SerializeField] private LIDARScanner scannerScript;
-    private AudioSource audioSource;
+    [SerializeField] AudioSource _normalScanAudioSource;
+    [SerializeField] AudioSource _bigScanAudioSource;
 
     [Header("Audio Clips")]
     [SerializeField] AudioClip normalScanClip;
     [SerializeField] AudioClip bigScanClip;
 
-    public bool isPlaying;
+    bool playBigSoundOnce = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        SetUpNormalAudioSource();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!scannerScript.GetBoolScanValues(ScanType.Big))
-            isPlaying = false;
-
-        if (!scannerScript.GetBoolScanValues(ScanType.Normal))
+        if (!scannerScript.IsNormalScanning)
         {
-            isPlaying = false;
-            audioSource.Stop();
+            StopNormalScanAudio();
         }
 
-        if (isPlaying)
-            return;
-
-        if (scannerScript.GetBoolScanValues(ScanType.Normal))
+        if (!scannerScript.IsBigScanning)
         {
-            if (!audioSource.isPlaying)
-                PlayNormalScanAudio();
+            playBigSoundOnce = false;
         }
 
-        if (scannerScript.GetBoolScanValues(ScanType.Big))
+        if (scannerScript.IsNormalScanning && !_normalScanAudioSource.isPlaying)
+        {
+            PlayNormalScanAudio();
+        }
+
+        if (scannerScript.IsBigScanning && !playBigSoundOnce && !_bigScanAudioSource.isPlaying)
         {
             PlayBigScanAudio();
         }
     }
 
+    void SetUpNormalAudioSource()
+    {
+        _normalScanAudioSource.loop = true;
+
+        _normalScanAudioSource.clip = normalScanClip;
+        _normalScanAudioSource.volume = AudioManager.Instance.volumeSFX;
+    }
+
     void PlayNormalScanAudio()
     {
-        isPlaying = true;
-        audioSource.loop = true;
+        _normalScanAudioSource.Play();
+    }
 
-        audioSource.clip = normalScanClip;
-        audioSource.volume = AudioManager.Instance.volumeSFX;
-
-        audioSource.Play();
+    void StopNormalScanAudio()
+    {
+        _normalScanAudioSource.Stop();
     }
 
     void PlayBigScanAudio()
     {
-        isPlaying = true;
-        audioSource.PlayOneShot(bigScanClip, AudioManager.Instance.volumeSFX);
+        playBigSoundOnce = true;
+        _bigScanAudioSource.PlayOneShot(bigScanClip, AudioManager.Instance.volumeSFX);
     }
 }

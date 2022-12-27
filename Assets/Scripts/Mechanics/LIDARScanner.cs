@@ -5,15 +5,6 @@ using UnityEngine;
 using UnityEngine.VFX;
 
 /// <summary>
-/// Enums for different scanner scan modes.
-/// </summary>
-public enum ScanType
-{
-    Normal,
-    Big
-}
-
-/// <summary>
 /// LIDAR scanner script. 
 /// </summary>
 /// <remarks>Written by Benedykt Cieslinski</remarks>
@@ -67,12 +58,12 @@ public class LIDARScanner : MonoBehaviour
     [Range(0, 5)]
     [SerializeField] private float m_defaultCircleRadius;
     [Tooltip("Scanner range.")]
-    [Range(0, 1000)]
-    [SerializeField] private float m_range;
+    [Range(0, 10000)]
+    [SerializeField] private float m_normalRange;
 
     [Header("Big scan values")]
     [Space(2)]
-    [Tooltip("GameObject that will hold transforms for scan reference.")]
+    [Tooltip("Origin point of the scan and a gameobject that will hold transforms for scan reference.")]
     [SerializeField] private Transform rayContainer;
     [Tooltip("Number of rays per row.")]
     [Range(0, 200)]
@@ -86,6 +77,9 @@ public class LIDARScanner : MonoBehaviour
     [Tooltip("Speed of the scan.")]
     [Range(0, 100)]
     [SerializeField] private float m_scanRate;
+    [Tooltip("Range of the scan.")]
+    [Range(0, 10000)]
+    [SerializeField] private float m_bigRange;
     [Tooltip("Scan recharge time.")]
     [Range(0, 25)]
     [SerializeField] public float m_FullScanCharge;
@@ -120,7 +114,16 @@ public class LIDARScanner : MonoBehaviour
 
     // Is player scanning variables
     private bool m_isBigScanning = false;
-    public bool m_isNormalScanning = false;
+    public bool IsBigScanning
+    {
+        get { return m_isBigScanning; }
+    }
+
+    private bool m_isNormalScanning = false;
+    public bool IsNormalScanning
+    {
+        get { return m_isNormalScanning; }
+    }
 
     #endregion
 
@@ -151,6 +154,7 @@ public class LIDARScanner : MonoBehaviour
         // Call big scan method each frame
         Scan(Time.deltaTime);
 
+
         // Charge scanner
         if (startRecharge)
         {
@@ -169,41 +173,6 @@ public class LIDARScanner : MonoBehaviour
     #endregion
 
     #region PUBLIC METHODS
-
-    /// <summary>
-    /// Based on a scan type it return a bool that indicates if that scan is being performed.
-    /// </summary>
-    /// <param name="type">Scanner scan type.</param>
-    /// <returns>Bool -> True if is scanning of type.</returns>
-    public bool GetBoolScanValues(ScanType type)
-    {
-        bool scanBool = false;
-
-        switch (type)
-        {
-            case ScanType.Normal:
-                scanBool = m_isNormalScanning;
-                break;
-            case ScanType.Big:
-                scanBool = m_isBigScanning;
-                break;
-        }
-
-        return scanBool;
-    }
-
-    /// <summary>
-    /// Gets the private value of scanner's current scan charge.
-    /// </summary>
-    /// <returns>Float of m_CurrentScanCharge.</returns>
-    public float GetCurrentScanCharge()
-    {
-        return m_CurrentScanCharge;
-    }
-
-    #endregion
-
-    #region PRIVATE METHODS
 
     /// <summary>
     /// Gets the player inputs
@@ -230,25 +199,8 @@ public class LIDARScanner : MonoBehaviour
         if (m_isBigScanning)
             return;
 
-        // Check if normal key is pressed and perform scan
-        if (Input.GetKeyDown(m_normalScanKey))
-        {
-            m_isNormalScanning = true; // Set scanning to true
-        }
-            // Check if normal key is pressed and perform scan
-        if (Input.GetKey(m_normalScanKey))
-        {
-            laserLineRenderer.enabled = true; // Enable line renderer
-            ShootLaser(m_numberOfNormalScanRays); // Shoot laser
-        }
-        else if (Input.GetKeyUp(m_normalScanKey))
-        {
-            laserLineRenderer.enabled = false; // Disable line renderer
-            m_isNormalScanning = false; // Set scanning to false
-        }
-
         //Check if big scan key is pressed and perform scan
-        if (Input.GetKey(m_bigScanKey) && canScan)
+        if (Input.GetKeyDown(m_bigScanKey) && canScan)
         {
             laserLineRenderer.enabled = true; // Enable line renderer
             m_isBigScanning = true; // Set scanning to true
@@ -256,7 +208,37 @@ public class LIDARScanner : MonoBehaviour
             canScan = false; // Disable ability to scan again
             m_CurrentScanCharge = 0; // Set the charge time to 0
         }
+
+        // Set the bool to true to indicate the beggining of scan
+        if (Input.GetKeyDown(m_normalScanKey))
+        {
+            m_isNormalScanning = true; // Set scanning to true
+        }
+        // While pressed scan
+        if (Input.GetKey(m_normalScanKey))
+        {
+            laserLineRenderer.enabled = true; // Enable line renderer
+            ShootLaser(m_numberOfNormalScanRays, playerCameraTransform.transform.position, muzzlePoint.position); // Shoot laser
+        }
+        else if (Input.GetKeyUp(m_normalScanKey)) // On key up end the scan
+        {
+            laserLineRenderer.enabled = false; // Disable line renderer
+            m_isNormalScanning = false; // Set scanning to false
+        }
     }
+
+    /// <summary>
+    /// Gets the private value of scanner's current scan charge.
+    /// </summary>
+    /// <returns>Float of m_CurrentScanCharge.</returns>
+    public float GetCurrentScanCharge()
+    {
+        return m_CurrentScanCharge;
+    }
+
+    #endregion
+
+    #region PRIVATE METHODS
 
     /// <summary>
     /// Checks if RaycastHit hit a object with a particular tag and assigns buffer data based on the tag.
@@ -287,7 +269,9 @@ public class LIDARScanner : MonoBehaviour
     /// Shoots a ray with a random spread in a shape of a circle,
     /// and draws a line renderer between the hit point and the origin point.
     /// </summary>
-    private void ShootLaser(int laserCount)
+    /// <param name="laserCount">Amount of rays per call.</param>
+    /// <param name="originPoint">Origin point of rays.</param>
+    private void ShootLaser(int laserCount, Vector3 originPoint, Vector3 lineRenOriginPoint)
     {
         for (int i = 0; i < laserCount; i++)
         {
@@ -297,13 +281,13 @@ public class LIDARScanner : MonoBehaviour
             // Calculate raycast direction
             Vector3 direction = playerCameraTransform.forward + (playerCameraTransform.right * randomPointInCircle.x) + (playerCameraTransform.up * randomPointInCircle.y);
 
-            if (Physics.Raycast(playerCameraTransform.transform.position, direction, out rayHit, m_range, mask))
+            if (Physics.Raycast(originPoint, direction, out rayHit, m_normalRange, mask))
             {
                 // Apply positions
                 CheckHitColliderOnPointType(rayHit);
 
                 // Set line renderer variables
-                UpdateLineRendererData(muzzlePoint.position, rayHit.point);
+                UpdateLineRendererData(lineRenOriginPoint, rayHit.point);
             }
         }
 
@@ -330,20 +314,27 @@ public class LIDARScanner : MonoBehaviour
     #endregion
 
     #region Big Scan 
+    ///<remarks> Heavy lifting done by https://github.com/lunkums. </remarks>
 
     /// <summary>
     /// Creates gameobjects to shoot rays from.
     /// </summary>
     private void CreateRayObjects()
     {
+        // Create a empty gameobject
         GameObject tmp = new GameObject("RayTransformRef");
-        rays = new GameObject[m_numberOfBigScanRays];
-        scanAngle = -m_verticalScanAngle;
 
+        // Set the ray array to the size of the number of rays
+        rays = new GameObject[m_numberOfBigScanRays];
+
+        // Instantiate the gameobject under a container
         for (int i = 0; i < m_numberOfBigScanRays; i++)
         {
             rays[i] = GameObject.Instantiate(tmp, rayContainer);
         }
+
+        // Set the default scan angle
+        scanAngle = -m_verticalScanAngle;
     }
 
     /// <summary>
@@ -407,7 +398,7 @@ public class LIDARScanner : MonoBehaviour
         ray.localEulerAngles = new Vector3(verticalAngle, Mathf.Cos(horizontalRadians) * horizontalAngle, 0);
 
         // Shoot raycast in direction
-        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, 100000f, mask);
+        successfulHit = Physics.Raycast(ray.position, ray.forward, out hit, m_bigRange, mask);
 
         // Return bool
         return successfulHit;
@@ -438,6 +429,11 @@ public class LIDARScanner : MonoBehaviour
         laserLineRenderer.endColor = Color.red;
     }
 
+    /// <summary>
+    /// Sets the positions of line renderer.
+    /// </summary>
+    /// <param name="startPos">Starting position.</param>
+    /// <param name="endPos">End position.</param>
     private void UpdateLineRendererData(Vector3 startPos, Vector3 endPos)
     {
         if (m_useOneColor)

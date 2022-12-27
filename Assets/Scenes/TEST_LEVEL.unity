@@ -64986,6 +64986,16 @@ PrefabInstance:
       propertyPath: artefactParentHolder
       value: 
       objectReference: {fileID: 1790143605}
+    - target: {fileID: 6990689276791502522, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: bigScanClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f739d9b363f30744f828d76cdc2b63ff, type: 3}
+    - target: {fileID: 6990689276791502522, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: normalScanClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 03938e3bb785298479ba941317e76028, type: 3}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer
@@ -65050,6 +65060,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_bigRange
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
+        type: 3}
+      propertyPath: m_maxCircleRadius
+      value: 2.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
