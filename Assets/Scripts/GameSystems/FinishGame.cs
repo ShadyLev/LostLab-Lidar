@@ -8,6 +8,8 @@ public class FinishGame : MonoBehaviour
 {
     ArtefactManager artefactManager; // Reference to artefact manager
     [SerializeField] GameObject cannotExitText;
+    [SerializeField] LevelLoader levelLoader;
+    [SerializeField] int sceneIDToLoad;
 
     private void Start()
     {
@@ -31,7 +33,10 @@ public class FinishGame : MonoBehaviour
 
     void LoadEndScene()
     {
-        Debug.Log("FINISHED!");
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+
+        levelLoader.LoadLevel(sceneIDToLoad);
     }
 
     IEnumerator ShowCannotExitText()
