@@ -3186,6 +3186,12 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 1129526264}
+    - target: {fileID: 6012051265792663502, guid: 66d199cf36686e44d94aedb75d4e1f1a,
+        type: 3}
+      propertyPath: artefactModel
+      value: 
+      objectReference: {fileID: 1000010728489230, guid: 8b40cffea67202d4bbf662b25de4c94a,
+        type: 3}
     - target: {fileID: 6552909664087275931, guid: 66d199cf36686e44d94aedb75d4e1f1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -17898,6 +17904,12 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 1129526264}
+    - target: {fileID: 6012051265792663502, guid: 66d199cf36686e44d94aedb75d4e1f1a,
+        type: 3}
+      propertyPath: artefactModel
+      value: 
+      objectReference: {fileID: 1000013105924406, guid: 6a7274aefcc6cef4fbbfba924cc7f657,
+        type: 3}
     - target: {fileID: 6552909664087275931, guid: 66d199cf36686e44d94aedb75d4e1f1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -24997,6 +25009,12 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 1129526264}
+    - target: {fileID: 6012051265792663502, guid: 66d199cf36686e44d94aedb75d4e1f1a,
+        type: 3}
+      propertyPath: artefactModel
+      value: 
+      objectReference: {fileID: 1000011841440206, guid: 0ed203d298c050b49bfabe788790e1c2,
+        type: 3}
     - target: {fileID: 6552909664087275931, guid: 66d199cf36686e44d94aedb75d4e1f1a,
         type: 3}
       propertyPath: m_RootOrder
