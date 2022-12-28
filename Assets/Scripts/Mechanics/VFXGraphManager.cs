@@ -6,6 +6,10 @@ using System.Runtime.InteropServices;
 using Unity.Mathematics;
 using System;
 
+/// <summary>
+/// This class controls the behaviour and settings of VFX Graph.
+/// </summary>
+/// <remarks>Written by Benedykt Cieslinski</remarks>
 public class VFXGraphManager : MonoBehaviour
 {
     #region Variables

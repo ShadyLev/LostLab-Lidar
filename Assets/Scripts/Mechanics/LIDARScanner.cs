@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.VFX;
 
 /// <summary>
-/// LIDAR scanner script. 
+/// Scanner class.
+/// This class handles the behaviour of the scanner such as the colour of points, the shooting types and the line renderer.
 /// </summary>
 /// <remarks>Written by Benedykt Cieslinski</remarks>
 public class LIDARScanner : MonoBehaviour
@@ -35,13 +36,6 @@ public class LIDARScanner : MonoBehaviour
     [Header("General Scanner Values")]
     [Tooltip("Layermasks for the raycasts to hit.")]
     [SerializeField] LayerMask mask;
-    [Tooltip("Key that when pressed will perform a normal scan.")]
-    [SerializeField] KeyCode m_normalScanKey;
-    [Tooltip("Key that when pressed will perform a big scan.")]
-    [SerializeField] KeyCode m_bigScanKey;
-    [Tooltip("How much the radius changes when scrolling")]
-    [Range(0,1)]
-    [SerializeField] private float m_scrollValue; 
 
     [Header("Normal scan values")]
     [Tooltip("Number of rays shot per frame.")]
@@ -60,6 +54,12 @@ public class LIDARScanner : MonoBehaviour
     [Tooltip("Scanner range.")]
     [Range(0, 10000)]
     [SerializeField] private float m_normalRange;
+    private float m_scrollValue;
+    public float ScrollValue
+    {
+        get { return m_scrollValue; }
+        set { m_scrollValue = value; }
+    }
 
     [Header("Big scan values")]
     [Space(2)]
@@ -158,74 +158,13 @@ public class LIDARScanner : MonoBehaviour
         // Charge scanner
         if (startRecharge)
         {
-            laserLineRenderer.enabled = false; // Enable line renderer
-
-            if (m_CurrentScanCharge >= m_FullScanCharge)
-            {
-                startRecharge = false;
-                canScan = true;
-            }
-
-            m_CurrentScanCharge += Time.deltaTime;
+            RechangeBigScan(Time.deltaTime);
         }
     }
 
     #endregion
 
     #region PUBLIC METHODS
-
-    /// <summary>
-    /// Gets the player inputs
-    /// </summary>
-    public void GetInput()
-    {
-        // Adjust the radius of the scanner
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
-        {
-            if (m_circleRadius + m_scrollValue > m_maxCircleRadius)
-                m_circleRadius = m_maxCircleRadius;
-            else
-                m_circleRadius += m_scrollValue;
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
-        {
-            if (m_circleRadius - m_scrollValue < m_minCircleRadius)
-                m_circleRadius = m_minCircleRadius;
-            else
-                m_circleRadius -= m_scrollValue;
-        }
-
-        // If big scan is active do not progress forward
-        if (m_isBigScanning)
-            return;
-
-        //Check if big scan key is pressed and perform scan
-        if (Input.GetKeyDown(m_bigScanKey) && canScan)
-        {
-            laserLineRenderer.enabled = true; // Enable line renderer
-            m_isBigScanning = true; // Set scanning to true
-
-            canScan = false; // Disable ability to scan again
-            m_CurrentScanCharge = 0; // Set the charge time to 0
-        }
-
-        // Set the bool to true to indicate the beggining of scan
-        if (Input.GetKeyDown(m_normalScanKey))
-        {
-            m_isNormalScanning = true; // Set scanning to true
-        }
-        // While pressed scan
-        if (Input.GetKey(m_normalScanKey))
-        {
-            laserLineRenderer.enabled = true; // Enable line renderer
-            ShootLaser(m_numberOfNormalScanRays, playerCameraTransform.transform.position, muzzlePoint.position); // Shoot laser
-        }
-        else if (Input.GetKeyUp(m_normalScanKey)) // On key up end the scan
-        {
-            laserLineRenderer.enabled = false; // Disable line renderer
-            m_isNormalScanning = false; // Set scanning to false
-        }
-    }
 
     /// <summary>
     /// Gets the private value of scanner's current scan charge.
@@ -236,9 +175,83 @@ public class LIDARScanner : MonoBehaviour
         return m_CurrentScanCharge;
     }
 
+    /// <summary>
+    /// Starts normal scanning.
+    /// </summary>
+    public void StartNormalScan()
+    {
+        m_isNormalScanning = true; // Set scanning to true
+        laserLineRenderer.enabled = true; // Enable line renderer
+        ShootLaser(m_numberOfNormalScanRays, playerCameraTransform.transform.position, muzzlePoint.position); // Shoot laser
+    }
+
+    /// <summary>
+    /// Ends normal scanning.
+    /// </summary>
+    public void EndNormalScan()
+    {
+        laserLineRenderer.enabled = false; // Disable line renderer
+        m_isNormalScanning = false; // Set scanning to false
+    }
+
+    /// <summary>
+    /// Begins the big scan.
+    /// </summary>
+    public void StartBigScan()
+    {
+        if (!canScan)
+            return;
+
+        laserLineRenderer.enabled = true; // Enable line renderer
+        m_isBigScanning = true; // Set scanning to true
+
+        canScan = false; // Disable ability to scan again
+        m_CurrentScanCharge = 0; // Set the charge time to 0
+    }
+
+    /// <summary>
+    /// Changes the size of the scanner radius based on an axis input.
+    /// </summary>
+    /// <param name="inputAxis">Axis to control the size.</param>
+    public void AdjustNormalScanRadius(string inputAxis)
+    {
+        // Adjust the radius of the scanner
+        if (Input.GetAxis(inputAxis) > 0f) // forward
+        {
+            if (m_circleRadius + m_scrollValue > m_maxCircleRadius)
+                m_circleRadius = m_maxCircleRadius;
+            else
+                m_circleRadius += m_scrollValue;
+        }
+        else if (Input.GetAxis(inputAxis) < 0f) // backwards
+        {
+            if (m_circleRadius - m_scrollValue < m_minCircleRadius)
+                m_circleRadius = m_minCircleRadius;
+            else
+                m_circleRadius -= m_scrollValue;
+        }
+    }
+
     #endregion
 
     #region PRIVATE METHODS
+
+    /// <summary>
+    /// Recharges the big scan until it's fully charged.
+    /// </summary>
+    /// <param name="deltaTime">Delta time.</param>
+    private void RechangeBigScan(float deltaTime)
+    {
+        laserLineRenderer.enabled = false; // Disable line renderer
+
+        if (m_CurrentScanCharge >= m_FullScanCharge)
+        {
+            startRecharge = false;
+            canScan = true;
+        }
+
+        m_CurrentScanCharge += deltaTime;
+    }
 
     /// <summary>
     /// Checks if RaycastHit hit a object with a particular tag and assigns buffer data based on the tag.
