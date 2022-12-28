@@ -9,6 +9,14 @@ public class TogglePauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenuCanvas;
     [SerializeField] PlayerInput playerInput;
 
+    [Header("Volumes")]
+    [SerializeField] GameObject normalGameVolume;
+    [SerializeField] GameObject menuUIVolume;
+
+    [Header("Cameras")]
+    [SerializeField] Camera playerCamera;
+    [SerializeField] Camera menuCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +45,22 @@ public class TogglePauseMenu : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+
+            normalGameVolume.SetActive(false);
+            menuUIVolume.SetActive(true);
+
+            playerCamera.enabled = false;
+            menuCamera.enabled = true;
         }else if (!isOpened)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            normalGameVolume.SetActive(true);
+            menuUIVolume.SetActive(false);
+
+            playerCamera.enabled = true;
+            menuCamera.enabled = false;
         }
     }
 }
