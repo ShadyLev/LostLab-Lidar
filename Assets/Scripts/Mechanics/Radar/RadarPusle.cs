@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class RadarPusle : MonoBehaviour
 {
+    //---RADAR----
     [SerializeField] private Transform radarPingPrefab;
-
     [SerializeField] private Transform radarPingsContainer;
-
     [SerializeField] private LayerMask artefactLayerMask;
-
     [SerializeField] private Transform pulseSpriteTransform;
     [SerializeField] private float range;
     [SerializeField] private float rangeMax;
     [SerializeField] private float fadeRange;
     [SerializeField] private float rangeSpeed;
+
+    //---AUDIO----
+    [SerializeField] private AudioClip pingSound;
+    [SerializeField] private float lowerPingSound;
+
+    private AudioSource audioSource;
+
     private List<Collider> alreadyPingedColliders;
 
     private Color pulseColor;
@@ -24,6 +29,7 @@ public class RadarPusle : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         pulseSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         pulseColor = pulseSpriteRenderer.color;
 
@@ -43,7 +49,6 @@ public class RadarPusle : MonoBehaviour
 
         pulseSpriteTransform.localScale = new Vector3(range, range);
 
-        //RaycastHit[] hitsArray = Physics.SphereCastAll(transform.position, range / 2f, transform.forward, artefactLayerMask);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range / 2f, artefactLayerMask);
         foreach (Collider col in hitColliders)
         {
@@ -62,6 +67,7 @@ public class RadarPusle : MonoBehaviour
 
                     radarPing.SetDisappearTimer(rangeMax / fadeRange);
                     radarPing.SetColour(Color.green);
+                    audioSource.PlayOneShot(pingSound, AudioManager.Instance.volumeSFX - lowerPingSound);
                 }
             }
         }
@@ -77,5 +83,10 @@ public class RadarPusle : MonoBehaviour
             pulseColor.a = 1f;
         }
         pulseSpriteRenderer.color = pulseColor;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, rangeMax/2);
     }
 }
