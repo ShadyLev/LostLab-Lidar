@@ -7,12 +7,14 @@ public class MapManager : MonoBehaviour
     public bool isPaused = false;
     private MapCameraController camMapController;
     private Camera mapCam;
-    [SerializeField] private GameObject playerObject;
+    [SerializeField] private PlayerInput playerInput;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+
         camMapController = GetComponent<MapCameraController>();
         mapCam = GetComponentInChildren<Camera>();
 
@@ -31,7 +33,9 @@ public class MapManager : MonoBehaviour
             {
                 Time.timeScale = 0;
                 camMapController.enabled = true;
-                playerObject.SetActive(false);
+
+                playerInput.enabled = false;
+
                 mapCam.enabled = true;
 
                 Cursor.lockState = CursorLockMode.Confined;
@@ -41,7 +45,9 @@ public class MapManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 camMapController.enabled = false;
-                playerObject.SetActive(true);
+
+                playerInput.enabled = true;
+
                 mapCam.enabled = false;
 
                 Cursor.lockState = CursorLockMode.Locked;

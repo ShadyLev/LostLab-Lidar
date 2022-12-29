@@ -23535,9 +23535,24 @@ PrefabInstance:
       objectReference: {fileID: 7805791633215677239}
     - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
+      propertyPath: maxZoom
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: mapCamera
+      value: 
+      objectReference: {fileID: 2115904942}
+    - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 2115904942}
+    - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: currentZoom
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7160472159449140259, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
       propertyPath: m_RootOrder
