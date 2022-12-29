@@ -29,8 +29,11 @@ public class SettingsMenu : MonoBehaviour
     public TextMeshProUGUI musicValue;
     public Slider sfxVolume;
     public TextMeshProUGUI sfxValue;
+    public Slider generalVolume;
+    public TextMeshProUGUI generalValue;
     float volumeMusic;
     float volumeSfx;
+    float volumeGeneral;
 
     // Start is called before the first frame update
     void Start()
@@ -144,6 +147,13 @@ public class SettingsMenu : MonoBehaviour
         AudioManager.Instance.volumeSFX = value;
         sfxValue.SetText(tmpVal.ToString("F0") + "%");
     }
+    public void SetGeneralVolume(float value)
+    {
+        volumeGeneral = value;
+        float tmpVal = value * 100f;
+        AudioManager.Instance.volumeGeneral = value;
+        generalValue.SetText(tmpVal.ToString("F0") + "%");
+    }
 
     public void SaveSettings()
     {
@@ -157,6 +167,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("SensY", sensY);
         PlayerPrefs.SetFloat("MusicVolume", volumeMusic);
         PlayerPrefs.SetFloat("SFXVolume", volumeSfx);
+        PlayerPrefs.SetFloat("GeneralVolume", volumeGeneral);
     }
 
     public void LoadSettings(int currentResolutionIndex)
@@ -214,5 +225,10 @@ public class SettingsMenu : MonoBehaviour
             sfxVolume.value = PlayerPrefs.GetFloat("SFXVolume");
         else
             sfxVolume.value = 1;
+
+        if (PlayerPrefs.HasKey("GeneralVolume"))
+            generalVolume.value = PlayerPrefs.GetFloat("GeneralVolume");
+        else
+            generalVolume.value = 1;
     }
 }

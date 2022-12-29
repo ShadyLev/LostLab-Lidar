@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     private static AudioManager _instance;
     public static AudioManager Instance { get { return _instance; } }
 
+    public float volumeGeneral = 1f;
     public float volumeSFX = 1f;
     public float volumeMusic = 1f;
 
@@ -31,6 +32,11 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        SetGeneralVolume();
+    }
+
     public void ButtonClick()
     {
         audioSource.PlayOneShot(buttonClick, volumeSFX);
@@ -41,8 +47,8 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(buttonHover, volumeSFX);
     }
 
-    void SetGeneralVolume()
+    public void SetGeneralVolume()
     {
-        
+        AudioListener.volume = volumeGeneral;
     }
 }
