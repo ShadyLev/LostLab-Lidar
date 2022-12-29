@@ -9,6 +9,7 @@ public class MapManager : MonoBehaviour
     public bool IsMapOpened { get { return isPaused; } }
     [Tooltip("Canvas with controls.")]
     [SerializeField] GameObject controlsCanvas;
+    [SerializeField] TogglePauseMenu pauseMenu;
 
 
     //----HIDDEN VALUES----
@@ -33,6 +34,9 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pauseMenu.IsPauseMenuOpened)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             isPaused = !isPaused;

@@ -6,6 +6,8 @@ public class TogglePauseMenu : MonoBehaviour
 {
     public KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private bool isOpened = false;
+    public bool IsPauseMenuOpened { get { return isOpened; } }
+
     [SerializeField] GameObject pauseMenuCanvas;
     [SerializeField] GameObject mapMenuCanvas;
     [SerializeField] MapManager mapManager;
