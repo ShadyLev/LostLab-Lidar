@@ -40869,14 +40869,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Move - w/s/a/d
 
-    Run - Shift
-
     Jump - Space
 
-    Crouch - c
+    scan - m1/m2
 
-    Slide
-    - c '
+    map - tab
+
+    pause
+    - esc'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb04931851d0c914eab707eec0506380, type: 2}
   m_sharedMaterial: {fileID: -6292332809472157053, guid: cb04931851d0c914eab707eec0506380,

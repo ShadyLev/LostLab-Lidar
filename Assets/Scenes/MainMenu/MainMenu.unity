@@ -16251,10 +16251,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Inset text here about smth
-
-
-    hehehehe'
+  m_text: "Explore the map using the scanner and collect all the artefacts. \n\nFind
+    the exit once all artefacts are collected."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb04931851d0c914eab707eec0506380, type: 2}
   m_sharedMaterial: {fileID: -6292332809472157053, guid: cb04931851d0c914eab707eec0506380,
@@ -16318,7 +16316,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 65.562225, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -23362,14 +23360,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Move - w/s/a/d
 
-    Run - Shift
-
     Jump - Space
 
-    Crouch - c
+    scan - m1/m2
 
-    Slide
-    - c '
+    map - tab
+
+    pause
+    - esc'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb04931851d0c914eab707eec0506380, type: 2}
   m_sharedMaterial: {fileID: -6292332809472157053, guid: cb04931851d0c914eab707eec0506380,
