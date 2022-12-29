@@ -38998,6 +38998,8 @@ MonoBehaviour:
   pauseKey: 27
   isOpened: 0
   pauseMenuCanvas: {fileID: 946031369}
+  mapMenuCanvas: {fileID: 1789267228}
+  mapManager: {fileID: 1789267229}
   playerInput: {fileID: 2121068728}
   normalGameVolume: {fileID: 1852543646}
   menuUIVolume: {fileID: 661829550}
@@ -51871,6 +51873,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786071980}
   m_CullTransparentMesh: 1
+--- !u!1 &1789267228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7160472159449140261, guid: 8204355513b2f94418c125c223e00aa5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1833564472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1789267229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7160472159449140256, guid: 8204355513b2f94418c125c223e00aa5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1833564472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789267228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdfc311f5ddfbf546b00d00e95c6b044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1790143605
 GameObject:
   m_ObjectHideFlags: 0
@@ -53319,26 +53339,71 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771085913}
     m_Modifications:
-    - target: {fileID: 7160472159449140256, guid: 8204355513b2f94418c125c223e00aa5,
+    - target: {fileID: 13233593989060305, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
-      propertyPath: playerObject
-      value: 
-      objectReference: {fileID: 1129526264}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13233593989060305, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13233593989060305, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 177.9006
+      objectReference: {fileID: 0}
+    - target: {fileID: 13233593989060305, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -36.178635
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156663581052227172, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156663581052227172, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156663581052227172, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 177.9006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156663581052227172, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.8453
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258922509159740122, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258922509159740122, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258922509159740122, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 177.9006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258922509159740122, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -54.511963
+      objectReference: {fileID: 0}
     - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 8953492214011537041}
-    - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
-        type: 3}
-      propertyPath: maxZoom
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
-        type: 3}
-      propertyPath: mapCamera
-      value: 
-      objectReference: {fileID: 1833564473}
     - target: {fileID: 7160472159449140259, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
       propertyPath: m_RootOrder
@@ -53399,14 +53464,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 8713398792745469154, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8204355513b2f94418c125c223e00aa5, type: 3}
---- !u!20 &1833564473 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7160472159824328708, guid: 8204355513b2f94418c125c223e00aa5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1833564472}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1837182823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83677,10 +83741,6 @@ PrefabInstance:
       propertyPath: artefactParentHolder
       value: 
       objectReference: {fileID: 1790143605}
-    - target: {fileID: 2121068728, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
-      propertyPath: m_scrollValue
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer
@@ -83745,11 +83805,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: m_minCircleRadius
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}

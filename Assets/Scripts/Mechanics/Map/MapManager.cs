@@ -6,6 +6,9 @@ public class MapManager : MonoBehaviour
 {
     [Tooltip("Is game paused.")]
     [SerializeField] bool isPaused = false;
+    public bool IsMapOpened { get { return isPaused; } }
+    [Tooltip("Canvas with controls.")]
+    [SerializeField] GameObject controlsCanvas;
 
 
     //----HIDDEN VALUES----
@@ -42,6 +45,7 @@ public class MapManager : MonoBehaviour
                 camMapController.enabled = true; // Enable map camera controller
                 playerInput.enabled = false; // Disable player input
                 mapCam.enabled = true; // Enable map camera
+                controlsCanvas.SetActive(true); // Enable controls canvas
 
                 // Show and unlock player cursor
                 Cursor.lockState = CursorLockMode.Confined;
@@ -55,6 +59,7 @@ public class MapManager : MonoBehaviour
                 camMapController.enabled = false; // Disable map camera controller
                 playerInput.enabled = true; // Enable player input
                 mapCam.enabled = false; // Disable map camera
+                controlsCanvas.SetActive(false); // Disable controls canvas
 
                 // Hide and lock player cursor
                 Cursor.lockState = CursorLockMode.Locked;

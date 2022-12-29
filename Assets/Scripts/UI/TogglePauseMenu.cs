@@ -7,6 +7,8 @@ public class TogglePauseMenu : MonoBehaviour
     public KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private bool isOpened = false;
     [SerializeField] GameObject pauseMenuCanvas;
+    [SerializeField] GameObject mapMenuCanvas;
+    [SerializeField] MapManager mapManager;
     [SerializeField] PlayerInput playerInput;
 
     [Header("Volumes")]
@@ -39,8 +41,6 @@ public class TogglePauseMenu : MonoBehaviour
         pauseMenuCanvas.SetActive(isOpened);
         Time.timeScale = isOpened ? 0 : 1;
 
-        playerInput.enabled = !isOpened;
-
         if (isOpened)
         {
             Cursor.lockState = CursorLockMode.Confined;
@@ -49,8 +49,13 @@ public class TogglePauseMenu : MonoBehaviour
             normalGameVolume.SetActive(false);
             menuUIVolume.SetActive(true);
 
+            if (mapManager.IsMapOpened)
+                mapMenuCanvas.SetActive(false);
+
             playerCamera.enabled = false;
             menuCamera.enabled = true;
+            playerInput.enabled = false;
+
         }else if (!isOpened)
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -58,6 +63,16 @@ public class TogglePauseMenu : MonoBehaviour
 
             normalGameVolume.SetActive(true);
             menuUIVolume.SetActive(false);
+
+            if (mapManager.IsMapOpened)
+            {
+                mapMenuCanvas.SetActive(true);
+                playerInput.enabled = false;
+            }
+            else
+            {
+                playerInput.enabled = true;
+            }
 
             playerCamera.enabled = true;
             menuCamera.enabled = false;
