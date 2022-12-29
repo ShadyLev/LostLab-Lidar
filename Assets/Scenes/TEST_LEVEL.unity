@@ -83677,6 +83677,10 @@ PrefabInstance:
       propertyPath: artefactParentHolder
       value: 
       objectReference: {fileID: 1790143605}
+    - target: {fileID: 2121068728, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}
+      propertyPath: m_scrollValue
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7218986030210776547, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
         type: 3}
       propertyPath: vfxContainer

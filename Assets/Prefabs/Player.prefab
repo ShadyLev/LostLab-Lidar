@@ -4295,7 +4295,7 @@ MonoBehaviour:
   scanner: {fileID: 7805791634151883002}
   m_normalScanKey: 323
   m_bigScanKey: 324
-  m_scrollValue: 0.5
+  m_scrollValue: 0.1
   m_radiusChangeAxis: Mouse ScrollWheel
 --- !u!1 &7805791633372197178
 GameObject:
@@ -5040,7 +5040,7 @@ PrefabInstance:
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: m_minCircleRadius
-      value: 0.8
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
