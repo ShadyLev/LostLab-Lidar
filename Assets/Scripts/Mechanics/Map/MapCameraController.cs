@@ -114,10 +114,11 @@ public class MapCameraController : MonoBehaviour
             return;
         }
 
-        if (!Input.GetMouseButton(1)) return;
+        if (!Input.GetMouseButton(1)) 
+            return;
 
         Vector3 pos = mapCamera.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
-        Vector3 move = new Vector3(pos.x * dragSpeed, 0, pos.y * dragSpeed);
+        Vector3 move = (mapCamera.transform.right * -pos.x * dragSpeed) + (mapCamera.transform.up * -pos.y * dragSpeed);
 
         targetRef.transform.Translate(move, Space.World);
     }
