@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TEST_LEVEL.unity
     guid: f18be1a8b8d813c4b80082a30d1df2e9
   - enabled: 1
-    path: Assets/Scenes/GameEnd.unity
+    path: Assets/Scenes/GameEndWin.unity
     guid: 759a222525e9105479275c9181a406b9
+  - enabled: 1
+    path: Assets/Scenes/GameEndLose.unity
+    guid: e90e91fe1d085e947b724a536ebe33cd
   m_configObjects: {}
