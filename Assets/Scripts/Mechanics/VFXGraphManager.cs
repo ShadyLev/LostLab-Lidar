@@ -102,6 +102,8 @@ public class VFXGraphManager : MonoBehaviour
 
         m_vfxList.Clear();
 
+        m_VFXParticleAmount = 0;
+
         Release();
 
         CreateVFX();
