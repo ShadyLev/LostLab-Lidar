@@ -8,6 +8,7 @@ TagManager:
   - Artefact
   - Environment
   - Ladder
+  - Interest
   layers:
   - Default
   - TransparentFX

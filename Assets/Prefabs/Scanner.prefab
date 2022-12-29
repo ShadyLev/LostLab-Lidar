@@ -323,6 +323,10 @@ MonoBehaviour:
     Color: {r: 0.88328743, g: 0, b: 1, a: 1}
     useDefaultGradient: 1
     Size: 0.25
+  - TagName: Interest
+    Color: {r: 0, g: 1, b: 0.38262558, a: 1}
+    useDefaultGradient: 0
+    Size: 0.25
   muzzlePoint: {fileID: 6990689275446479013}
   playerCameraTransform: {fileID: 0}
   mask:
