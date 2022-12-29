@@ -25,6 +25,10 @@ public class MapCameraController : MonoBehaviour
     [Range(0, 90)]
     [SerializeField] float maxXRotAngle = 80;
 
+    [Tooltip("How fast camera moves when dragged.")]
+    [Range(0, 10)]
+    [SerializeField] float dragSpeed = 2;
+
     [Header("Zoom values.")]
     [Tooltip("Max camera zoom out.")]
     [Range(0, 500)]
@@ -36,7 +40,6 @@ public class MapCameraController : MonoBehaviour
     [Range(0, 500)]
     [SerializeField] float zoomDelta = 10f;
 
-    public float dragSpeed = 2;
     private Vector3 dragOrigin;
 
     //----HIDDEN VALUES----

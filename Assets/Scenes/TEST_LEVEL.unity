@@ -52581,6 +52581,11 @@ PrefabInstance:
       propertyPath: maxZoom
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: mapCamera
+      value: 
+      objectReference: {fileID: 1833564473}
     - target: {fileID: 7160472159449140259, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
       propertyPath: m_RootOrder
@@ -52643,6 +52648,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8204355513b2f94418c125c223e00aa5, type: 3}
+--- !u!20 &1833564473 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7160472159824328708, guid: 8204355513b2f94418c125c223e00aa5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1833564472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1837182823
 PrefabInstance:
   m_ObjectHideFlags: 0

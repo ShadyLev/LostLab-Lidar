@@ -40,4 +40,9 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.PlayOneShot(buttonHover, volumeSFX);
     }
+
+    void SetGeneralVolume()
+    {
+
+    }
 }
