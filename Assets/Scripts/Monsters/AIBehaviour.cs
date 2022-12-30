@@ -9,6 +9,8 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] VFXGraphManager graphManager;
     [SerializeField] LevelLoader levelLoader;
 
+    [SerializeField] GameObject[] enemyModel;
+
     [SerializeField] int endGameSceneIndex;
     [SerializeField] int phase = 0;
     [SerializeField] float timeBeforeClearPoint = 1f;
@@ -57,6 +59,10 @@ public class AIBehaviour : MonoBehaviour
         graphManager.DestroyVFXList();
         phase++;
 
+        yield return new WaitForSeconds(time);
+
+        TeleportAgent();
+
         Invoke("ResetPhase", cooldownBetweenPhases);
     }
 
@@ -68,8 +74,12 @@ public class AIBehaviour : MonoBehaviour
 
         graphManager.DestroyVFXList();
         // teleport player
-        this.gameObject.tag = "Invisible";
+        ChangeTags("Invisible");
         phase++;
+
+        yield return new WaitForSeconds(time);
+
+        TeleportAgent();
 
         Invoke("ResetPhase", cooldownBetweenPhases);
     }
@@ -79,9 +89,22 @@ public class AIBehaviour : MonoBehaviour
         startPhase = false;
     }
 
+    void TeleportAgent()
+    {
+
+    }
+
     public void KillingAttack()
     {
         if(phase == 2)
             levelLoader.LoadLevel(endGameSceneIndex);
+    }
+
+    void ChangeTags(string newTag)
+    {
+        foreach(GameObject part in enemyModel)
+        {
+            part.tag = newTag;
+        }
     }
 }
