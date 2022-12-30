@@ -12,20 +12,24 @@ public class AIController : MonoBehaviour
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] LayerMask whatIsPlayer;
 
+    [Header("General values")]
+    [Range(0, 100)]
+    [SerializeField] float sightRange;
+    [Range(0, 100)]
+    [SerializeField] float attackRange;
+    [SerializeField] bool playerInSightRange;
+    [SerializeField] bool playerInAttackRange;
+
     [Header("Patrolling")]
     [SerializeField] Vector3 walkPoint;
+    [Range(0, 100)]
     [SerializeField] float walkPointRange;
     [SerializeField] bool walkPointSet;
 
     [Header("Attacking")]
+    [Range(0, 1)]
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] bool alreadyAttacked;
-
-    [Header("General values")]
-    [SerializeField] float sightRange;
-    [SerializeField] float attackRange;
-    [SerializeField] bool playerInSightRange;
-    [SerializeField] bool playerInAttackRange;
 
 
     // Start is called before the first frame update
@@ -49,6 +53,10 @@ public class AIController : MonoBehaviour
     }
 
     #region Patrolling
+
+    /// <summary>
+    /// Sets destination to a random point in radius.
+    /// </summary>
     void Patrolling()
     {
         if (!walkPointSet)
@@ -62,21 +70,29 @@ public class AIController : MonoBehaviour
             walkPointSet = false;
     }
 
+    /// <summary>
+    /// Finds a random point on a navmesh in radius
+    /// </summary>
     void SearchWalkPoint()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        Vector3 randomDirection = Random.insideUnitSphere * walkPointRange;
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-        
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, walkPointRange, 1);
+        Vector3 finalPosition = hit.position;
+
+        walkPoint = finalPosition;
+        walkPointSet = true;
     }
 
     #endregion
 
     #region Chasing
 
+    /// <summary>
+    /// Sets destination to player.
+    /// </summary>
     void Chasing()
     {
         agent.SetDestination(playerTransform.position);
@@ -86,6 +102,9 @@ public class AIController : MonoBehaviour
 
     #region Attacking
 
+    /// <summary>
+    /// Attacks the player in intervals.
+    /// </summary>
     void Attacking()
     {
         // Stop
@@ -105,6 +124,9 @@ public class AIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the attack bool.
+    /// </summary>
     void ResetAttack()
     {
         alreadyAttacked = false;
@@ -118,15 +140,15 @@ public class AIController : MonoBehaviour
     {
         // Patrolling range
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position, walkPointRange);
+        Gizmos.DrawWireSphere(transform.position, walkPointRange);
 
         // Chase range
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, sightRange);
+        Gizmos.DrawWireSphere(transform.position, sightRange);
 
         // Attack range
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
     #endregion
