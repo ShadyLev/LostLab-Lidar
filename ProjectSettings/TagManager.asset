@@ -9,6 +9,7 @@ TagManager:
   - Environment
   - Ladder
   - Interest
+  - Invisible
   layers:
   - Default
   - TransparentFX

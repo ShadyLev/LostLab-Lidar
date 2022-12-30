@@ -234,6 +234,22 @@ public class LIDARScanner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets a point type data based on a tag string.
+    /// </summary>
+    /// <param name="typeTag">Point type tag name.</param>
+    /// <returns>PointType data.</returns>
+    public PointType GetPointTypeData(string typeTag)
+    {
+        foreach(PointType type in pointTypes)
+        {
+            if (type.TagName == typeTag)
+                return type;
+        }
+
+        return null;
+    }
+
     #endregion
 
     #region PRIVATE METHODS

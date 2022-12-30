@@ -311,22 +311,37 @@ MonoBehaviour:
     Color: {r: 0.79607844, g: 0.4392157, b: 0, a: 1}
     useDefaultGradient: 1
     Size: 0.25
+    isBeingScanned: 0
   - TagName: Artefact
     Color: {r: 1, g: 1, b: 1, a: 1}
     useDefaultGradient: 0
     Size: 0.25
+    isBeingScanned: 0
   - TagName: Ladder
     Color: {r: 0.88328743, g: 0, b: 1, a: 1}
     useDefaultGradient: 0
     Size: 0.25
+    isBeingScanned: 0
   - TagName: Untagged
     Color: {r: 0.88328743, g: 0, b: 1, a: 1}
     useDefaultGradient: 1
     Size: 0.25
+    isBeingScanned: 0
   - TagName: Interest
     Color: {r: 0, g: 1, b: 0.38262558, a: 1}
     useDefaultGradient: 0
     Size: 0.25
+    isBeingScanned: 0
+  - TagName: Enemy
+    Color: {r: 1, g: 0, b: 0, a: 1}
+    useDefaultGradient: 0
+    Size: 0.4
+    isBeingScanned: 0
+  - TagName: Invisible
+    Color: {r: 1, g: 0, b: 0, a: 0}
+    useDefaultGradient: 0
+    Size: 0.4
+    isBeingScanned: 0
   muzzlePoint: {fileID: 6990689275446479013}
   playerCameraTransform: {fileID: 0}
   mask:
