@@ -17,4 +17,7 @@ public class PointType
 
     [Tooltip("Size of the particle.")]
     public float Size;
+
+    [Tooltip("Bool that shows if that tag is being scanned right now.")]
+    public bool isBeingScanned;
 }

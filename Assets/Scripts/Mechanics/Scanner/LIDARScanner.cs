@@ -154,6 +154,8 @@ public class LIDARScanner : MonoBehaviour
         // Call big scan method each frame
         Scan(Time.deltaTime);
 
+        // Reset point type bools
+        ResetPointTypeBool();
 
         // Charge scanner
         if (startRecharge)
@@ -272,7 +274,30 @@ public class LIDARScanner : MonoBehaviour
 
                 // Add data to buffer
                 vfxManager.AddDataToBuffer(hit.point, pointColor, isGrad, type.Size);
+
+                // Set bool in point type 
+                type.isBeingScanned = true;
             }
+            else
+            {
+                type.isBeingScanned = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// If player is not scanning this method resets the bool indicating scanning value to false.
+    /// </summary>
+    private void ResetPointTypeBool()
+    {
+        // If player is scanning of any type -> return
+        if (IsNormalScanning || IsBigScanning)
+            return;
+
+        // Else go through each point type and reset the isbeingscanned bool to false
+        foreach(PointType type in pointTypes)
+        {
+            type.isBeingScanned = false;
         }
     }
 
