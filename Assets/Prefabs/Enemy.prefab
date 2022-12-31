@@ -2437,7 +2437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5ab43ba2ac55547a6558cd7e18896d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 5661327977582047111}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
@@ -2493,8 +2493,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d944f82630dce448fe779dc09f76a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSource: {fileID: 0}
-  randomCreepyNoises: []
-  phase1DiscoveredClip: {fileID: 0}
-  phase2DiscoveredClip: {fileID: 0}
-  phase3KillClip: {fileID: 0}
+  defaultSource: {fileID: 7270770918836596320}
+  randomCreepyNoises:
+  - {fileID: 8300000, guid: c945e3050c830c24abf73cf82f132f9f, type: 3}
+  startTimer: 0
+  minDelayBetweenClips: 5
+  maxDelayBetweenClips: 15
+  timer: 0
+  phase1DiscoveredClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841,
+    type: 3}
+  phase2DiscoveredClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841,
+    type: 3}
+  phase3KillClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841, type: 3}
+  isPlaying: 0
