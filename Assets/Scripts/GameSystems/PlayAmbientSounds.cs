@@ -8,6 +8,7 @@ public class PlayAmbientSounds : MonoBehaviour
     [SerializeField] AudioClip[] clips;
 
     AudioSource source;
+    float currentVolume;
 
     // Index of the currently played sound
     private int index;
@@ -16,20 +17,37 @@ public class PlayAmbientSounds : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
+        currentVolume = AudioManager.Instance.volumeMusic;
     }
 
     // Update is called once per frame
     void Update()
     {
+        AdjustVolume();
+
+        if (source.isPlaying)
+            return;
+
         PlayNote();
     }
 
     public void PlayNote()
     {
         // Play current sound
-        source.PlayOneShot(clips[index], AudioManager.Instance.volumeMusic);
+        source.clip = clips[index];
+        source.volume = AudioManager.Instance.volumeMusic;
+        source.Play();
 
         // Increase the index, wrap around if reached end of array
         index = (index + 1) % clips.Length;
+    }
+
+    void AdjustVolume()
+    {
+        if(currentVolume != AudioManager.Instance.volumeMusic)
+        {
+            currentVolume = AudioManager.Instance.volumeMusic;
+            source.volume = AudioManager.Instance.volumeMusic;
+        }
     }
 }

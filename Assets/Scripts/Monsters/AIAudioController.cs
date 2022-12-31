@@ -33,20 +33,17 @@ public class AIAudioController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //
         if (startTimer)
         {
             timer -= Time.deltaTime;
 
             if (timer <= 0)
+            {
                 startTimer = false;
+                StartPlayingRandomClip();
+            }
         }
-
-        if(timer <= 0)
-        {
-            StartPlayingRandomClip();
-        }
-
     }
 
     void StartPlayingRandomClip()
