@@ -575,12 +575,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35239064}
   m_CullTransparentMesh: 1
---- !u!1 &35402050 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3422392969464193426, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6367122065761034113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &36883821
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,12 +800,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43248843}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &56670143 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3422392969464193438, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6367122065761034113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &61293933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,12 +1439,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &142953198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3422392969464193068, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6367122065761034113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &147771590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,37 +2449,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215968446}
   m_CullTransparentMesh: 1
---- !u!1 &232289129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6367122065368014235, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6367122065761034113}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &232289133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232289129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb22395b0dbad848b4bbf2a24a14d87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scanner: {fileID: 1908410722}
-  graphManager: {fileID: 1908410723}
-  levelLoader: {fileID: 985472643}
-  enemyModel:
-  - {fileID: 142953198}
-  - {fileID: 56670143}
-  - {fileID: 35402050}
-  endGameSceneIndex: 3
-  phase: 0
-  timeBeforeClearPoint: 1
-  isBeingScannedByPlayer: 0
-  startPhase: 0
-  cooldownBetweenPhases: 4
 --- !u!1 &236803680
 GameObject:
   m_ObjectHideFlags: 0
@@ -22084,60 +22035,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3422392969464193064, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
+    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
+      propertyPath: scanner
+      value: 
+      objectReference: {fileID: 1908410722}
+    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 985472643}
+    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
+      propertyPath: graphManager
+      value: 
+      objectReference: {fileID: 1908410723}
+    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
+      propertyPath: maxTeleportRange
+      value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193066, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193068, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193070, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193424, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193426, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193428, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193434, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193436, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422392969464193438, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 3426540070078600123, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
-        type: 3}
-      propertyPath: attackRange
-      value: 2
+    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
+      propertyPath: minTeleportRange
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3426540070078600123, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
         type: 3}

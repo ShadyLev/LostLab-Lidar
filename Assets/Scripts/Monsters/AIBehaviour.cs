@@ -11,6 +11,9 @@ public class AIBehaviour : MonoBehaviour
 
     [SerializeField] GameObject[] enemyModel;
 
+    [SerializeField] float maxTeleportRange;
+    [SerializeField] float minTeleportRange;
+
     [SerializeField] int endGameSceneIndex;
     [SerializeField] int phase = 0;
     [SerializeField] float timeBeforeClearPoint = 1f;
@@ -19,6 +22,8 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] bool startPhase = false;
 
     [SerializeField] float cooldownBetweenPhases = 4f;
+
+    [SerializeField] Vector3 teleportPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +46,10 @@ public class AIBehaviour : MonoBehaviour
             StartCoroutine(Phase2(timeBeforeClearPoint));
     }
 
+    /// <summary>
+    /// Checks if an object of tag Enemy is being scanned.
+    /// </summary>
+    /// <returns>True or false.</returns>
     bool CheckIfBeingScanned()
     {
         PointType type =  scanner.GetPointTypeData("Enemy");
@@ -61,7 +70,7 @@ public class AIBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(time);
 
-        TeleportAgent();
+        TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
 
         Invoke("ResetPhase", cooldownBetweenPhases);
     }
@@ -79,27 +88,64 @@ public class AIBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(time);
 
-        TeleportAgent();
+        TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
 
         Invoke("ResetPhase", cooldownBetweenPhases);
     }
 
+    /// <summary>
+    /// Resets the startPhase bool.
+    /// </summary>
     void ResetPhase()
     {
         startPhase = false;
     }
 
-    void TeleportAgent()
+    /// <summary>
+    /// Finds a random position on the navmesh between min and max range.
+    /// </summary>
+    /// <param name="minRange">Minimun range from origin.</param>
+    /// <param name="maxRange">Maximum range from origin.</param>
+    /// <returns>Vector3 position.</returns>
+    Vector3 GetRandomPositionOnNavMesh(float minRange, float maxRange)
     {
+        float randomRange = Random.Range(minRange, maxRange);
 
+        Vector3 randomDirection = Random.insideUnitSphere * randomRange;
+
+        randomDirection += transform.position;
+        UnityEngine.AI.NavMeshHit hit;
+        UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, randomRange, 1);
+        Vector3 finalPosition = hit.position;
+
+        teleportPosition = finalPosition;
+
+        return teleportPosition;
     }
 
+    /// <summary>
+    /// Teleport the agent to a random position on the nav mesh.
+    /// </summary>
+    void TeleportAgentToRandomPositionOnNavMesh(float minRange, float maxRange)
+    {
+        Vector3 teleportPos = GetRandomPositionOnNavMesh(minRange, maxRange);
+
+        transform.position = teleportPos;
+    }
+
+    /// <summary>
+    /// Kills the player by loading the end game scene.
+    /// </summary>
     public void KillingAttack()
     {
         if(phase == 2)
             levelLoader.LoadLevel(endGameSceneIndex);
     }
 
+    /// <summary>
+    /// Changes the tag of all objects to a new tag.
+    /// </summary>
+    /// <param name="newTag">New tag name.</param>
     void ChangeTags(string newTag)
     {
         foreach(GameObject part in enemyModel)
