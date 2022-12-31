@@ -65,12 +65,13 @@ public class AIBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(time);
 
-        graphManager.DestroyVFXList();
-        phase++;
-
-        yield return new WaitForSeconds(time);
-
         TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
+
+        yield return new WaitForSeconds(0.5f);
+
+        graphManager.DestroyVFXList();
+
+        phase++;
 
         Invoke("ResetPhase", cooldownBetweenPhases);
     }
@@ -81,14 +82,17 @@ public class AIBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(time);
 
-        graphManager.DestroyVFXList();
         // teleport player
-        ChangeTags("Invisible");
-        phase++;
 
-        yield return new WaitForSeconds(time);
+        ChangeTags("Invisible");
 
         TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
+
+        yield return new WaitForSeconds(0.5f);
+
+        graphManager.DestroyVFXList();
+
+        phase++;
 
         Invoke("ResetPhase", cooldownBetweenPhases);
     }

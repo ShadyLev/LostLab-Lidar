@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class AIAudioController : MonoBehaviour
 {
+    [Header("AudioSources")]
+    [SerializeField] AudioSource defaultSource;
+
+    [Header("Random clips array")]
     [SerializeField] AudioClip[] randomCreepyNoises;
 
+    [Header("Specified clips")]
     [SerializeField] AudioClip phase1DiscoveredClip;
     [SerializeField] AudioClip phase2DiscoveredClip;
     [SerializeField] AudioClip phase3KillClip;
