@@ -31,16 +31,20 @@ public class AIController : MonoBehaviour
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] bool alreadyAttacked;
 
+    private NavMeshPath navPath;
+
 
     // Start is called before the first frame update
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        navPath = new NavMeshPath();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
@@ -79,11 +83,26 @@ public class AIController : MonoBehaviour
 
         randomDirection += transform.position;
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, walkPointRange, 1);
+        NavMesh.SamplePosition(randomDirection, out hit, walkPointRange, NavMesh.AllAreas);
         Vector3 finalPosition = hit.position;
 
-        walkPoint = finalPosition;
-        walkPointSet = true;
+        if (CheckIfPathPossible(finalPosition))
+        {
+            walkPoint = finalPosition;
+            walkPointSet = true;
+        }
+    }
+
+    bool CheckIfPathPossible(Vector3 targetPosition)
+    {
+        agent.CalculatePath(targetPosition, navPath);
+
+        if(navPath.status == NavMeshPathStatus.PathComplete)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     #endregion

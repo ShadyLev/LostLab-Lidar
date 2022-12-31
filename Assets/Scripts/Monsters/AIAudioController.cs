@@ -18,11 +18,11 @@ public class AIAudioController : MonoBehaviour
     [SerializeField] float timer;
 
     [Header("Specified clips")]
-    [SerializeField] AudioClip phase1DiscoveredClip;
-    [SerializeField] AudioClip phase2DiscoveredClip;
-    [SerializeField] AudioClip phase3KillClip;
+    [SerializeField] public AudioClip phase1DiscoveredClip;
+    [SerializeField] public AudioClip phase2DiscoveredClip;
+    [SerializeField] public AudioClip phase3KillClip;
 
-    [SerializeField] bool isPlaying = false;
+    [SerializeField] bool isPlaying = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +69,7 @@ public class AIAudioController : MonoBehaviour
         startTimer = true;
     }
 
-    IEnumerator PlaySpecificClip(AudioClip clip)
+    public IEnumerator PlaySpecificClip(AudioClip clip)
     {
         isPlaying = true;
         oneShotSource.PlayOneShot(clip, AudioManager.Instance.volumeSFX);

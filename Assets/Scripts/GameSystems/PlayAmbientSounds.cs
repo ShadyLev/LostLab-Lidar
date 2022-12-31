@@ -33,6 +33,8 @@ public class PlayAmbientSounds : MonoBehaviour
 
     public void PlayNote()
     {
+        Debug.Log("Player random");
+
         // Play current sound
         source.clip = clips[index];
         source.volume = AudioManager.Instance.volumeMusic;

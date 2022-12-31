@@ -8,6 +8,7 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] LIDARScanner scanner;
     [SerializeField] VFXGraphManager graphManager;
     [SerializeField] LevelLoader levelLoader;
+    [SerializeField] AIAudioController audioController;
 
     [SerializeField] GameObject[] enemyModel;
 
@@ -28,7 +29,7 @@ public class AIBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioController = GetComponent<AIAudioController>();
     }
 
     // Update is called once per frame
@@ -69,6 +70,8 @@ public class AIBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        audioController.PlaySpecificClip(audioController.phase1DiscoveredClip);
+
         graphManager.DestroyVFXList();
 
         phase++;
@@ -89,6 +92,8 @@ public class AIBehaviour : MonoBehaviour
         TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
 
         yield return new WaitForSeconds(0.5f);
+
+        audioController.PlaySpecificClip(audioController.phase2DiscoveredClip);
 
         graphManager.DestroyVFXList();
 
@@ -142,8 +147,11 @@ public class AIBehaviour : MonoBehaviour
     /// </summary>
     public void KillingAttack()
     {
-        if(phase == 2)
+        if (phase == 2)
+        {
+            audioController.PlaySpecificClip(audioController.phase3KillClip);
             levelLoader.LoadLevel(endGameSceneIndex);
+        }
     }
 
     /// <summary>
