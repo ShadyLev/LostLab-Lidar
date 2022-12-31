@@ -7,7 +7,8 @@ public class AIAudioController : MonoBehaviour
     private AIController controller;
 
     [Header("AudioSources")]
-    [SerializeField] AudioSource defaultSource;
+    [SerializeField] AudioSource randomSource;
+    [SerializeField] AudioSource oneShotSource;
 
     [Header("Random clips array")]
     [SerializeField] AudioClip[] randomCreepyNoises;
@@ -58,7 +59,7 @@ public class AIAudioController : MonoBehaviour
 
         AudioClip randomClip = random[randomIndex];
 
-        defaultSource.PlayOneShot(randomClip, AudioManager.Instance.volumeSFX);
+        randomSource.PlayOneShot(randomClip, AudioManager.Instance.volumeSFX);
 
         yield return new WaitForSeconds(randomClip.length);
 
@@ -68,7 +69,7 @@ public class AIAudioController : MonoBehaviour
     IEnumerator PlaySpecificClip(AudioClip clip)
     {
         isPlaying = true;
-        defaultSource.PlayOneShot(clip, AudioManager.Instance.volumeSFX);
+        oneShotSource.PlayOneShot(clip, AudioManager.Instance.volumeSFX);
 
         yield return new WaitForSeconds(clip.length);
 
