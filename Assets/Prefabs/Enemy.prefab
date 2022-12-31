@@ -2412,7 +2412,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6367122065368014235}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.38
+  m_Radius: 0.17
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2472,12 +2472,15 @@ MonoBehaviour:
   - {fileID: 3422392969464193068}
   - {fileID: 3422392969464193438}
   - {fileID: 3422392969464193426}
+  maxTeleportRange: 50
+  minTeleportRange: 100
   endGameSceneIndex: 3
   phase: 0
-  timeBeforeClearPoint: 1
+  timeBeforeClearPoint: 5
   isBeingScannedByPlayer: 0
   startPhase: 0
   cooldownBetweenPhases: 4
+  teleportPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &232289134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2490,3 +2493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d944f82630dce448fe779dc09f76a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSource: {fileID: 0}
+  randomCreepyNoises: []
+  phase1DiscoveredClip: {fileID: 0}
+  phase2DiscoveredClip: {fileID: 0}
+  phase3KillClip: {fileID: 0}
