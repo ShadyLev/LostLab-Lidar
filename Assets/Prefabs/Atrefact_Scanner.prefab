@@ -56,6 +56,8 @@ MonoBehaviour:
   rangeMax: 0
   fadeRange: 0
   rangeSpeed: 0
+  pingSound: {fileID: 0}
+  lowerPingSound: 0
 --- !u!1 &1171911613
 GameObject:
   m_ObjectHideFlags: 0
