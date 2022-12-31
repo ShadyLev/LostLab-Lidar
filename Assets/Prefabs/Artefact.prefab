@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   artefactModel: {fileID: 0}
-  m_pickUpSound: {fileID: 8300000, guid: cb821910a8e4c2945b07bf9ed344c69c, type: 3}
+  m_pickUpSound: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841, type: 3}
 --- !u!64 &1197655732480458335
 MeshCollider:
   m_ObjectHideFlags: 0

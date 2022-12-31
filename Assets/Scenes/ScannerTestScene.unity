@@ -22047,18 +22047,6 @@ PrefabInstance:
       propertyPath: graphManager
       value: 
       objectReference: {fileID: 1908410723}
-    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
-      propertyPath: maxTeleportRange
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
-      propertyPath: minTeleportRange
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
-      propertyPath: timeBeforeClearPoint
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3426540070078600123, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
         type: 3}
       propertyPath: playerTransform
