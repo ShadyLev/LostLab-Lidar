@@ -42,6 +42,11 @@ public class AIAudioController : MonoBehaviour
                 startTimer = false;
         }
 
+        if(timer <= 0)
+        {
+            StartPlayingRandomClip();
+        }
+
     }
 
     void StartPlayingRandomClip()
@@ -64,6 +69,7 @@ public class AIAudioController : MonoBehaviour
         yield return new WaitForSeconds(randomClip.length);
 
         isPlaying = false;
+        startTimer = true;
     }
 
     IEnumerator PlaySpecificClip(AudioClip clip)
