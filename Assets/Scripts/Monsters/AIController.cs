@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class AIController : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private NavMeshPath navPath;
 
+    [Header("Player references")]
     [SerializeField] private Transform playerTransform;
-
-    [SerializeField] LayerMask whatIsGround;
     [SerializeField] LayerMask whatIsPlayer;
 
     [Header("General values")]
@@ -30,8 +30,6 @@ public class AIController : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] float timeBetweenAttacks;
     [SerializeField] bool alreadyAttacked;
-
-    private NavMeshPath navPath;
 
 
     // Start is called before the first frame update
