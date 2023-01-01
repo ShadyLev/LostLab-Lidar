@@ -40,6 +40,8 @@ public class AIController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         navPath = new NavMeshPath();
+
+        behaviour = GetComponent<AIBehaviour>();
     }
 
     // Update is called once per frame
