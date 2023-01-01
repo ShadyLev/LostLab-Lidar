@@ -12,6 +12,9 @@ public class AIController : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] LayerMask whatIsPlayer;
 
+    [Header("AI References")]
+    [SerializeField] AIBehaviour behaviour;
+
     [Header("General values")]
     [Range(0, 100)]
     [SerializeField] float sightRange;
@@ -45,6 +48,11 @@ public class AIController : MonoBehaviour
 
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        if(behaviour.Phase >= 2)
+        {
+            attackRange = 0;
+        }
 
         if (!playerInSightRange && !playerInAttackRange)
             Patrolling();

@@ -17,6 +17,8 @@ public class AIBehaviour : MonoBehaviour
 
     [SerializeField] int endGameSceneIndex;
     [SerializeField] int phase = 0;
+    public int Phase { get { return phase; } }
+
     [SerializeField] float timeBeforeClearPoint = 1f;
 
     [SerializeField] bool isBeingScannedByPlayer = false;
