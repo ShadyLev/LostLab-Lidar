@@ -2570,6 +2570,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 2048
+  behaviour: {fileID: 0}
   sightRange: 25
   attackRange: 2
   playerInSightRange: 0

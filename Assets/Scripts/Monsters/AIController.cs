@@ -51,9 +51,9 @@ public class AIController : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if(behaviour.Phase >= 2)
+        if(behaviour.Phase == 3)
         {
-            attackRange = 0;
+            attackRange = 5;
         }
 
         if (!playerInSightRange && !playerInAttackRange)
@@ -144,8 +144,10 @@ public class AIController : MonoBehaviour
         {
             // here
 
+            StartCoroutine(behaviour.KillingAttack());
 
             alreadyAttacked = true;
+            Debug.Log("Attacked");
 
             Invoke("ResetAttack", timeBetweenAttacks);
         }

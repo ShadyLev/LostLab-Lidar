@@ -16,7 +16,7 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] float minTeleportRange;
 
     [SerializeField] int endGameSceneIndex;
-    [SerializeField] int phase = 0;
+    [SerializeField] int phase = 1;
     public int Phase { get { return phase; } }
 
     [SerializeField] float timeBeforeClearPoint = 1f;
@@ -43,9 +43,9 @@ public class AIBehaviour : MonoBehaviour
         if (startPhase)
             return;
 
-        if (phase == 0)
+        if (phase == 1)
             StartCoroutine(Phase1(timeBeforeClearPoint));
-        else if (phase == 1)
+        else if (phase == 2)
             StartCoroutine(Phase2(timeBeforeClearPoint));
     }
 
@@ -147,11 +147,14 @@ public class AIBehaviour : MonoBehaviour
     /// <summary>
     /// Kills the player by loading the end game scene.
     /// </summary>
-    public void KillingAttack()
+    public IEnumerator KillingAttack()
     {
-        if (phase == 2)
+        if (phase == 3)
         {
             audioController.PlaySpecificClip(audioController.phase3KillClip);
+
+            yield return new WaitForSeconds(audioController.phase3KillClip.length);
+
             levelLoader.LoadLevel(endGameSceneIndex);
         }
     }
