@@ -68,12 +68,10 @@ public class AIAudioController : MonoBehaviour
         startTimer = true;
     }
 
-    public IEnumerator PlaySpecificClip(AudioClip clip)
+    public void PlaySpecificClip(AudioClip clip)
     {
         oneShotSource.PlayOneShot(clip, AudioManager.Instance.volumeSFX);
 
         Debug.Log("Playing specific sound");
-
-        yield return new WaitForSeconds(clip.length);
     }
 }

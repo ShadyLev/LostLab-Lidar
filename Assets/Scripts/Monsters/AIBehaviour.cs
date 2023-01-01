@@ -68,9 +68,9 @@ public class AIBehaviour : MonoBehaviour
 
         TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
 
-        yield return new WaitForSeconds(0.5f);
-
         audioController.PlaySpecificClip(audioController.phase1DiscoveredClip);
+
+        yield return new WaitForSeconds(0.1f);
 
         graphManager.DestroyVFXList();
 
@@ -89,11 +89,11 @@ public class AIBehaviour : MonoBehaviour
 
         ChangeTags("Invisible");
 
+        audioController.PlaySpecificClip(audioController.phase2DiscoveredClip);
+
         TeleportAgentToRandomPositionOnNavMesh(minTeleportRange, maxTeleportRange);
 
-        yield return new WaitForSeconds(0.5f);
-
-        audioController.PlaySpecificClip(audioController.phase2DiscoveredClip);
+        yield return new WaitForSeconds(0.1f);
 
         graphManager.DestroyVFXList();
 
