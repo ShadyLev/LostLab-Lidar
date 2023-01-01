@@ -22,12 +22,13 @@ public class AIAudioController : MonoBehaviour
     [SerializeField] public AudioClip phase2DiscoveredClip;
     [SerializeField] public AudioClip phase3KillClip;
 
-    [SerializeField] bool isPlaying = false; 
-
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<AIController>();
+        timer = Random.Range(minDelayBetweenClips, maxDelayBetweenClips);
+
+        startTimer = true;
     }
 
     // Update is called once per frame
@@ -42,6 +43,7 @@ public class AIAudioController : MonoBehaviour
             {
                 startTimer = false;
                 StartPlayingRandomClip();
+                Debug.Log("Playing random enemy clip");
             }
         }
     }
@@ -50,13 +52,11 @@ public class AIAudioController : MonoBehaviour
     {
         timer = Random.Range(minDelayBetweenClips, maxDelayBetweenClips);
 
-        PlayRandomClip(randomCreepyNoises);
+        StartCoroutine(PlayRandomClip(randomCreepyNoises));
     }
 
     IEnumerator PlayRandomClip(AudioClip[] random)
     {
-        isPlaying = true;
-
         int randomIndex = Random.Range(0, random.Length);
 
         AudioClip randomClip = random[randomIndex];
@@ -65,17 +65,15 @@ public class AIAudioController : MonoBehaviour
 
         yield return new WaitForSeconds(randomClip.length);
 
-        isPlaying = false;
         startTimer = true;
     }
 
     public IEnumerator PlaySpecificClip(AudioClip clip)
     {
-        isPlaying = true;
         oneShotSource.PlayOneShot(clip, AudioManager.Instance.volumeSFX);
 
-        yield return new WaitForSeconds(clip.length);
+        Debug.Log("Playing specific sound");
 
-        isPlaying = false;
+        yield return new WaitForSeconds(clip.length);
     }
 }

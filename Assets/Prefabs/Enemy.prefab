@@ -2566,10 +2566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5ab43ba2ac55547a6558cd7e18896d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 5661327977582047111}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
+  playerTransform: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -2597,11 +2594,12 @@ MonoBehaviour:
   scanner: {fileID: 0}
   graphManager: {fileID: 0}
   levelLoader: {fileID: 0}
+  audioController: {fileID: 0}
   enemyModel:
   - {fileID: 3422392969464193068}
   - {fileID: 3422392969464193438}
   - {fileID: 3422392969464193426}
-  maxTeleportRange: 50
+  maxTeleportRange: 500
   minTeleportRange: 100
   endGameSceneIndex: 3
   phase: 0
@@ -2627,16 +2625,14 @@ MonoBehaviour:
   randomCreepyNoises:
   - {fileID: 8300000, guid: c945e3050c830c24abf73cf82f132f9f, type: 3}
   - {fileID: 8300000, guid: bed4fd04ffe4d424f9e529ea3959f9bc, type: 3}
-  - {fileID: 8300000, guid: 960d3a46f0d284f4781780f1adb15022, type: 3}
   - {fileID: 8300000, guid: e47e202d39f199b448fcb83ee66f26d8, type: 3}
   - {fileID: 8300000, guid: a9a52c2c8094ac242a59e59ad16b123f, type: 3}
   startTimer: 0
-  minDelayBetweenClips: 5
-  maxDelayBetweenClips: 15
+  minDelayBetweenClips: 10
+  maxDelayBetweenClips: 30
   timer: 0
   phase1DiscoveredClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841,
     type: 3}
   phase2DiscoveredClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841,
     type: 3}
   phase3KillClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841, type: 3}
-  isPlaying: 0
