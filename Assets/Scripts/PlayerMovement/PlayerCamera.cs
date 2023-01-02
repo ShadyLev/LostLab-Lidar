@@ -9,6 +9,8 @@ public class PlayerCamera : MonoBehaviour
     public float sensX; // Sensitivity on the X axis
     [Tooltip("Sensitivity on the Y axis")]
     public float sensY; // Sensitivity on the Y axis
+    [Tooltip("Multiplier for the sensitivity")]
+    public float sensMultiplier = 2;
 
     [Header("Object references")]
     [Tooltip("Player orientation object")]
@@ -26,6 +28,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        LoadSens();
+
         // Get the mouse inputs
         float mouseX = Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensY * Time.deltaTime;
@@ -39,5 +43,21 @@ public class PlayerCamera : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         player.rotation = Quaternion.Euler(0, yRotation, 0);
 
+    }
+
+    void LoadSens()
+    {
+        if (PlayerPrefs.HasKey("SensX"))
+            sensX = PlayerPrefs.GetFloat("SensX");
+        else
+            sensX = 100;
+
+        if (PlayerPrefs.HasKey("SensY"))
+            sensY = PlayerPrefs.GetFloat("SensY");
+        else
+            sensY = 100;
+
+        sensX *= sensMultiplier;
+        sensY *= sensMultiplier;
     }
 }
