@@ -408,6 +408,8 @@ public class LIDARScanner : MonoBehaviour
             m_isBigScanning = false;
 
             startRecharge = true; // Start recharging
+
+            return; // Do not progress
         }
         
         // Increase scan angle
