@@ -202,14 +202,26 @@ public class SettingsMenu : MonoBehaviour
         }
 
         if (PlayerPrefs.HasKey("SensX"))
+        {
             sensxSlider.value = PlayerPrefs.GetFloat("SensX");
+            SetSensX(PlayerPrefs.GetFloat("SensX"));
+        }
         else
+        {
             sensxSlider.value = 100;
+            SetSensX(100);
+        }
 
         if (PlayerPrefs.HasKey("SensY"))
+        {
             sensySlider.value = PlayerPrefs.GetFloat("SensY");
+            SetSensY(PlayerPrefs.GetFloat("SensY"));
+        }
         else
+        {
             sensySlider.value = 100;
+            SetSensY(100);
+        }
 
         if (PlayerPrefs.HasKey("IsInvertedY"))
             isInverted.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("IsInvertedY"));
@@ -217,18 +229,38 @@ public class SettingsMenu : MonoBehaviour
             isInverted.isOn = false;
 
         if (PlayerPrefs.HasKey("MusicVolume"))
+        {
             musicVolume.value = PlayerPrefs.GetFloat("MusicVolume");
+            SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+        }
         else
+        {
             musicVolume.value = 1;
+            SetMusicVolume(1);
+        }
 
         if (PlayerPrefs.HasKey("SFXVolume"))
+        {
             sfxVolume.value = PlayerPrefs.GetFloat("SFXVolume");
+            SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume"));
+        }
         else
+        {
             sfxVolume.value = 1;
+            SetSFXVolume(1);
+        }
 
         if (PlayerPrefs.HasKey("GeneralVolume"))
+        {
             generalVolume.value = PlayerPrefs.GetFloat("GeneralVolume");
+            SetGeneralVolume(PlayerPrefs.GetFloat("GeneralVolume"));
+        }
         else
+        {
             generalVolume.value = 1;
+            SetGeneralVolume(1);
+        }
+
+        Debug.Log("Loaded");
     }
 }
