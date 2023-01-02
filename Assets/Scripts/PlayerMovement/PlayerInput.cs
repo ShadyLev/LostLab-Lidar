@@ -47,7 +47,7 @@ public class PlayerInput : MonoBehaviour
             return;
 
         //Check if big scan key is pressed and perform scan
-        if (Input.GetKeyDown(m_bigScanKey))
+        if (Input.GetKeyDown(m_bigScanKey) && !scanner.IsNormalScanning)
         {
             scanner.StartBigScan();
         }
