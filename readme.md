@@ -76,4 +76,5 @@ This way I can sample the graphics buffer in the VFX Graph and use its data to c
 After filling up the buffer to the set max size I create a new VisualEffects object and release the graphics buffer.
 
 This way I can display millions of points, and assign custom data to them such as different colour based on tags or a default gradient:
+
 https://media.github.falmouth.ac.uk/user/619/files/b164c03a-6929-4cfd-bc34-48aec5585739
