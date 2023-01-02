@@ -9,24 +9,31 @@ public class AIBehaviour : MonoBehaviour
     [SerializeField] VFXGraphManager graphManager;
     [SerializeField] LevelLoader levelLoader;
     [SerializeField] AIAudioController audioController;
-
     [SerializeField] GameObject[] enemyModel;
 
+    [Header("Behaviour values.")]
+    [Tooltip("Maximum range of finding a point to teleport to.")]
     [SerializeField] float maxTeleportRange;
+    [Tooltip("Minumum range of finding a point to teleport to.")]
     [SerializeField] float minTeleportRange;
 
-    [SerializeField] int endGameSceneIndex;
+    [Tooltip("Current phase of the enemy.")]
     [SerializeField] int phase = 1;
     public int Phase { get { return phase; } }
 
+    [Tooltip("Delay before destroying the VFX Points.")]
     [SerializeField] float timeBeforeClearPoint = 1f;
-
-    [SerializeField] bool isBeingScannedByPlayer = false;
-    [SerializeField] bool startPhase = false;
-
+    [Tooltip("Delay between phases.")]
     [SerializeField] float cooldownBetweenPhases = 4f;
 
-    [SerializeField] Vector3 teleportPosition;
+    [Header("Scene index to load on death.")]
+    [Tooltip("Index of the scene to load when player is killed.")]
+    [SerializeField] int endGameSceneIndex;
+
+    bool isBeingScannedByPlayer = false; // Is player scannign the enemy tag
+    bool startPhase = false; // Start phase bool
+
+    Vector3 teleportPosition; // Position to teleport to
 
     // Start is called before the first frame update
     void Start()
@@ -37,12 +44,15 @@ public class AIBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If not scanned by player do not progress
         if (!CheckIfBeingScanned())
             return;
 
+        // If a phase is currently running do not progress
         if (startPhase)
             return;
 
+        // Start phase coroutines
         if (phase == 1)
             StartCoroutine(Phase1(timeBeforeClearPoint));
         else if (phase == 2)
@@ -62,6 +72,11 @@ public class AIBehaviour : MonoBehaviour
         return isBeingScannedByPlayer;
     }
 
+    /// <summary>
+    /// Coroutine for phase1 of the enemy.
+    /// </summary>
+    /// <param name="time">Time between scan and teleport.</param>
+    /// <returns>Coroutine wait time.</returns>
     IEnumerator Phase1(float time)
     {
         startPhase = true;
@@ -81,6 +96,11 @@ public class AIBehaviour : MonoBehaviour
         Invoke("ResetPhase", cooldownBetweenPhases);
     }
 
+    /// <summary>
+    /// Coroutine for phase2 of the enemy.
+    /// </summary>
+    /// <param name="time">Time between scan and teleport.</param>
+    /// <returns>Coroutine wait time.</returns>
     IEnumerator Phase2(float time)
     {
         startPhase = true;
