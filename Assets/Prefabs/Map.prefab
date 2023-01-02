@@ -545,9 +545,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfc311f5ddfbf546b00d00e95c6b044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
   controlsCanvas: {fileID: 8713398792745469154}
   pauseMenu: {fileID: 0}
+  normalVolume: {fileID: 0}
+  menuVolume: {fileID: 0}
+  openKey: 9
+  isPaused: 0
 --- !u!1 &7160472159824328711
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,8 +809,8 @@ Canvas:
   m_GameObject: {fileID: 8713398792745469154}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 7160472159824328708}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
