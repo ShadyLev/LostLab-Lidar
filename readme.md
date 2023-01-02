@@ -77,6 +77,4 @@ After filling up the buffer to the set max size I create a new VisualEffects obj
 
 This way I can display millions of points, and assign custom data to them such as different colour based on tags or a default gradient:
 
-https://media.github.falmouth.ac.uk/user/619/files/16b1a26f-ed17-414e-a0d9-92aa3d7f764a
-
-
+https://media.github.falmouth.ac.uk/user/619/files/e96704af-b4f2-44b3-8195-7525e4379e5e
