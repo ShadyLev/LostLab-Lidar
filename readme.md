@@ -23,6 +23,9 @@ The first, and most obvious, method to achieve this effect is using gameobjects.
 The problem with this method is that it is very inefficient as the engine has to spawn and render thousands of gameobjects at once. This results in the FPS dropping very quickly at around 30-50 thousand of spawned points.
 Even after enabling GPU Instancing on the said gameobject materials, it hardly helped. This method would not work out.
 
+#### Decals
+After gameobjects I quickly tried using decals but it ended with the same results as the previous method.
+
 ### Unity Particle System
 My next best idea was to utilise Unity's built in particle system which greatly increases the amount of points I can spawn. 
 By using the [ParticleSystem.Emit](https://docs.unity3d.com/ScriptReference/ParticleSystem.Emit.html) function I can specify the position, color, spawn count and more of particles. 
