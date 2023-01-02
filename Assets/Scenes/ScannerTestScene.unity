@@ -22036,10 +22036,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
-      propertyPath: phase
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
       propertyPath: scanner
       value: 
       objectReference: {fileID: 1908410722}
@@ -22051,10 +22047,6 @@ PrefabInstance:
       propertyPath: graphManager
       value: 
       objectReference: {fileID: 1908410723}
-    - target: {fileID: 232289133, guid: f4416d13ebd71fe4cbbe74a2c98e37b8, type: 3}
-      propertyPath: minTeleportRange
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3426540070078600123, guid: f4416d13ebd71fe4cbbe74a2c98e37b8,
         type: 3}
       propertyPath: playerTransform
@@ -22382,11 +22374,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7805791634151883002, guid: 3ca139ec3ac2dcd4f822cef1948603c3,
-        type: 3}
-      propertyPath: pointTypes.Array.data[5].Size
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca139ec3ac2dcd4f822cef1948603c3, type: 3}

@@ -2601,14 +2601,11 @@ MonoBehaviour:
   - {fileID: 3422392969464193438}
   - {fileID: 3422392969464193426}
   maxTeleportRange: 500
-  minTeleportRange: 100
-  endGameSceneIndex: 3
-  phase: 0
+  minTeleportRange: 10
+  phase: 1
   timeBeforeClearPoint: 5
-  isBeingScannedByPlayer: 0
-  startPhase: 0
   cooldownBetweenPhases: 4
-  teleportPosition: {x: 0, y: 0, z: 0}
+  endGameSceneIndex: 3
 --- !u!114 &232289134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2631,7 +2628,6 @@ MonoBehaviour:
   startTimer: 0
   minDelayBetweenClips: 10
   maxDelayBetweenClips: 30
-  timer: 0
   phase1DiscoveredClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841,
     type: 3}
   phase2DiscoveredClip: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841,

@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [Tooltip("Is game paused.")]
-    [SerializeField] bool isPaused = false;
-    public bool IsMapOpened { get { return isPaused; } }
+    [Header("GameObject references")]
     [Tooltip("Canvas with controls.")]
     [SerializeField] GameObject controlsCanvas;
     [SerializeField] TogglePauseMenu pauseMenu;
+
+    [Header("HDRP Volumes")]
+    [SerializeField] GameObject normalVolume;
+    [SerializeField] GameObject menuVolume;
+
+    [Header("Map values.")]
+    [Tooltip("Key to open the map.")]
+    [SerializeField] KeyCode openKey = KeyCode.Tab;
+    [Tooltip("Is game paused.")]
+    [SerializeField] bool isPaused = false;
+    public bool IsMapOpened { get { return isPaused; } }
 
 
     //----HIDDEN VALUES----
@@ -34,10 +43,11 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If pause menu is opened do not progress.
         if (pauseMenu.IsPauseMenuOpened)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(openKey))
         {
             isPaused = !isPaused;
 
@@ -50,6 +60,10 @@ public class MapManager : MonoBehaviour
                 playerInput.enabled = false; // Disable player input
                 mapCam.enabled = true; // Enable map camera
                 controlsCanvas.SetActive(true); // Enable controls canvas
+
+                // HDRP Volume swap
+                normalVolume.SetActive(false); // Disable normal volume
+                menuVolume.SetActive(true); // Enable menu volume
 
                 // Show and unlock player cursor
                 Cursor.lockState = CursorLockMode.Confined;
@@ -64,6 +78,10 @@ public class MapManager : MonoBehaviour
                 playerInput.enabled = true; // Enable player input
                 mapCam.enabled = false; // Disable map camera
                 controlsCanvas.SetActive(false); // Disable controls canvas
+
+                // HDRP Volume swap
+                normalVolume.SetActive(true); // Disable normal volume
+                menuVolume.SetActive(false); // Enable normal volume
 
                 // Hide and lock player cursor
                 Cursor.lockState = CursorLockMode.Locked;

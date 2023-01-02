@@ -19081,7 +19081,7 @@ GameObject:
   - component: {fileID: 661829552}
   - component: {fileID: 661829551}
   m_Layer: 0
-  m_Name: Global Volume
+  m_Name: MenuVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22641,18 +22641,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1986009913947294586, guid: bca49031370bed24e85ffe4521db8fea,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8791675
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986009913947294586, guid: bca49031370bed24e85ffe4521db8fea,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.4014482
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986009913947294586, guid: bca49031370bed24e85ffe4521db8fea,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.606
+      value: -8.54
       objectReference: {fileID: 0}
     - target: {fileID: 1986009913947294586, guid: bca49031370bed24e85ffe4521db8fea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.191
+      value: 1.024
       objectReference: {fileID: 0}
     - target: {fileID: 1986009913947294586, guid: bca49031370bed24e85ffe4521db8fea,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.283
+      value: 3.344
       objectReference: {fileID: 0}
     - target: {fileID: 1986009913947294586, guid: bca49031370bed24e85ffe4521db8fea,
         type: 3}
@@ -56408,11 +56418,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771085913}
     m_Modifications:
+    - target: {fileID: 2469906382201114682, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1854624583}
+    - target: {fileID: 2469906382201114682, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7160472159449140256, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1390562230}
+    - target: {fileID: 7160472159449140256, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: menuVolume
+      value: 
+      objectReference: {fileID: 661829550}
+    - target: {fileID: 7160472159449140256, guid: 8204355513b2f94418c125c223e00aa5,
+        type: 3}
+      propertyPath: normalVolume
+      value: 
+      objectReference: {fileID: 1852543646}
     - target: {fileID: 7160472159449140258, guid: 8204355513b2f94418c125c223e00aa5,
         type: 3}
       propertyPath: target
@@ -57455,7 +57485,7 @@ GameObject:
   - component: {fileID: 1852543648}
   - component: {fileID: 1852543647}
   m_Layer: 0
-  m_Name: Sky and Fog Global Volume
+  m_Name: NormalPlayVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57527,6 +57557,12 @@ Transform:
   m_Father: {fileID: 1139770548}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1854624583 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7160472159824328708, guid: 8204355513b2f94418c125c223e00aa5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1833564472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1856024591
 GameObject:
   m_ObjectHideFlags: 0

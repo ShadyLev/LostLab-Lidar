@@ -8045,6 +8045,11 @@ PrefabInstance:
       propertyPath: playerCameraTransform
       value: 
       objectReference: {fileID: 7805791632567062082}
+    - target: {fileID: 6990689276125353337, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
+        type: 3}
+      propertyPath: pointTypes.Array.data[5].Size
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6990689276125353340, guid: 26458f3a83f5d8f4db53d1fd3e8ca15e,
         type: 3}
       propertyPath: m_Name
