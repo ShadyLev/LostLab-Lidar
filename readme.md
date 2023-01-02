@@ -1,18 +1,67 @@
-### Blank Unity Project ### 
+# Lost Lab
+### Project description:
+**Lost Lab** is a Unity3D university project presenting a main game mechanic inspired by games like ![Gmod LiDAR](https://steamcommunity.com/workshop/filedetails/?id=2813176307) mod or ![Scanner Sombre](https://store.steampowered.com/app/475190/Scanner_Sombre/). 
 
-This repository has been pre-configured with a .gitignore and .gitattributes file specific to Unity projects using git-lfs. 
+You are tasked with carrying out a mission for a secret government agency. You must retrieve artefacts from a anomaly called the Lost Lab.
 
-This project was created for Unity [2021.3.4f1](https://unity3d.com/get-unity/download/archive)
+All you have is a scanner to detect the environment and a radar to locate the artefacts near by. 
 
-The project has been created with a barebones folder structure.  The settings have been optimized for best 3D quality without adding any additional packages to the project.
-For 2D projects, go to Edit -> Project Settings -> Editor and set the "Default Behaviour Mode" to 2D.  Do this at the start so that imported assets are optimized automatically.
+# Scanner mechanic
+### Description
+The main point of the scanner mechanic is to display a large amount of points that will be placed on the level geometry. The more points displayed the more accurate the level layout will become. 
+<p align="center">
+  <img src="./Images/LostLabScreenshot1.png" alt="Enviroment example 1"/>
+  <img src="./Images/LostLabScreenshot2.png" alt="Enviroment example 2"/>
+</p>
 
-To use this repo select it from the remplate list when making a new repo.
+## Methods
 
-Note:  Do not leave empty folders in your Unity project.  Empty folders do not get added to version control, but the meta files they create do.  This can lead to issues with keeping your project up to date.
+### Gameobject
+The first, and most obvious, method to achieve this effect is using gameobjects. We simply have to instantiate prefabs in the place of a raycast hit. 
+The problem with this method is that it is very inefficient as the engine has to spawn and render thousands of gameobjects at once. This results in the FPS dropping very quickly at around 30-50 thousand of spawned points.
+Even after enabling GPU Instancing on the said gameobject materials, it hardly helped. This method would not work out.
 
-Please make sure you place all of your Terrain in a folder called "Terrain" or "Terrains". Failing to do so will result in corupted projects.
+### Unity Particle System
+My next best idea was to utilise Unity's built in particle system which greatly increases the amount of points I can spawn. 
+By using the ![ParticleSystem.Emit](https://docs.unity3d.com/ScriptReference/ParticleSystem.Emit.html) function I can specify the position, color, spawn count and more of particles. 
+<p align="center">
+  <img src="./Images/Example1.gif" alt="Unity particle system solution example."/>
+</p>
+Unity's shuriken particle system, however great for small system, breaks down on a larger scale as it is primarily run on the CPU. 
+The same as with the Gameobject method, enabling GPU instancing did not solve the optimisation problem.
 
-For full details on this project's settings, please read the Changelog.md
- 
-Do you have any suggestions for improvements? Please submit a pull request!
+### VFX Graph
+After realising that I will need to utilise the GPU to display the amount of points I will need I discovered VFX Graph. A particle system that uses the GPU to be more optimised. 
+Brackey's ![video](https://www.youtube.com/watch?v=FvZNVQuLDjI) on VFX Graph introduced me to this Unity package and showed that I could easly display up to 80 million points at one time! Which is perfect as I wanted the ability to view the entire map covered in points. 
+The last question remained, how to communicate with VFX Graph my point information like position and color?
+
+#### Texture2D
+During my research on VFX Graph I saw a post saying how to send position data to VFX Graph using a Texture2D.
+It was easy and very smart. To implement it all I had to do was:
+-Create a Visual Effects object (VFX Graph) and set the particle capacity to 16384 (Max texture2D width/height).
+-Create a Texture2D with the same width (16384) and RGBAFloat format;
+-Store my Vector3 positions in a list and transform that list into a array of Colors.
+R = X, G = Y, B = Z, A = alpha of the particle.
+-Set the texture pixels to the colors form the array and send it to the VFX Graph.
+
+This way I could display up to 16384 points in my graph. When i would exceed that amount I could simply create a new graph with a new texture.
+
+The only problem with this solution is the lack of customizability. I could only send position data and the alpha color of the particle.
+
+#### Graphics Buffer
+After more research I stumbled upon a forum post ini which one of the replies recommended using a graphics buffer to send custom particle data to the VFX Graph.
+This was exactly what I was looking for.
+So I created my own CustomVFXData buffer like this:
+```
+    [VFXType(VFXTypeAttribute.Usage.GraphicsBuffer)]
+    struct CustomVFXData
+    {
+        public Vector3 position;
+        public Vector4 color;
+        public int useDefaultGradient;
+        public float size;
+    }
+    // List of custom Data points
+    private List<CustomVFXData> m_CustomVFXData = new List<CustomVFXData>();
+```
+Using this buffer all I had to do was 
