@@ -6,6 +6,8 @@ You are tasked with carrying out a mission for a secret government agency. You m
 
 All you have is a scanner to detect the environment and a radar to locate the artefacts near by. 
 
+You can download the game demo on itch.io: (comming very soon!)
+
 # Scanner mechanic
 ### Description
 The main point of the scanner mechanic is to display a large amount of points that will be placed on the level geometry. The more points displayed the more accurate the level layout will become. 
@@ -25,7 +27,7 @@ Even after enabling GPU Instancing on the said gameobject materials, it hardly h
 My next best idea was to utilise Unity's built in particle system which greatly increases the amount of points I can spawn. 
 By using the ![ParticleSystem.Emit](https://docs.unity3d.com/ScriptReference/ParticleSystem.Emit.html) function I can specify the position, color, spawn count and more of particles. 
 <p align="center">
-  <img src="./Images/Example1.gif" alt="Unity particle system solution example."/>
+  <img src="./Images/Example1.gif" alt="Unity particle system solution example." width="50%"/>
 </p>
 Unity's shuriken particle system, however great for small system, breaks down on a larger scale as it is primarily run on the CPU. 
 The same as with the Gameobject method, enabling GPU instancing did not solve the optimisation problem.
@@ -73,9 +75,5 @@ This way I can sample the graphics buffer in the VFX Graph and use its data to c
 **Important!** It is crucial to not only check if we are accidentaly adding more data to the buffer than its size as that will crash but also release the buffer after not using it.
 After filling up the buffer to the set max size I create a new VisualEffects object and release the graphics buffer.
 
-This way I can display millions of points, and assign custom data to them such as different colour based on tags or a default gradient.
-<p align="center">
-  <img src="/Images/TagsExample.png" width="40%" />
-  <img src="/Images/vfxsolution.gif" width="40%" />
-</p>
-
+This way I can display millions of points, and assign custom data to them such as different colour based on tags or a default gradient:
+https://media.github.falmouth.ac.uk/user/619/files/b164c03a-6929-4cfd-bc34-48aec5585739
