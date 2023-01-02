@@ -1,6 +1,6 @@
 # Lost Lab
 ### Project description:
-**Lost Lab** is a Unity3D university project presenting a main game mechanic inspired by games like ![Gmod LiDAR](https://steamcommunity.com/workshop/filedetails/?id=2813176307) mod or ![Scanner Sombre](https://store.steampowered.com/app/475190/Scanner_Sombre/). 
+**Lost Lab** is a Unity3D university project presenting a main game mechanic inspired by games like [Gmod LiDAR](https://steamcommunity.com/workshop/filedetails/?id=2813176307) mod or [Scanner Sombre](https://store.steampowered.com/app/475190/Scanner_Sombre/). 
 
 You are tasked with carrying out a mission for a secret government agency. You must retrieve artefacts from a anomaly called the Lost Lab.
 
@@ -23,9 +23,12 @@ The first, and most obvious, method to achieve this effect is using gameobjects.
 The problem with this method is that it is very inefficient as the engine has to spawn and render thousands of gameobjects at once. This results in the FPS dropping very quickly at around 30-50 thousand of spawned points.
 Even after enabling GPU Instancing on the said gameobject materials, it hardly helped. This method would not work out.
 
+#### Decals
+After gameobjects I quickly tried using decals but it ended with the same results as the previous method.
+
 ### Unity Particle System
 My next best idea was to utilise Unity's built in particle system which greatly increases the amount of points I can spawn. 
-By using the ![ParticleSystem.Emit](https://docs.unity3d.com/ScriptReference/ParticleSystem.Emit.html) function I can specify the position, color, spawn count and more of particles. 
+By using the [ParticleSystem.Emit](https://docs.unity3d.com/ScriptReference/ParticleSystem.Emit.html) function I can specify the position, color, spawn count and more of particles. 
 <p align="center">
   <img src="./Images/Example1.gif" alt="Unity particle system solution example." width="50%"/>
 </p>
@@ -34,7 +37,7 @@ The same as with the Gameobject method, enabling GPU instancing did not solve th
 
 ### VFX Graph
 After realising that I will need to utilise the GPU to display the amount of points I will need I discovered VFX Graph. A particle system that uses the GPU to be more optimised. 
-![Brackey's video](https://www.youtube.com/watch?v=FvZNVQuLDjI) on VFX Graph introduced me to this Unity package and showed that I could easly display up to 80 million points at one time! Which is perfect as I wanted the ability to view the entire map covered in points. 
+[Brackey's video](https://www.youtube.com/watch?v=FvZNVQuLDjI) on VFX Graph introduced me to this Unity package and showed that I could easly display up to 80 million points at one time! Which is perfect as I wanted the ability to view the entire map covered in points. 
 The last question remained, how to communicate with VFX Graph my point information like position and color?
 
 #### Texture2D
@@ -69,7 +72,7 @@ So I created my own CustomVFXData buffer like this:
 Now having this custom data struct and a graphics buffer I was able to follow these points and achieve the result I got:
 - Create a new graphics buffer and set its stride to size of CustomVFXData and the buffer size to 10k (can be larger but read time will increase).
 - Each time I want to create a new point I create a new CustomVFXData, fill it with my values and add it to the m_CustomVFXData list.
-- When I want to display the points I use ![GraphicsBuffer.SetData()](https://docs.unity3d.com/ScriptReference/GraphicsBuffer.SetData.html) with my custom data list and reinitialize the VFX Graph.
+- When I want to display the points I use [GraphicsBuffer.SetData()](https://docs.unity3d.com/ScriptReference/GraphicsBuffer.SetData.html) with my custom data list and reinitialize the VFX Graph.
 
 This way I can sample the graphics buffer in the VFX Graph and use its data to create new particles.
 **Important!** It is crucial to not only check if we are accidentaly adding more data to the buffer than its size as that will crash but also release the buffer after not using it.
