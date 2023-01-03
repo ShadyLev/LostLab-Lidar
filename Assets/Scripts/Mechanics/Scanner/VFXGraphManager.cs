@@ -110,6 +110,31 @@ public class VFXGraphManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Destroys one VFX object from the list of all VFX objects in the scene.
+    /// </summary>
+    /// <param name="vfx">Object to destroy.</param>
+    public void DestroyOneFromVFXList(VisualEffect vfx)
+    {
+        // If the object to destroy is the current one
+        if(vfx == m_currentVFX)
+        {
+            Release(); // Release the graphics buffer
+
+            m_vfxList.Remove(vfx); // Remove the object from the list
+
+            Destroy(vfx); // Destroy the object
+
+            CreateVFX(); // Create a new VFX object
+        }
+        else // If its an object we used previously
+        {
+            m_vfxList.Remove(vfx); // Remove object from list
+            
+            Destroy(vfx); // Destroy object
+        }
+    }
+
+    /// <summary>
     /// Adds particle data to the list of CustomVFXData.
     /// </summary>
     /// <param name="position">Position of the particle</param>

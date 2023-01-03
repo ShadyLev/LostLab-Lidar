@@ -9,6 +9,10 @@ public class ArtefactBehaviour : MonoBehaviour
     [Tooltip("Sound to play when the artefact is picked up.")]
     [SerializeField] AudioClip m_pickUpSound;
 
+
+    [Tooltip("Radius in which all Vfx will be cleared on pickup.")]
+    [SerializeField] float blackoutRadius;
+
     //---HIDDEN---
     TheBlackout blackout; // Reference to the blackout script
     MeshFilter meshFilter; // Ref to own mesh filter
@@ -41,7 +45,7 @@ public class ArtefactBehaviour : MonoBehaviour
             PlayPickupSound();
 
             // Destroy all points
-            blackout.FullBlackout();
+            blackout.BlackoutInArea(blackoutRadius);
 
             // Increment artefact amount
             artefactManager.CurrentArtefactAmount++;
@@ -65,5 +69,11 @@ public class ArtefactBehaviour : MonoBehaviour
     void DestroySelf()
     {
         Destroy(this.gameObject); 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, blackoutRadius);
     }
 }

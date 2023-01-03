@@ -48,9 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33b078719603c34287f24f7ddfb3691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
-  manager: {fileID: 0}
-  radius: 0
 --- !u!114 &6012051265792663502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,8 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd79ced4f4289ce428a56076efba5ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  artefactModel: {fileID: 0}
+  artefactModel: {fileID: 1000013105924406, guid: 6a7274aefcc6cef4fbbfba924cc7f657,
+    type: 3}
   m_pickUpSound: {fileID: 8300000, guid: 2e0878d0f3f92de4396b714870474841, type: 3}
+  blackoutRadius: 20
 --- !u!64 &1197655732480458335
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -98,7 +97,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

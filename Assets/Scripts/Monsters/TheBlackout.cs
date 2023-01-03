@@ -5,33 +5,41 @@ using UnityEngine.VFX;
 
 public class TheBlackout : MonoBehaviour
 {
-    [SerializeField] GameObject playerObject;
-    [SerializeField] VFXGraphManager manager;
-    [SerializeField] float radius;
+    // Reference to the player gameobject
+    GameObject playerObject;
+
+    // Reference to the VFX Manager script
+    VFXGraphManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObject = GameObject.Find("Player").gameObject;
-        manager = playerObject.GetComponentInChildren<VFXGraphManager>();
+        playerObject = GameObject.Find("Player").gameObject; // Get player object
+        manager = playerObject.GetComponentInChildren<VFXGraphManager>(); // Get vfx manager script
     }
 
+    /// <summary>
+    /// Clears every VFX object in radius from self.
+    /// </summary>
+    /// <param name="radius">Radius of the clear.</param>
     public void BlackoutInArea(float radius)
     {
         int layerId = 8;
         int layerMask = 1 << layerId;
-        Collider[] vfxNearbyArray = Physics.OverlapSphere(playerObject.transform.position, radius, layerMask);
+        Collider[] vfxNearbyArray = Physics.OverlapSphere(transform.position, radius, layerMask);
 
         foreach(Collider vfx in vfxNearbyArray)
         {
-            if(Vector3.Distance(vfx.transform.position, playerObject.transform.position) <= radius)
+            if(Vector3.Distance(vfx.transform.position, transform.position) <= radius)
             {
-                //manager.DestroyOneFromVFXList(vfx.GetComponent<VisualEffect>());
-                Destroy(vfx.gameObject);
+                manager.DestroyOneFromVFXList(vfx.GetComponent<VisualEffect>());
             }
         }
     }
 
+    /// <summary>
+    /// Clears every VFX object in the scene.
+    /// </summary>
     public void FullBlackout()
     {
         manager.DestroyVFXList();
