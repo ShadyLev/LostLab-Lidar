@@ -6,7 +6,7 @@ You are tasked with carrying out a mission for a secret government agency. You m
 
 All you have is a scanner to detect the environment and a radar to locate the artefacts near by. 
 
-You can download the game demo on itch.io: (comming very soon!)
+You can download the game demo on my Itch.io: [LostLab download.](https://shadylev.itch.io/lost-lab)
 
 # Scanner mechanic
 ### Description
