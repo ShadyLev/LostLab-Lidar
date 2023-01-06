@@ -54,9 +54,9 @@ This way I could display up to 16384 points in my graph. When i would exceed tha
 The only problem with this solution is the lack of customizability. I could only send position data and the alpha color of the particle.
 
 #### Graphics Buffer
-After more research I stumbled upon a forum post ini which one of the replies recommended using a graphics buffer to send custom particle data to the VFX Graph.
+After more research I stumbled upon a forum post in which one of the replies recommended using a graphics buffer to send custom particle data to the VFX Graph.
 This was exactly what I was looking for.
-So I created my own CustomVFXData buffer like this:
+So I created my own CustomVFXData struct like this:
 ```
     [VFXType(VFXTypeAttribute.Usage.GraphicsBuffer)]
     struct CustomVFXData
